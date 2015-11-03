@@ -1,0 +1,335 @@
+{
+  "pages": [
+    {
+      "pageName": "HomePage",
+      "pagePath": "/home",
+      "children": [
+        {
+          "variantName": "Default",
+          "type": "p",
+          "children": [
+            {
+              "type": "span",
+              "text": "Click on the button below to fetch data from the server, if you see an Error, please check if you have started local server from the root folder of current project: node ./server.js",
+              "props": {}
+            }
+          ],
+          "props": {
+            "style": {
+              "marginTop": "2em"
+            },
+            "className": "text-center"
+          }
+        },
+        {
+          "variantName": "Unsaved variant",
+          "type": "div",
+          "props": {
+            "style": {
+              "width": "90%",
+              "margin": "0 5% 0 5%"
+            }
+          },
+          "children": [
+            {
+              "variantName": "Unsaved variant",
+              "type": "div",
+              "props": {
+                "style": {
+                  "width": "100%"
+                }
+              },
+              "children": [
+                {
+                  "variantName": "Unsaved variant",
+                  "type": "div",
+                  "props": {
+                    "style": {
+                      "display": "table",
+                      "width": "100%"
+                    }
+                  },
+                  "children": [
+                    {
+                      "variantName": "Unsaved variant",
+                      "type": "div",
+                      "props": {
+                        "style": {
+                          "display": "table-row"
+                        }
+                      },
+                      "children": [
+                        {
+                          "variantName": "Unsaved variant",
+                          "type": "div",
+                          "props": {
+                            "style": {
+                              "display": "table-cell",
+                              "textAlign": "center"
+                            }
+                          },
+                          "children": [
+                            {
+                              "type": "FetchSmartButton",
+                              "props": {
+                                "bsStyle": "warning"
+                              },
+                              "children": [],
+                              "componentName": null
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "variantName": "market repos grid",
+          "type": "Grid",
+          "props": {
+            "fluid": true,
+            "style": {
+              "marginTop": "2em"
+            }
+          },
+          "children": [
+            {
+              "type": "Row",
+              "children": [
+                {
+                  "type": "Col",
+                  "props": {
+                    "xs": 12,
+                    "md": 4,
+                    "sm": 4,
+                    "lg": 4,
+                    "style": {
+                      "margin": 0,
+                      "padding": 10
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "Panel",
+                      "props": {
+                        "header": "Panel with header",
+                        "bsStyle": "danger"
+                      },
+                      "children": [
+                        {
+                          "type": "SmartPanel",
+                          "props": {
+                            "style": {
+                              "textAlign": "center"
+                            }
+                          }
+                        }
+                      ],
+                      "componentName": null
+                    }
+                  ]
+                },
+                {
+                  "type": "Col",
+                  "props": {
+                    "xs": 12,
+                    "md": 4,
+                    "sm": 4,
+                    "lg": 4,
+                    "style": {
+                      "margin": 0,
+                      "padding": 10
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "Panel",
+                      "props": {
+                        "header": "Panel with header",
+                        "bsStyle": "primary"
+                      },
+                      "children": [
+                        {
+                          "type": "SmartPanel",
+                          "props": {
+                            "style": {
+                              "textAlign": "center"
+                            }
+                          }
+                        }
+                      ],
+                      "componentName": null
+                    }
+                  ]
+                },
+                {
+                  "type": "Col",
+                  "props": {
+                    "xs": 12,
+                    "md": 4,
+                    "sm": 4,
+                    "lg": 4,
+                    "style": {
+                      "margin": 0,
+                      "padding": 10
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "Panel",
+                      "props": {
+                        "header": "Panel with header",
+                        "bsStyle": "success"
+                      },
+                      "children": [
+                        {
+                          "type": "SmartPanel",
+                          "props": {
+                            "style": {
+                              "textAlign": "center"
+                            }
+                          }
+                        }
+                      ],
+                      "componentName": null
+                    }
+                  ]
+                }
+              ],
+              "props": {
+                "style": {
+                  "padding": 0
+                }
+              }
+            },
+            {
+              "type": "Row",
+              "children": [
+                {
+                  "type": "Col",
+                  "props": {
+                    "xs": 12,
+                    "md": 4,
+                    "sm": 4,
+                    "lg": 4,
+                    "style": {
+                      "margin": 0,
+                      "padding": 10
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "Panel",
+                      "props": {
+                        "header": "Panel with header",
+                        "bsStyle": "info"
+                      },
+                      "children": [
+                        {
+                          "type": "SmartPanel",
+                          "props": {
+                            "style": {
+                              "textAlign": "center"
+                            }
+                          }
+                        }
+                      ],
+                      "componentName": null
+                    }
+                  ]
+                },
+                {
+                  "type": "Col",
+                  "props": {
+                    "xs": 12,
+                    "md": 4,
+                    "sm": 4,
+                    "lg": 4,
+                    "style": {
+                      "margin": 0,
+                      "padding": 10
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "Panel",
+                      "props": {
+                        "header": "Panel with header",
+                        "bsStyle": "warning"
+                      },
+                      "children": [
+                        {
+                          "type": "SmartPanel",
+                          "props": {
+                            "style": {
+                              "textAlign": "center"
+                            }
+                          }
+                        }
+                      ],
+                      "componentName": null
+                    }
+                  ]
+                },
+                {
+                  "type": "Col",
+                  "props": {
+                    "xs": 12,
+                    "md": 4,
+                    "sm": 4,
+                    "lg": 4,
+                    "style": {
+                      "margin": 0,
+                      "padding": 10
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "Panel",
+                      "props": {
+                        "header": {
+                          "type": "h3",
+                          "props": {},
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty h3",
+                              "props": {}
+                            }
+                          ]
+                        }
+                      },
+                      "children": [
+                        {
+                          "type": "SmartPanel",
+                          "props": {
+                            "style": {
+                              "textAlign": "center"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "props": {
+                "style": {
+                  "padding": 0
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "props": {},
+      "pageTitle": "HomePage",
+      "pageProps": [],
+      "pageScript": ""
+    }
+  ]
+}

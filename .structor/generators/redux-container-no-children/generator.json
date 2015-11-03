@@ -1,0 +1,9 @@
+{
+  "name": "04-react",
+  "description": "04  |  Redux container, without children",
+  "component": {
+    "destDirPath": "src/client/containers/{groupName}",
+    "fileExtension": "jsx",
+    "script": "Component.js"
+  }
+}

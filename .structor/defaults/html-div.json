@@ -1,0 +1,12 @@
+[
+  {
+    "variantName": "Default",
+    "type": "div",
+    "children": [
+      {
+        "type": "span",
+        "text": "Empty div"
+      }
+    ]
+  }
+]

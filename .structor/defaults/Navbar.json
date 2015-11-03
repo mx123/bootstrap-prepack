@@ -1,0 +1,197 @@
+[
+  {
+    "variantName": "market navbar",
+    "type": "Navbar",
+    "props": {
+      "inverse": true,
+      "staticTop": true,
+      "data-umyid": "102",
+      "toggleNavKey": 0,
+      "fixedTop": true
+    },
+    "children": [
+      {
+        "variantName": "Unsaved variant",
+        "type": "NavBrand",
+        "props": {
+          "data-umyid": "118"
+        },
+        "children": [
+          {
+            "type": "span",
+            "text": "Structor",
+            "props": {
+              "data-umyid": "130"
+            }
+          },
+          {
+            "type": "span",
+            "text": "Market",
+            "props": {
+              "data-umyid": "131"
+            }
+          }
+        ]
+      },
+      {
+        "type": "Nav",
+        "children": [
+          {
+            "type": "NavItem",
+            "props": {
+              "href": "https://github.com/ipselon/structor",
+              "target": "blank",
+              "eventKey": 1,
+              "data-umyid": "104"
+            },
+            "children": [
+              {
+                "type": "span",
+                "text": "GitHub",
+                "props": {
+                  "data-umyid": "105"
+                }
+              }
+            ]
+          },
+          {
+            "type": "NavItem",
+            "props": {
+              "href": "https://www.facebook.com/groups/1668757740011916/",
+              "target": "blank",
+              "eventKey": 2,
+              "data-umyid": "106"
+            },
+            "children": [
+              {
+                "type": "span",
+                "text": "Facebook",
+                "props": {
+                  "data-umyid": "107"
+                }
+              }
+            ]
+          },
+          {
+            "type": "NavItem",
+            "props": {
+              "href": "https://www.youtube.com/playlist?list=PLAcaUOtEwjoR_U6eE2HQEXwkefeVESix1",
+              "target": "blank",
+              "eventKey": 2,
+              "data-umyid": "132"
+            },
+            "children": [
+              {
+                "type": "span",
+                "text": "Youtube",
+                "props": {
+                  "data-umyid": "133"
+                }
+              }
+            ]
+          },
+          {
+            "type": "NavItem",
+            "props": {
+              "href": "https://groups.google.com/forum/#!forum/structor-forum",
+              "target": "blank",
+              "eventKey": 2,
+              "data-umyid": "134"
+            },
+            "children": [
+              {
+                "type": "span",
+                "text": "Forum",
+                "props": {
+                  "data-umyid": "135"
+                }
+              }
+            ]
+          },
+          {
+            "type": "NavItem",
+            "props": {
+              "href": "https://twitter.com/helmetrex",
+              "target": "blank",
+              "eventKey": 2,
+              "data-umyid": "136"
+            },
+            "children": [
+              {
+                "type": "span",
+                "text": "Twitter",
+                "props": {
+                  "data-umyid": "137"
+                }
+              }
+            ]
+          },
+          {
+            "variantName": "Unsaved variant",
+            "type": "NavDropdown",
+            "props": {
+              "data-umyid": "121",
+              "title": "Dropdown",
+              "eventKey": 3
+            },
+            "children": [
+              {
+                "props": {
+                  "eventKey": "1",
+                  "data-umyid": "122"
+                },
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Menu Item Link",
+                    "props": {
+                      "data-umyid": "123"
+                    }
+                  }
+                ],
+                "type": "MenuItem"
+              },
+              {
+                "props": {
+                  "eventKey": "2",
+                  "data-umyid": "124"
+                },
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Menu Item Link",
+                    "props": {
+                      "data-umyid": "125"
+                    }
+                  }
+                ],
+                "type": "MenuItem"
+              },
+              {
+                "props": {
+                  "eventKey": "3",
+                  "data-umyid": "126"
+                },
+                "children": [
+                  {
+                    "type": "span",
+                    "text": "Menu Item Link",
+                    "props": {
+                      "data-umyid": "127"
+                    }
+                  }
+                ],
+                "type": "MenuItem"
+              }
+            ]
+          }
+        ],
+        "props": {
+          "data-umyid": "103",
+          "right": true,
+          "eventKey": 0
+        }
+      }
+    ]
+  }
+]

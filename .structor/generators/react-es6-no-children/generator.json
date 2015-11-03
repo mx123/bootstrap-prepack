@@ -1,0 +1,9 @@
+{
+  "name": "02-react",
+  "description": "02  |  Dumb React component, without children",
+  "component": {
+    "destDirPath": "src/client/components/{groupName}",
+    "fileExtension": "jsx",
+    "script": "Component.js"
+  }
+}

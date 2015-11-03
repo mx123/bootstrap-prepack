@@ -1,10 +1,8 @@
 ### Description
 Starter project with a set of React Bootstrap components. Includes: redux, redux-actions, redux-promise, express
- 
-<img src="" style="width: 100%"></img>
 <br/>
 ### Technologies and libraries
-The following libs and technologies were used:
+The following libs and technlogies were used:
 * ```react``` (0.14)
 * ```react-router```
 * ```redux``` (```redux-thunk```, ```react-redux```, ```redux-actions```, ```redux-promise```)
@@ -17,7 +15,7 @@ In the builder you will have an ability easily compose components right on the p
 But also you can add your own reusable components manually.
 Every component has its own quick note which is accessible through "Options" -> "ReadMe"
 
-```react-router``` is used as routing mechanism between pages in Structor. 
+```react-router``` is used as routing mechanizm between pages in Structor. 
 Equal router is used in final application after exporting pages. 
 This will be discussed below in chapter "Export pages".
 

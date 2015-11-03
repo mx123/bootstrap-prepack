@@ -1,0 +1,11 @@
+[
+  {
+    "type": "Link",
+    "props": {
+      "to": "primary"
+    },
+    "children":[
+	{"type": "span", "text": "Link"}
+    ]
+  }
+]

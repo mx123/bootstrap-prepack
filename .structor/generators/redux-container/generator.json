@@ -1,0 +1,9 @@
+{
+  "name": "03-react",
+  "description": "03  |  Redux container, includes all children",
+  "component": {
+    "destDirPath": "src/client/containers/{groupName}",
+    "fileExtension": "jsx",
+    "script": "Component.js"
+  }
+}

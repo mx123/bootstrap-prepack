@@ -1,7 +1,9 @@
+[![structor compatible](https://img.shields.io/badge/structor%20compatible-true-0077dd.svg?style=flat)](http://helmetrex.com)
+
 ### Description
 Starter project with a set of React Bootstrap components. Includes: redux, redux-actions, redux-promise, express
  
-<img src="" style="width: 100%"></img>
+<img src="https://github.com/ipselon/bootstrap-prepack/blob/master/screenshot.png" style="width: 100%"></img>
 <br/>
 ### Technologies and libraries
 The following libs and technologies were used:

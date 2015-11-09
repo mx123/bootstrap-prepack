@@ -1,0 +1,97 @@
+{
+  "type": "Panel",
+  "props": {
+    "header": "Header",
+    "footer": "Footer"
+  },
+  "children": [
+    {
+      "type": "ListGroup",
+      "props": {},
+      "children": [
+        {
+          "type": "ListGroupItem",
+          "props": {
+            "href": "#"
+          },
+          "children": [
+            {
+              "type": "span",
+              "text": "List item #1",
+              "props": {}
+            }
+          ]
+        },
+        {
+          "type": "ListGroupItem",
+          "props": {
+            "href": "#",
+            "active": true,
+            "style": {
+              "zIndex": "1000",
+              "width": "100%"
+            },
+            "testObj": {
+              "testObj": {
+                "testObj": {
+                  "testProp": 1234,
+                  "testProp1": true,
+                  "testProp2": "Hello!!!"
+                }
+              }
+            }
+          },
+          "children": [
+            {
+              "type": "span",
+              "text": "List item #2",
+              "props": {}
+            }
+          ]
+        },
+        {
+          "type": "ListGroupItem",
+          "props": {
+            "newComponent": {
+              "type": "Button",
+              "props": {
+                "bsStyle": "primary",
+                "value": "stop"
+              },
+              "children": [
+                {
+                  "type": "span",
+                  "props": {},
+                  "text": "Button"
+                }
+              ]
+            }
+          },
+          "children": [
+            {
+              "type": "span",
+              "text": "List item #3",
+              "props": {}
+            }
+          ]
+        },
+        {
+          "type": "ListGroupItem",
+          "props": {
+            "href": "#",
+            "active": false,
+            "arrayProp": [
+              { "name": 1}, "Hello in array", false, true, 25
+            ]
+          },
+          "children": [
+            {
+              "type": "SmartPanel",
+              "props": {}
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

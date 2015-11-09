@@ -11,14 +11,17 @@
             {
               "type": "span",
               "text": "Click on the button below to fetch data from the server, if you see an Error, please check if you have started local server from the root folder of current project: node ./server.js",
-              "props": {}
+              "props": {
+                "data-umyid": "3"
+              }
             }
           ],
           "props": {
             "style": {
               "marginTop": "2em"
             },
-            "className": "text-center"
+            "className": "text-center",
+            "data-umyid": "2"
           }
         },
         {
@@ -28,7 +31,8 @@
             "style": {
               "width": "90%",
               "margin": "0 5% 0 5%"
-            }
+            },
+            "data-umyid": "4"
           },
           "children": [
             {
@@ -37,7 +41,8 @@
               "props": {
                 "style": {
                   "width": "100%"
-                }
+                },
+                "data-umyid": "5"
               },
               "children": [
                 {
@@ -47,7 +52,8 @@
                     "style": {
                       "display": "table",
                       "width": "100%"
-                    }
+                    },
+                    "data-umyid": "6"
                   },
                   "children": [
                     {
@@ -56,7 +62,8 @@
                       "props": {
                         "style": {
                           "display": "table-row"
-                        }
+                        },
+                        "data-umyid": "7"
                       },
                       "children": [
                         {
@@ -66,13 +73,16 @@
                             "style": {
                               "display": "table-cell",
                               "textAlign": "center"
-                            }
+                            },
+                            "data-umyid": "8"
                           },
                           "children": [
                             {
                               "type": "FetchSmartButton",
                               "props": {
-                                "bsStyle": "warning"
+                                "bsStyle": "warning",
+                                "data-umyid": "9",
+                                "className": ""
                               },
                               "children": [],
                               "componentName": null
@@ -94,7 +104,8 @@
             "fluid": true,
             "style": {
               "marginTop": "2em"
-            }
+            },
+            "data-umyid": "10"
           },
           "children": [
             {
@@ -110,14 +121,17 @@
                     "style": {
                       "margin": 0,
                       "padding": 10
-                    }
+                    },
+                    "data-umyid": "12"
                   },
                   "children": [
                     {
                       "type": "Panel",
                       "props": {
                         "header": "Panel with header",
-                        "bsStyle": "danger"
+                        "bsStyle": "danger",
+                        "data-umyid": "13",
+                        "className": ""
                       },
                       "children": [
                         {
@@ -125,7 +139,8 @@
                           "props": {
                             "style": {
                               "textAlign": "center"
-                            }
+                            },
+                            "data-umyid": "14"
                           }
                         }
                       ],
@@ -143,14 +158,17 @@
                     "style": {
                       "margin": 0,
                       "padding": 10
-                    }
+                    },
+                    "data-umyid": "15"
                   },
                   "children": [
                     {
                       "type": "Panel",
                       "props": {
                         "header": "Panel with header",
-                        "bsStyle": "primary"
+                        "bsStyle": "primary",
+                        "data-umyid": "20",
+                        "className": ""
                       },
                       "children": [
                         {
@@ -158,7 +176,8 @@
                           "props": {
                             "style": {
                               "textAlign": "center"
-                            }
+                            },
+                            "data-umyid": "21"
                           }
                         }
                       ],
@@ -176,14 +195,16 @@
                     "style": {
                       "margin": 0,
                       "padding": 10
-                    }
+                    },
+                    "data-umyid": "22"
                   },
                   "children": [
                     {
                       "type": "Panel",
                       "props": {
                         "header": "Panel with header",
-                        "bsStyle": "success"
+                        "bsStyle": "success",
+                        "data-umyid": "23"
                       },
                       "children": [
                         {
@@ -191,7 +212,8 @@
                           "props": {
                             "style": {
                               "textAlign": "center"
-                            }
+                            },
+                            "data-umyid": "24"
                           }
                         }
                       ],
@@ -203,7 +225,8 @@
               "props": {
                 "style": {
                   "padding": 0
-                }
+                },
+                "data-umyid": "11"
               }
             },
             {
@@ -219,14 +242,16 @@
                     "style": {
                       "margin": 0,
                       "padding": 10
-                    }
+                    },
+                    "data-umyid": "26"
                   },
                   "children": [
                     {
                       "type": "Panel",
                       "props": {
                         "header": "Panel with header",
-                        "bsStyle": "info"
+                        "bsStyle": "info",
+                        "data-umyid": "27"
                       },
                       "children": [
                         {
@@ -234,7 +259,8 @@
                           "props": {
                             "style": {
                               "textAlign": "center"
-                            }
+                            },
+                            "data-umyid": "28"
                           }
                         }
                       ],
@@ -252,14 +278,16 @@
                     "style": {
                       "margin": 0,
                       "padding": 10
-                    }
+                    },
+                    "data-umyid": "29"
                   },
                   "children": [
                     {
                       "type": "Panel",
                       "props": {
                         "header": "Panel with header",
-                        "bsStyle": "warning"
+                        "bsStyle": "warning",
+                        "data-umyid": "30"
                       },
                       "children": [
                         {
@@ -267,7 +295,8 @@
                           "props": {
                             "style": {
                               "textAlign": "center"
-                            }
+                            },
+                            "data-umyid": "31"
                           }
                         }
                       ],
@@ -285,7 +314,8 @@
                     "style": {
                       "margin": 0,
                       "padding": 10
-                    }
+                    },
+                    "data-umyid": "32"
                   },
                   "children": [
                     {
@@ -293,15 +323,20 @@
                       "props": {
                         "header": {
                           "type": "h3",
-                          "props": {},
+                          "props": {
+                            "data-umyid": "34"
+                          },
                           "children": [
                             {
                               "type": "span",
                               "text": "Empty h3",
-                              "props": {}
+                              "props": {
+                                "data-umyid": "35"
+                              }
                             }
                           ]
-                        }
+                        },
+                        "data-umyid": "33"
                       },
                       "children": [
                         {
@@ -309,7 +344,8 @@
                           "props": {
                             "style": {
                               "textAlign": "center"
-                            }
+                            },
+                            "data-umyid": "36"
                           }
                         }
                       ]
@@ -320,16 +356,75 @@
               "props": {
                 "style": {
                   "padding": 0
-                }
+                },
+                "data-umyid": "25"
               }
             }
           ]
         }
       ],
-      "props": {},
+      "props": {
+        "data-umyid": "1"
+      },
       "pageTitle": "HomePage",
       "pageProps": [],
       "pageScript": ""
+    },
+    {
+      "pageName": "UnnamedPage1",
+      "pagePath": "/UnnamedPage1",
+      "children": [
+        {
+          "type": "h3",
+          "props": {
+            "style": {
+              "padding": "1em",
+              "textAlign": "center"
+            },
+            "data-umyid": "136"
+          },
+          "children": [
+            {
+              "type": "span",
+              "text": "This is an empty page. To add new component select needed element on left-side panel and click on an element on the page where you want to put new component, than choose action for right component's place.",
+              "props": {
+                "data-umyid": "137"
+              }
+            }
+          ]
+        }
+      ],
+      "props": {
+        "data-umyid": "135"
+      }
+    },
+    {
+      "pageName": "UnnamedPage2",
+      "pagePath": "/UnnamedPage2",
+      "children": [
+        {
+          "type": "h3",
+          "props": {
+            "style": {
+              "padding": "1em",
+              "textAlign": "center"
+            },
+            "data-umyid": "139"
+          },
+          "children": [
+            {
+              "type": "span",
+              "text": "This is an empty page. To add new component select needed element on left-side panel and click on an element on the page where you want to put new component, than choose action for right component's place.",
+              "props": {
+                "data-umyid": "140"
+              }
+            }
+          ]
+        }
+      ],
+      "props": {
+        "data-umyid": "138"
+      }
     }
   ]
 }

@@ -1,0 +1,23 @@
+{
+  "name": "06-react-smart",
+  "description": "06  |  Test React component, includes all children",
+  "component": {
+    "destDirPath": "src/client/components/{groupName}",
+    "fileExtension": "jsx",
+    "script": "Component.js"
+  },
+  "modules":[
+    {
+      "id": "componentActions",
+      "destDirPath": "src/client/actions/{groupName}",
+      "name": "{componentName}Actions",
+      "script": "componentActions.js"
+    },
+    {
+      "id": "actionsIndex",
+      "destDirPath": "src/client/actions/",
+      "name": "index",
+      "script": "actionsIndex.js"
+    }
+  ]
+}

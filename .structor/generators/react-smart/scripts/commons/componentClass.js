@@ -1,7 +1,8 @@
 import _ from 'lodash';
 
 const header = _.template(
-`import React, { Component, PropTypes } from 'react';\n`);
+`import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';\n`);
 
 const headerImportsMembers = _.template(
 `import { <%= members.join(',') %> } from '<%= relativeSource %>';\n`);
@@ -9,27 +10,28 @@ const headerImportsMembers = _.template(
 const headerImportsDefaults = _.template(
 `import <%= name %> from '<%= relativeSource %>';\n`);
 
-const stateProps = _.template(
-` const {  \n`);
-
 const classWrapper = _.template(
 `class <%= componentName %> extends Component {
 
     constructor(props, content) {
-        // this.state = {count: props.initialCount};
         super(props, content);
     }
 
     render() {
-        // const { propOne, propTwo } = this.props;
-        return (
-            <<%= model.type %> {...this.props} <%= api.getComponentProps({ props: model.props, api: api }) %> >
-                <%= api.getComponentChildren({ model: model, api: api }) %>
-            </<%= model.type %>>
-        );
-    }
+        <%= api.getRenderVars({ meta: meta }) %><%= api.getComponentVars({ model: model, meta: meta, api: api }) %><%= api.getComponentChildrenVars({ model: model, meta: meta, api: api }) %><%= api.getRootComponent({ model: model, meta: meta, api: api }) %>}
 }
-export default <%= componentName %>;\n`);
+<%= api.getClassFooter({ model: model, meta: meta, api: api, componentName: componentName }) %>`);
+
+const footerWithStateToProps = _.template(
+`function mapStateToProps(state) {
+    const <%= meta.component.stateToProps %> = state;
+    return <%= api.getStateVars({ meta: meta }) %>
+}
+
+export default connect(mapStateToProps)(<%= componentName %>);\n`);
+
+const footerWithEmptyStateToProps = _.template(
+`export default connect()(<%= componentName %>);\n`);
 
 export function getComponentClassHeader(){
     return header();
@@ -40,7 +42,7 @@ export function getComponentClassMemberImports(options) {
     let result = '';
     let importsMap = {};
     imports.forEach(item => {
-        if (item.member && !item.name) {
+        if (item.member) {
             importsMap[item.relativeSource] = importsMap[item.relativeSource] || [];
             importsMap[item.relativeSource].push(item.member);
         }
@@ -56,7 +58,7 @@ export function getComponentClassDefaultImports(options){
     let result = '';
     let importsMap = {};
     imports.forEach( item => {
-        if(!item.member && item.name){
+        if(!item.member){
             importsMap[item.relativeSource] = importsMap[item.relativeSource] || [];
             importsMap[item.relativeSource].push(item.name);
         }
@@ -67,8 +69,41 @@ export function getComponentClassDefaultImports(options){
     return result;
 }
 
-export function getStateProps(options){
+export function getStateVars(options){
+    const { meta: { propVars } } = options;
+    let result = '';
+    if(propVars && propVars.size > 0){
+        result += '{';
+        for (var key of propVars.keys()) {
+            result += key + ',';
+        }
+        result = result.substr(0, result.length - 1) + '};\n';
+    }
+    return result;
+}
 
+export function getRenderVars(options){
+    const { meta: { propVars, actions } } = options;
+    let result = '';
+    if(propVars && propVars.size > 0){
+        result += 'const {';
+        for (var key of propVars.keys()) {
+            result += key + ',';
+        }
+        result = result.substr(0, result.length - 1) + '} = this.props;\n';
+    }
+    return result;
+}
+
+export function getClassFooter(options){
+    const { meta: { propVars } } = options;
+    let result = '';
+    if(propVars && propVars.size > 0){
+        result = footerWithStateToProps(options);
+    } else {
+        result = footerWithEmptyStateToProps(options);
+    }
+    return result;
 }
 
 export function getComponentClass(options){

@@ -1,0 +1,9 @@
+{
+  "type": "Panel",
+  "props": {
+    "header": "Header",
+    "footer": "Footer"
+  },
+  "children":[]
+
+}

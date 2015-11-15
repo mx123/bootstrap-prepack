@@ -46,6 +46,8 @@ module.exports = {
     },
     Demo: {
         SmartPanel: require('../../src/client/containers/Demo/SmartPanel.jsx'),
-        FetchSmartButton: require('../../src/client/containers/Demo/FetchSmartButton.jsx')
+        FetchSmartButton: require('../../src/client/containers/Demo/FetchSmartButton.jsx'),
+        Test: require('../../src/client/components/Demo/Test.jsx'),
+        Test1: require('../../src/client/components/Demo/Test1.jsx')
     }
 };

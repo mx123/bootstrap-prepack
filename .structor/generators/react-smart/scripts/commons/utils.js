@@ -3,6 +3,65 @@ import fs from 'fs';
 import path from 'path';
 import esformatter from 'esformatter';
 import { esformatterOptions } from './esformatterUtils.js';
+import esprima from 'esprima';
+import escodegen from 'escodegen';
+
+// Executes visitor on the object and its children (recursively).
+export function traverse(object, visitor) {
+
+    visitor(object);
+
+    for (let key in object) {
+        if (object.hasOwnProperty(key)) {
+            let child = object[key];
+            if (typeof child === 'object' && child !== null) {
+                traverse(child, visitor);
+            }
+        }
+    }
+}
+
+export function traverseWithResult(object, visitor, result) {
+
+    let _result = visitor(object, result);
+
+    for (let key in object) {
+        if (object.hasOwnProperty(key)) {
+            let child = object[key];
+            if (typeof child === 'object' && child !== null) {
+                traverseWithResult(child, visitor, _result);
+            }
+        }
+    }
+}
+
+export function traverseModel(node, visitor){
+    visitor(node);
+
+    if(node.children && node.children.length > 0){
+        node.children.forEach( child => {
+            traverseModelWithResult(child, visitor);
+        });
+    }
+}
+
+export function traverseModelWithResult(node, visitor, result){
+    let _result = visitor(node, result);
+
+    if(node.children && node.children.length > 0){
+        node.children.forEach( child => {
+            traverseModelWithResult(child, visitor, _result);
+        });
+    }
+}
+
+export function parse(inputData, options = {tolerant: true, range: false, comment: false}){
+    return esprima.parse(inputData, options);
+}
+
+export function generate(ast){
+    return escodegen.generate(ast);
+}
 
 export function formatJs(jsData) {
     try {
@@ -26,4 +85,19 @@ export function readFile(filePath) {
     });
 }
 
+
+export function writeFile(filePath, fileData){
+    return new Promise((resolve, reject) => {
+        if(!fileData){
+            reject('File data is undefined. File path: ' + filePath);
+        }
+        fs.writeFile(filePath, fileData, {encoding: 'utf8'}, err => {
+            if(err){
+                reject(err);
+            } else {
+                resolve();
+            }
+        });
+    });
+}
 

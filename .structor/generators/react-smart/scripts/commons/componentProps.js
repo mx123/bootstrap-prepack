@@ -1,25 +1,50 @@
 import _ from 'lodash';
 
 export function getComponentProps(options){
-    const { props, api } = options;
+    const { model: { seqID, props }, meta, api } = options;
+    const metaProps = seqID !== undefined ? meta.render[seqID].props : undefined;
     let result = '';
-    if(props && !_.isEmpty(props)){
-        result += ' ';
-        _.forOwn(props, (value, prop) => {
-            if(_.isArray(value)){
-                result += prop + '={ ' + api.getPropValue({ value, api }) + ' } ';
-            } else if(_.isObject(value)){
-                if(value['type']){
-                    result += prop +"={ " + api.getChildComponent({ model: value, api }) + '} ';
+    if(metaProps && !_.isEmpty(metaProps)){
+        _.forOwn(metaProps, (value, prop) => {
+            if(value !== undefined && _.isString(value) && value.indexOf('$') === 0){
+                const localVarName = value.substr(1);
+                if(meta.handlerFuncs.has(localVarName)){
+                    result += ' ' + prop + '={this.' + localVarName + '} ';
                 } else {
-                    result += prop + "={ " + api.getPropValue({ value, api }) +  ' } ';
+                    result += ' ' + prop + '={' + localVarName + '} ';
                 }
-            } else if (_.isString(value) && value.length > 0) {
-                result += prop + "=" + api.getPropValue({value, api}) + ' ';
-            } else if (_.isBoolean(value) || _.isNumber(value)) {
-                result += prop + "={" + api.getPropValue({value, api}) + '} ';
+            } else {
+                let modelPropValue = props[prop];
+                if(modelPropValue !== undefined){
+                    result += api.getJSXPropValue({ value: modelPropValue, prop, meta, api });
+                } else {
+                    result += api.getJSXPropValue({ value, prop, meta, api });
+                }
             }
         });
+    } else if (props && !_.isEmpty(props)) {
+        _.forOwn(props, (value, prop) => {
+            result += api.getJSXPropValue({value, prop, meta, api});
+        });
+    }
+    return result;
+}
+
+export function getJSXPropValue(options){
+    const { value, prop, meta, api } = options;
+    let result = ' ';
+    if(_.isArray(value)){
+        result += prop + '={ ' + api.getPropValue({ value, api }) + ' } ';
+    } else if(_.isObject(value)){
+        if(value['type']){
+            result += prop +"={ " + api.getChildComponent({ model: value, meta, api }) + '} ';
+        } else {
+            result += prop + "={ " + api.getPropValue({ value, api }) +  ' } ';
+        }
+    } else if (_.isString(value) && value.length > 0) {
+        result += prop + "=" + api.getPropValue({ value, api }) + ' ';
+    } else if (_.isBoolean(value) || _.isNumber(value)) {
+        result += prop + "={" + api.getPropValue({ value, api }) + '} ';
     }
     return result;
 }
@@ -27,7 +52,7 @@ export function getComponentProps(options){
 export function getPropValue(options){
     const { value, prop, api } = options;
     let result = '';
-    if(value !== 'undefined'){
+    if(value !== undefined){
         if(_.isString(value) && value.length > 0){
             if(prop){
                 result += '"' + prop + '": ';

@@ -1,6 +1,6 @@
 {
-  "name": "06-react-smart",
-  "description": "06  |  Test React component, includes all children",
+  "name": "07-react-dumb",
+  "description": "07  |  Test React component, includes all children",
   "component": {
     "destDirPath": "src/client/components/{groupName}",
     "fileExtension": "jsx",
@@ -8,21 +8,15 @@
   },
   "modules":[
     {
-      "id": "initialState",
-      "destDirPath": "src/client/store",
-      "name": "initialState.js",
-      "script": "initialState.js"
-    },
-    {
       "id": "componentActions",
       "destDirPath": "src/client/actions/{groupName}",
-      "name": "actions{componentName}.js",
+      "name": "{componentName}Actions",
       "script": "componentActions.js"
     },
     {
       "id": "actionsIndex",
       "destDirPath": "src/client/actions/",
-      "name": "indexNew.js",
+      "name": "index",
       "script": "actionsIndex.js"
     }
   ]

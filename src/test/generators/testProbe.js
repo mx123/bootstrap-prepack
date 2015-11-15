@@ -18,15 +18,31 @@ fileManager.readJson('./model/PanelModel.json')
         return generatorManager.doPreGeneration(jsonObj, '06-react-smart', { componentName: 'Test', groupName: 'GroupTest'})
             .then( function(preGeneratedData) {
                 //console.log('//--- RAW META ---//');
-                //console.log(preGeneratedData.metaJSON);
+                //console.log(preGeneratedData.metaModel);
                 //console.log('//--- RAW README ---//');
-                //console.log(preGeneratedData.readMe);
+                //console.log(preGeneratedData.metaHelp);
                 return preGeneratedData;
             });
     })
     .then( function(pregeneratedData){
-        var checkedMeta = JSON.parse(pregeneratedData.metaJSON);
-        checkedMeta.checked = true;
+        var checkedMeta = pregeneratedData.metaModel;
+
+        checkedMeta.component.stateToProps = "{ application: { githubData: { fetching: { status, errorText, error }, list: [ { id: lid1 }], list2 } } }";
+        checkedMeta.component.handlers.handleOnClick = '(e) => { async:myAsyncAction($testingRef.getValue(), $list2); }';
+        checkedMeta.component.handlers.handleOnClick1 = '(a1, a2) => { myNewAction($testingRef.getValue(), a1, $testingRef2.value); }';
+        checkedMeta.component.handlers.handleOnClick2 = '(a3) => myNewAction2($error);';
+
+        checkedMeta.render.var = 'testingVariable';
+        checkedMeta.render.children[0].children[0].var = 'listItemVar:map:$list2';
+        checkedMeta.render.children[0].children[1].var = 'listItemVar2:if:$item2';
+        checkedMeta.render.children[0].children[1].children[0].text = '$listItemTex2';
+        checkedMeta.render.children[0].children[2].var = 'listItemVar3';
+        checkedMeta.render.children[0].children[0].props.ref = 'testingRef';
+        checkedMeta.render.children[0].children[0].props.onClick = '$handleOnClick';
+        checkedMeta.render.children[0].children[1].props.ref = 'testingRef2';
+        checkedMeta.render.children[0].children[1].props.testObj = '$testObjVar';
+        checkedMeta.render.children[0].children[1].props.style = '$listStyle';
+
         console.log('//--- CHECKED META ---//');
         console.log(JSON.stringify(checkedMeta, null, 4));
         return checkedMeta;
@@ -38,6 +54,7 @@ fileManager.readJson('./model/PanelModel.json')
                     .then( function(generatedObj) {
                         //console.log(JSON.stringify(generatedObj, null, 4));
                         console.log(generatedObj.component.sourceCode);
+                        console.log(generatedObj.modules.initialState.sourceCode);
                         //return generatedObj;
                     });
             })

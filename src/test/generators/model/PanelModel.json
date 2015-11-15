@@ -71,7 +71,8 @@
             {
               "type": "span",
               "text": "List item #3",
-              "props": {}
+              "props": {},
+              "var": "listItemSpan"
             }
           ]
         },

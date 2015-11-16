@@ -43,11 +43,5 @@ module.exports = {
     ReactBootstrapModal: {
         ModalSubmitCancel: require('../../src/client/components/ReactBootstrapModal').ModalSubmitCancel,
         ModalClose: require('../../src/client/components/ReactBootstrapModal').ModalClose
-    },
-    Demo: {
-        SmartPanel: require('../../src/client/containers/Demo/SmartPanel.jsx'),
-        FetchSmartButton: require('../../src/client/containers/Demo/FetchSmartButton.jsx'),
-        Test: require('../../src/client/components/Demo/Test.jsx'),
-        Test1: require('../../src/client/components/Demo/Test1.jsx')
     }
 };

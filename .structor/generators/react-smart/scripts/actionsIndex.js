@@ -1,32 +1,34 @@
-
 import _ from 'lodash';
 import path from 'path';
-import utils from './commons/utils.js';
-import api from './commons';
-
+import { enrichHandlers } from './commons/metaUtils.js';
+import { readFile, parse, generate, formatJs } from './commons/utils.js';
+import { injectNonExistingActions } from './actionsIndex/actionsIndexFile.js';
 
 export function process(dataObject){
 
-    return Promise.resolve().then( () => {
-        const { modules, meta } = dataObject;
-        //
-        //let resultSourceCode = api.getComponentClassHeader();
-        //resultSourceCode += api.getComponentClassMemberImports({ imports });
-        //resultSourceCode += api.getComponentClassDefaultImports({ imports });
-        //resultSourceCode += api.getComponentClass({
-        //    componentName, componentBody: '<span></span>', componentProps: 'props', model, api
-        //});
-        //
-        //
-        //console.log(resultSourceCode);
-        //console.log('//---------//');
-        //let result = utils.formatJs(resultSourceCode);
+    const { modules, meta } = dataObject;
 
-        console.log('//---- ----------------------- ----//');
-        console.log('//---- actionsIndex dataObject ----//');
-        console.log('//---- ----------------------- ----//');
-        //console.log(JSON.stringify(dataObject, null, 4));
-        const result = '@@ actionsIndex source code';
+    return Promise.resolve().then( () => {
+
+        return readFile(modules.actionsIndex.outputFilePath);
+
+    }).then( fileData => {
+
+        let result = fileData;
+        let newAst = null;
+        try{
+            const ast = parse(fileData);
+            let metaObj = enrichHandlers(meta);
+            newAst = injectNonExistingActions(ast, metaObj.actions, modules.actions.relativeFilePath);
+        } catch(e){
+            throw Error('Parsing file: ' + modules.actionsIndex.outputFilePath + '. ' + e);
+        }
+
+        try{
+            result = formatJs(generate(newAst));
+        } catch(e){
+            throw Error('Generating file: ' + modules.actionsIndex.outputFilePath + '. ' + e);
+        }
 
         return result;
 

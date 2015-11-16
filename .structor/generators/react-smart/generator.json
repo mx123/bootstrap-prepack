@@ -14,16 +14,22 @@
       "script": "initialState.js"
     },
     {
-      "id": "componentActions",
+      "id": "actions",
       "destDirPath": "src/client/actions/{groupName}",
-      "name": "actions{componentName}.js",
-      "script": "componentActions.js"
+      "name": "{componentName}Actions.js",
+      "script": "actions.js"
     },
     {
       "id": "actionsIndex",
       "destDirPath": "src/client/actions/",
-      "name": "indexNew.js",
+      "name": "index.js",
       "script": "actionsIndex.js"
+    },
+    {
+      "id": "reducersIndex",
+      "destDirPath": "src/client/reducers/",
+      "name": "index.js",
+      "script": "reducersIndex.js"
     }
   ]
 }

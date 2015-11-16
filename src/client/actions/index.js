@@ -1,5 +1,1 @@
-import { fetchServerData } from './serverActions.js';
-
-export default {
-    fetchServerData
-}
+export { fetchServerData } from './serverActions.js';

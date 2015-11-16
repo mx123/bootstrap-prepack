@@ -3,22 +3,19 @@ import _ from 'lodash';
 import path from 'path';
 import { formatJs, readFile, writeFile } from './commons/utils.js';
 import { enrichStateToPropVars, getMetaModel, enrichRefs, enrichHandlers } from './commons/metaUtils.js';
-import { makeFlatMetaSyncWithModel } from './commons/componentUtils.js';
-import api from './commons';
+import { makeFlatMetaSyncWithModel } from './component/componentUtils.js';
+import { getComponentClass } from './component/componentClass.js';
+import * as api from './component/index.js';
 
 const testHeader = {
     component: {
-        stateToProps: "",
-        handlers: {}
+        stateToProps: '',
+        handlers: {
+            componentWillReceiveProps: '(nextProps) => {}',
+            componentWillUpdate: '(nextProps, nextState) => {}',
+            componentDidMount: '() => {}'
+        }
     }
-
-    //component: {
-    //    //stateToProps: "{ application, application: { demo: { arr1: [{ arId, arValue }] }, next },  application: { subApp1: { variable: variableName } } }",
-    //    stateToProps: "{ application: { githubData: { fetching: { status, errorText, error }, " +
-    //    "list: [ { id: lid1 }], list2: [ { id: lid2 }] } } }",
-    //    handlers: {}
-    //}
-
 };
 
 export function preProcess(dataObject){
@@ -28,8 +25,7 @@ export function preProcess(dataObject){
     })
         .then (helpIndexText => {
 
-        //testHeader.model = dataObject.component.model;
-
+        testHeader.component.reducerRoot =  _.camelCase(dataObject.component.componentName);
         testHeader.render = getMetaModel(dataObject.component.model)[0];
 
         let result = {
@@ -45,37 +41,25 @@ export function preProcess(dataObject){
 export function process(dataObject){
 
     return Promise.resolve().then( () => {
-        const { component: { imports, componentName }, meta } = dataObject;
+        const { component: { imports, componentName }, modules, meta } = dataObject;
         let model = dataObject.component.model;
 
-        let metaObj = enrichStateToPropVars(meta);
-        //console.log('//-- stateToProps -------------------------');
-        //console.log(JSON.stringify(metaObj.propVars, null, 4));
-        metaObj = enrichRefs(metaObj);
-        //console.log('//-- meta refs -------------------------');
-        //console.log(JSON.stringify(metaObj.refs, null, 4));
-        metaObj = enrichHandlers(metaObj);
+        let metaObj = enrichHandlers(enrichRefs(enrichStateToPropVars(meta)));
+
+        metaObj.actionsIndexFilePath = modules.actionsIndex.relativeFilePath;
 
         makeFlatMetaSyncWithModel(metaObj, model);
 
-        let resultSourceCode = api.getComponentClassHeader();
-        resultSourceCode += api.getComponentClassMemberImports({ imports });
-        resultSourceCode += api.getComponentClassDefaultImports({ imports });
-
-        resultSourceCode += api.getComponentClass({
-            componentName, model, meta: metaObj, api
+        let resultSourceCode = getComponentClass({
+            imports, componentName, model, meta: metaObj, api
         });
 
-
-        let result;
         try{
-            result = formatJs(resultSourceCode);
+            return formatJs(resultSourceCode);
         } catch (e){
             writeFile('__$error.js', resultSourceCode);
             throw e;
         }
-
-        return result;
     });
 
 }

@@ -108,7 +108,8 @@ function initActionObj(meta, node, actions, handler, label = 'none') {
             let actionObj = {
                 label: label,
                 actionName: actionName,
-                arguments:[]
+                arguments:[],
+                constantName: _.snakeCase(actionName).toUpperCase()
             };
             if(actionArgs && actionArgs.length > 0){
                 actionArgs.forEach( argumentNode => {
@@ -131,7 +132,7 @@ export function enrichHandlers(meta){
                 let handlerObj = {
                     methodName: prop,
                     actions: new Map(),
-                    arguments: [],
+                    parameters: [],
                     rawText: value
                 };
                 handlerFuncs.set(prop, handlerObj);
@@ -140,8 +141,8 @@ export function enrichHandlers(meta){
                 //console.log(JSON.stringify(ast, null, 4));
                 traverse(ast, node => {
                     if(node.type === 'ArrowFunctionExpression' && node.params && node.params.length > 0){
-                        node.params.forEach( argumentParam => {
-                            handlerObj.arguments.push(argumentParam.name);
+                        node.params.forEach( funcParam => {
+                            handlerObj.parameters.push(funcParam.name);
                         });
                         traverse(node.body, innerNode => {
                             if(innerNode.type === 'LabeledStatement' && innerNode.label && innerNode.label.type === 'Identifier'){

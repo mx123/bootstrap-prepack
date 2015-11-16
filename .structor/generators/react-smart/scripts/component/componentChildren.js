@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { traverseModel } from './utils.js';
+import { traverseModel } from '../commons/utils.js';
 
 const childComponentEmpty = _.template(
 `<<%= model.type %><%= propsObj %><%= api.getComponentProps({ model: model, meta: meta, api: api }) %> />\n`);
@@ -24,7 +24,7 @@ const localVarForChild = _.template(
 
 const localVarForChildMapTraverse = _.template(
 `let <%= metaVarName %>;
-if(<%= traverseVarName %> && <%= traverseVarName %>.length > 0){;
+if(<%= traverseVarName %> && <%= traverseVarName %>.length > 0){
     <%= metaVarName %> = <%= traverseVarName %>.map( (item, index) => {
         return (<%= api.getChildComponent({ model: model, meta: meta, api: api }, ' key={index} ') %>);
     })
@@ -35,7 +35,7 @@ if(<%= traverseVarName %> && <%= traverseVarName %>.length > 0){;
 const localVarForChildMapTraverseLocalVar = _.template(
 `let <%= traverseVarName %> = [];
 let <%= metaVarName %>;
-if(<%= traverseVarName %> && <%= traverseVarName %>.length > 0){;
+if(<%= traverseVarName %> && <%= traverseVarName %>.length > 0){
     <%= metaVarName %> = <%= traverseVarName %>.map( (item, index) => {
         return (<%= api.getChildComponent({ model: model, meta: meta, api: api }, ' key={index} ') %>);
     })
@@ -51,7 +51,7 @@ let <%= metaVarName %> = <%= metaVarName %>_list.map( (item, index) => {
 
 const localVarForChildIfTraverse = _.template(
 `let <%= metaVarName %> = null;
-if(<%= traverseVarName %> === true){;
+if(<%= traverseVarName %> === true){
     <%= metaVarName %> = (<%= api.getChildComponent({ model: model, meta: meta, api: api }) %>);
 } else {
     <%= metaVarName %> = (<%= api.getChildComponent({ model: model, meta: meta, api: api }) %>);
@@ -60,7 +60,7 @@ if(<%= traverseVarName %> === true){;
 const localVarForChildIfTraverseLocalVar = _.template(
 `let <%= traverseVarName %> = true;
 let <%= metaVarName %> = null;
-if(<%= traverseVarName %> === true){;
+if(<%= traverseVarName %> === true){
     <%= metaVarName %> = (<%= api.getChildComponent({ model: model, meta: meta, api: api }) %>);
 } else {
     <%= metaVarName %> = (<%= api.getChildComponent({ model: model, meta: meta, api: api }) %>);
@@ -69,7 +69,7 @@ if(<%= traverseVarName %> === true){;
 const localVarForChildIfTraverseEmpty = _.template(
 `let <%= metaVarName %> = null;
 let <%= metaVarName %>_check = true;
-if(<%= metaVarName %>_check === true){;
+if(<%= metaVarName %>_check === true){
     <%= metaVarName %> = (<%= api.getChildComponent({ model: model, meta: meta, api: api }) %>);
 }\n`);
 

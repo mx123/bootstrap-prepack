@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { traverseModelWithResult } from './utils.js';
+import { traverseModelWithResult } from '../commons/utils.js';
 
 function countModel(model){
     let counter = 0;

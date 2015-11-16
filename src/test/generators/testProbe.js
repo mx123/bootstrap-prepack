@@ -28,6 +28,7 @@ fileManager.readJson('./model/PanelModel.json')
         var checkedMeta = pregeneratedData.metaModel;
 
         checkedMeta.component.stateToProps = "{ application: { githubData: { fetching: { status, errorText, error }, list: [ { id: lid1 }], list2 } } }";
+        checkedMeta.component.handlers.componentDidMount = '() => { if(this.props.f = 12){ console.log("12"); } }';
         checkedMeta.component.handlers.handleOnClick = '(e) => { async:myAsyncAction($testingRef.getValue(), $list2); }';
         checkedMeta.component.handlers.handleOnClick1 = '(a1, a2) => { myNewAction($testingRef.getValue(), a1, $testingRef2.value); }';
         checkedMeta.component.handlers.handleOnClick2 = '(a3) => myNewAction2($error);';
@@ -53,8 +54,16 @@ fileManager.readJson('./model/PanelModel.json')
                 return generatorManager.doGeneration(jsonObj, '06-react-smart', { componentName: 'Test', groupName: 'GroupTest'}, meta)
                     .then( function(generatedObj) {
                         //console.log(JSON.stringify(generatedObj, null, 4));
+                        console.log('// ---- Component ----------------------------------------------------------------');
                         console.log(generatedObj.component.sourceCode);
+                        console.log('// ---- Initial state ----------------------------------------------------------------');
                         console.log(generatedObj.modules.initialState.sourceCode);
+                        console.log('// ---- Actions index ----------------------------------------------------------------');
+                        console.log(generatedObj.modules.actionsIndex.sourceCode);
+                        console.log('// ---- Reducers ----------------------------------------------------------------');
+                        console.log(generatedObj.modules.reducersIndex.sourceCode);
+                        console.log('// ---- Actions ----------------------------------------------------------------');
+                        console.log(generatedObj.modules.actions.sourceCode);
                         //return generatedObj;
                     });
             })

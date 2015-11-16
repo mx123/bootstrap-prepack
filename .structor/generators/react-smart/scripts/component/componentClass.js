@@ -11,12 +11,12 @@ const headerImportsDefaults = _.template(
 `import <%= name %> from '<%= relativeSource %>';\n`);
 
 const classWrapper = _.template(
-`class <%= componentName %> extends Component {
+`<%= api.getComponentClassHeader() %><%= api.getComponentClassMemberImports({ imports: imports }) %><%= api.getComponentClassDefaultImports({ imports: imports }) %><%= api.getImportHeaderActions({ meta: meta }) %>
+class <%= componentName %> extends Component {
 
     constructor(props, content) {
-        super(props, content);
-    }
-
+        super(props, content);<%= api.getHandlersBinds({ model: model, meta: meta, api: api }) %>}
+    <%= api.getHandlers({ model: model, meta: meta, api: api }) %>
     render() {
         <%= api.getRenderVars({ meta: meta }) %><%= api.getComponentVars({ model: model, meta: meta, api: api }) %><%= api.getComponentChildrenVars({ model: model, meta: meta, api: api }) %><%= api.getRootComponent({ model: model, meta: meta, api: api }) %>}
 }

@@ -18,7 +18,6 @@ var PageForDesk = React.createClass({
     componentDidMount: function(){
         window.Page = this;
         var pathname = this.props.location.pathname;
-        //console.log('Page is mounted with location pathname: ' + pathname);
         this._updatePageModel(pathname);
         if(window.onPageDidMount){
             window.onPageDidMount();
@@ -39,7 +38,6 @@ var PageForDesk = React.createClass({
     },
 
     componentDidUpdate: function(prevProps, prevState){
-        //console.log('Page is updated...');
         if(window.onPageDidUpdate){
             window.onPageDidUpdate();
         }
@@ -58,7 +56,6 @@ var PageForDesk = React.createClass({
 
     _updatePageModel: function(pathname){
         var pageModel = null;
-        //console.log('Try to update page model by pathname: ' + pathname);
         if(window.__model && window.__model.pages && window.__model.pages.length > 0){
             var pages = window.__model.pages;
             if(pathname === '/'){
@@ -73,7 +70,6 @@ var PageForDesk = React.createClass({
                     //check if pathname has valid parameters for route path pattern
                     pages.forEach( function(page, index){
                         try{
-                            //var pathObj = matchPattern(page.pagePath, pathname.substr(1));
                             var paramsObj = getParams(page.pagePath, pathname);
                             var formattedPath = formatPattern(page.pagePath, paramsObj);
                             if(pathname === formattedPath){
@@ -175,7 +171,6 @@ var PageForDesk = React.createClass({
                             try {
                                 let temp = fn.apply(this, arguments);
                                 instanceMap[this.props['data-umyid']] = temp._owner._rootNodeID;
-                                //console.log('Temp: %o, %o', temp._owner._rootNodeID, this.props);
                                 return temp;
                             } catch (err) {
                                 console.error(err);

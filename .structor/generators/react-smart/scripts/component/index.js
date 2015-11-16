@@ -1,4 +1,4 @@
-import {
+export {
     getComponentClassHeader,
     getComponentClassMemberImports,
     getComponentClassDefaultImports,
@@ -8,43 +8,32 @@ import {
     getClassFooter
 } from './componentClass.js';
 
-import {
+export {
     getComponentChildren,
     getChildComponent,
     getComponentChildrenVars,
     getRootComponent
 } from './componentChildren.js';
 
-import {
+export {
     getComponentProps,
     getPropValue,
     getJSXPropValue
 } from './componentProps.js';
 
-import {
+export {
     getComponentVars,
     fillLocalVars,
     getLocalVarValue,
     getVarValue
 } from './componentVars.js';
 
-export default {
-    getComponentClassHeader,
-    getComponentClassMemberImports,
-    getComponentClassDefaultImports,
-    getComponentClass,
-    getStateVars,
-    getRenderVars,
-    getClassFooter,
-    getComponentChildren,
-    getChildComponent,
-    getRootComponent,
-    getComponentChildrenVars,
-    getComponentProps,
-    getPropValue,
-    getJSXPropValue,
-    getComponentVars,
-    fillLocalVars,
-    getLocalVarValue,
-    getVarValue
-}
+export {
+    getImportHeaderActions,
+    getHandlers,
+    getHandlerActions,
+    getHandlerVars,
+    getHandlerRefs,
+    getHandlersBinds
+} from './componentHandlers.js'
+

@@ -37,6 +37,9 @@ var dataFunc = '(arg1, arg2) => { $action($ref1, $ref2); $action(arg1, arg2); }'
 
 var dataObj = 'const s = { application: { demo: { next: null }, demo: [ {id: 1}, {id: 1} ] }, application2: 12345 } ';
 
+var classObj =
+'class Test extends Component { handleOnClick = (e) => { e.preventDefault(); e.stopPropagation(); const { dispatch, list2 } = this.props; dispatch(myAsyncAction( this.refs.testingRef.getValue(), list2)); } }';
+
 try{
     //var ast = esprima.parse(data, {tolerant: true, range: false, comment: false});
     //console.log(JSON.stringify(ast, null, 4));
@@ -72,11 +75,14 @@ try{
     //
     //console.log(JSON.stringify(propsFromState, null, 4));
 
-    var ast1 = esprima.parse(dataFunc, {tolerant: true, range: false, comment: false});
-    console.log(JSON.stringify(ast1, null, 4));
+    //var ast1 = esprima.parse(dataFunc, {tolerant: true, range: false, comment: false});
+    //console.log(JSON.stringify(ast1, null, 4));
 
     //var ast2 = esprima.parse(dataObj, {tolerant: true, range: false, comment: false});
     //console.log(JSON.stringify(ast2, null, 4));
+
+    var ast3 = esprima.parse(classObj, {tolerant: true, range: false, comment: false});
+    console.log(JSON.stringify(ast3, null, 4));
 
 
 } catch (e){

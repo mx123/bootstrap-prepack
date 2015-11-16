@@ -1,37 +1,50 @@
-
 import _ from 'lodash';
 import path from 'path';
-import * as utils from './commons/utils.js';
-import * as initialStateUtils from './commons/initialStateUtils.js';
-import api from './commons';
-
+import { readFile, parse, generate, formatJs } from './commons/utils.js';
+import { findInitialStateNode, mergeInitialStateWithMeta } from './initialState/initialStateFile.js';
 
 export function process(dataObject){
 
-    const { modules, meta } = dataObject;
+    const { modules, meta: { component: { stateToProps } } } = dataObject;
 
     return Promise.resolve().then( () => {
 
-        return utils.readFile(modules.initialState.outputFilePath);
+        return readFile(modules.initialState.outputFilePath);
 
     }).then( fileData => {
 
-        let result;
-        if(meta.component.stateToProps && meta.component.stateToProps.length > 0){
-            const initialStateAst = utils.parse(fileData);
-            let initialStateAstNode = initialStateUtils.findInitialStateNode(initialStateAst);
+        if(stateToProps && stateToProps.length > 0){
+
+            let initialStateAst;
+            try {
+                initialStateAst = parse(fileData);
+            } catch (e) {
+                throw Error('Parsing file: ' + modules.initialState.outputFilePath + '. ' + e);
+            }
+
+            let initialStateAstNode = findInitialStateNode(initialStateAst);
             if(!initialStateAstNode){
                 throw Error('Initial state object was not found in ' + modules.initialState.outputFilePath);
             }
-            const metaStateAst = utils.parse('const ' + meta.component.stateToProps + '=meta;');
-            initialStateUtils.mergeInitialStateWithMeta(initialStateAstNode, metaStateAst);
-            result = utils.generate(initialStateAst);
-        } else {
-            result = fileData;
-        }
-        console.log(result);
 
-        return result;
+            let metaStateAst;
+            try {
+                metaStateAst = parse('const ' + stateToProps + '=meta;');
+            } catch (e) {
+                throw Error('Parsing "component.stateToProps". ' + e);
+            }
+
+            mergeInitialStateWithMeta(initialStateAstNode, metaStateAst);
+
+            try {
+                return formatJs(generate(initialStateAst));
+            } catch (e) {
+                throw Error('Generating initial state file. ' + e);
+            }
+
+        } else {
+            return fileData;
+        }
 
     });
 

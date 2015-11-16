@@ -1,4 +1,4 @@
-import { parse, traverse, traverseWithResult } from './utils.js';
+import { parse, traverse, traverseWithResult } from '../commons/utils.js';
 
 function getObjectAstMap(ast){
     const result = new Map();
@@ -113,24 +113,24 @@ function mergeMetaAstToInitialAst(metaMap, initialMap){
 
 export function findInitialStateNode(ast){
     let result = null;
-    let defaultExportVarName = null;
     traverse(ast, node => {
         if (node.type === 'ExportDefaultDeclaration'
-            && node.declaration
-            && node.declaration.type === 'Identifier') {
-            defaultExportVarName = node.declaration.name;
-        }
-    });
-
-    if(defaultExportVarName){
-        traverse(ast, function(node){
-            if(node.type === 'VariableDeclarator'
-                && node.id
-                && node.id.type === 'Identifier' && node.id.name === defaultExportVarName){
-                result = node.init;
+            && node.declaration){
+            if(node.declaration.type === 'Identifier'){
+                const defaultExportVarName = node.declaration.name;
+                traverse(ast, function(innerNode){
+                    if(innerNode.type === 'VariableDeclarator'
+                        && innerNode.id
+                        && innerNode.id.type === 'Identifier' && innerNode.id.name === defaultExportVarName){
+                        result = innerNode.init;
+                    }
+                });
+            } else if(node.declaration.type === 'ObjectExpression'){
+                result = node.declaration;
             }
-        });
-    }
+        }
+
+    });
     return result;
 }
 

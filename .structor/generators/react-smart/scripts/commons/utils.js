@@ -55,12 +55,12 @@ export function traverseModelWithResult(node, visitor, result){
     }
 }
 
-export function parse(inputData, options = {tolerant: true, range: false, comment: false}){
+export function parse(inputData, options = {tolerant: true, range: false, comment: true}){
     return esprima.parse(inputData, options);
 }
 
 export function generate(ast){
-    return escodegen.generate(ast);
+    return escodegen.generate(ast, {comment: true});
 }
 
 export function formatJs(jsData) {

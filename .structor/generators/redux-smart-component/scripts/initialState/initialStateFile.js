@@ -9,7 +9,6 @@ function getObjectAstMap(ast){
         if( node.type === 'Property' && node.key && node.key.type === 'Identifier' && node.value){
             if(node.value.type === 'ObjectExpression' || node.value.type === 'ArrayExpression'){
                 let key = res.key + '.' + node.key.name;
-                //console.log('Key: ' + key);
                 res[node.key.name] = {
                     key: key
                 };
@@ -17,7 +16,6 @@ function getObjectAstMap(ast){
                 return res[node.key.name];
             } else if(node.value.type === 'Literal') {
                 let key = res.key + '.' + node.key.name;
-                //console.log('Key: ' + key);
                 res[node.key.name] = {
                     key: key
                 };
@@ -80,19 +78,12 @@ function transformRestructuringToObject(ast){
     });
 }
 
-function mergeMetaAstToInitialAst(metaMap, initialMap){
+function mergeMetaAstToInitialAst(metaMap, initialMap, rootNode){
     metaMap.forEach( (value, key, thisMap) => {
-        //console.log('Meta ast key: ' + key);
         let initialEntry = initialMap.get(key);
-        if(initialEntry){
-            //console.log('Entries types: ', value.node.value.type, initialEntry.node.value.type);
-        } else {
+        if(!initialEntry){
             let initialParentEntry = initialMap.get(value.parentKey);
             if(initialParentEntry){
-                let metaParentEntry = thisMap.get(value.parentKey);
-                //console.log('Parent entries types: ', metaParentEntry.node.value.type, initialParentEntry.node.value.type);
-                //console.log(JSON.stringify(value.node, null, 4));
-                //console.log(JSON.stringify(metaParentEntry.node, null, 4));
                 if(initialParentEntry.node.value.type === 'ArrayExpression'){
                     let elements = initialParentEntry.node.value.elements;
                     if(elements && elements.length > 0){
@@ -105,8 +96,13 @@ function mergeMetaAstToInitialAst(metaMap, initialMap){
                 } else if(initialParentEntry.node.value.type === 'ObjectExpression') {
                     initialParentEntry.node.value.properties.push(value.node);
                 }
-                //console.log(JSON.stringify(metaParentEntry.node, null, 4));
+            } else {
+                let metaParentEntry = thisMap.get(value.parentKey);
+                if(!metaParentEntry){
+                    rootNode.properties.push(value.node);
+                }
             }
+
         }
     });
 }
@@ -129,25 +125,15 @@ export function findInitialStateNode(ast){
                 result = node.declaration;
             }
         }
-
     });
     return result;
 }
 
 export function mergeInitialStateWithMeta(initialStateAstNode, metaStateAst){
 
-    //console.log(JSON.stringify(metaStateAst, null, 4));
     transformRestructuringToObject(metaStateAst);
     let metaStateMap = getObjectAstMap(metaStateAst);
     let initialStateMap = getObjectAstMap(initialStateAstNode);
-
-    //let metaStateAst = parse(metaStateObj);
-
-    //console.log('=====================================================================================================');
-    mergeMetaAstToInitialAst(metaStateMap, initialStateMap);
-    //console.log(JSON.stringify(metaStateMap, null, 4));
-    //console.log('=====================================================================================================');
-    //console.log(JSON.stringify(initialStateMap, null, 4));
-    //console.log(JSON.stringify(initialStateAstNode, null, 4));
+    mergeMetaAstToInitialAst(metaStateMap, initialStateMap, initialStateAstNode);
 
 }

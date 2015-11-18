@@ -24,10 +24,11 @@ export function process(dataObject){
             throw Error('Parsing file: ' + modules.actionsIndex.outputFilePath + '. ' + e);
         }
 
+        let resultSourceCode = generate(newAst);
         try{
-            result = formatJs(generate(newAst));
+            result = formatJs(resultSourceCode);
         } catch(e){
-            throw Error('Generating file: ' + modules.actionsIndex.outputFilePath + '. ' + e);
+            throw Error(e + ' Please look at file: ' + writeErrorFileFor(modules.actionsIndex.outputFilePath, resultSourceCode));
         }
 
         return result;

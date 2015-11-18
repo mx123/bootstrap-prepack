@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { isMetaRef, getMetaRefName } from '../commons/metaUtils.js';
 
 export function getComponentProps(options){
     const { model: { seqID, props }, meta, api } = options;
@@ -6,8 +7,8 @@ export function getComponentProps(options){
     let result = '';
     if(metaProps && !_.isEmpty(metaProps)){
         _.forOwn(metaProps, (value, prop) => {
-            if(value !== undefined && _.isString(value) && value.indexOf('$') === 0){
-                const localVarName = value.substr(1);
+            if(isMetaRef(value)){
+                const localVarName = getMetaRefName(value);
                 if(meta.handlerFuncs.has(localVarName)){
                     result += ' ' + prop + '={this.' + localVarName + '} ';
                 } else {

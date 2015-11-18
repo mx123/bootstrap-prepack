@@ -39,9 +39,5 @@ module.exports = {
         Alert: require('react-bootstrap').Alert,
         Jumbotron: require('react-bootstrap').Jumbotron,
         AlertDismissable: require('../../src/client/components/ReactBootstrap').AlertDismissable
-    },
-    ReactBootstrapModal: {
-        ModalSubmitCancel: require('../../src/client/components/ReactBootstrapModal').ModalSubmitCancel,
-        ModalClose: require('../../src/client/components/ReactBootstrapModal').ModalClose
     }
 };

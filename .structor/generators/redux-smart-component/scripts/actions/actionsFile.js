@@ -43,9 +43,10 @@ const actionHandler = _.template(
 }`);
 
 const asyncActionReturn = _.template(
-`return Promise.resolve()
-    .then(() => {
-        return {};
+`return new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve({});
+    }, 3000);
 });\n`);
 
 const actionReturn = _.template(
@@ -100,6 +101,9 @@ export function getActionsCreators(options){
 
 export function getActionParameters(options){
     const { action } = options;
+    if(action.arguments.length === 0){
+        return '()';
+    }
     let paramsText = '';
     action.arguments.forEach( argument => {
         if(argument.ref){

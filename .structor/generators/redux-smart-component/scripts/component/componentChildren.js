@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { traverseModel } from '../commons/utils.js';
+import { isMetaRef, getMetaRefName, getMetaVarObject } from '../commons/metaUtils.js';
 
 const childComponentEmpty = _.template(
 `<<%= model.type %><%= propsObj %><%= api.getComponentProps({ model: model, meta: meta, api: api }) %> />\n`);
@@ -75,7 +76,7 @@ if(<%= metaVarName %>_check === true){
 
 function parseMetaVar(metaVar){
     if( metaVar && _.isString(metaVar) && metaVar.length > 0 ){
-        const metaVarArray = metaVar.split(':');
+        const metaVarArray = metaVar.split('_');
         //console.log(JSON.stringify(metaVarArray));
         if(metaVarArray[0]){
             return {
@@ -97,8 +98,8 @@ export function getChildComponent(options, withProps = ''){
     if(model.text){
         const { seqID } = model;
         const metaVar = seqID !== undefined ? meta.render[seqID].text : undefined;
-        if( metaVar && _.isString(metaVar) && metaVar.length > 0 && metaVar.indexOf('$') === 0){
-            options.varName = metaVar.substr(1);
+        if(isMetaRef(metaVar)){
+            options.varName = getMetaRefName(metaVar);
             return childComponentWithVar(options);
         } else {
             return childComponentWithText(options);
@@ -117,7 +118,7 @@ export function getComponentChildren(options){
         model.children.forEach( child => {
             const { seqID } = child;
             const metaVar = seqID !== undefined ? meta.render[seqID].var : undefined;
-            const metaVarObj = parseMetaVar(metaVar);
+            const metaVarObj = getMetaVarObject(metaVar);
             if(metaVarObj){
                 result += '{ '+ metaVarObj.varName +' }';
             } else {
@@ -137,9 +138,9 @@ export function getComponentChildrenVars(options){
     traverseModel(model, child => {
         const { seqID } = child;
         const metaVar = seqID !== undefined ? meta.render[seqID].var : undefined;
-        const metaVarObj = parseMetaVar(metaVar);
+        const metaVarObj = getMetaVarObject(metaVar);
         if(metaVarObj){
-            const { varName: metaVarName, traverseAs, traverseVarName } = metaVarObj;
+            const { varName: metaVarName, ext: traverseAs, extRef: traverseVarName } = metaVarObj;
             if(meta.propVars && meta.propVars.has(metaVarName)){
                 throw Error('Ambiguity in variable definition for element "' + child.type + '". Variable: "'
                     + metaVar + '" has the same name as property mapped from the state');
@@ -201,7 +202,7 @@ export function getRootComponent(options){
     let result = '';
     const { model, model: { seqID }, meta, api } = options;
     const metaVar = seqID !== undefined ? meta.render[seqID].var : undefined;
-    const metaVarObj = parseMetaVar(metaVar);
+    const metaVarObj = getMetaVarObject(metaVar);
     if(metaVarObj){
         result += 'return ' + metaVarObj.varName + ';\n';
     } else {

@@ -1,6 +1,6 @@
 {
-  "name": "01-react-smart",
-  "description": "01  |  Redux container component, includes all children",
+  "name": "01-redux-smart",
+  "description": "01  |  Redux smart component, includes all children",
   "component": {
     "destDirPath": "src/client/containers/{groupName}",
     "fileExtension": "jsx",

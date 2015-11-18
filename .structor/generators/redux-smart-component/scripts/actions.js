@@ -2,7 +2,7 @@
 import _ from 'lodash';
 import path from 'path';
 import { enrichHandlers } from './commons/metaUtils.js';
-import { readFile, writeFile, parse, generate, formatJs } from './commons/utils.js';
+import { readFile, parse, generate, formatJs, writeErrorFileFor } from './commons/utils.js';
 import { getNonExistingActions } from './actionsIndex/actionsUtils.js';
 import { getActionsFile } from './actions/actionsFile.js';
 import * as api from './actions/index.js';
@@ -26,8 +26,7 @@ export function process(dataObject){
             try{
                 return formatJs(resultSourceCode);
             } catch (e){
-                writeFile('__$error.js', resultSourceCode);
-                throw e;
+                throw Error(e + ' Please look at file: ' + writeErrorFileFor(modules.actions.outputFilePath, resultSourceCode));
             }
         } else {
             return '';

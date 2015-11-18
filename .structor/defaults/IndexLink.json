@@ -1,0 +1,11 @@
+[
+  {
+    "type": "IndexLink",
+    "props": {
+      "to": "primary"
+    },
+    "children":[
+	{"type": "span", "text": "IndexLink"}
+    ]
+  }
+]

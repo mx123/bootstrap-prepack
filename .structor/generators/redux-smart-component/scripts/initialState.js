@@ -36,10 +36,11 @@ export function process(dataObject){
 
             mergeInitialStateWithMeta(initialStateAstNode, metaStateAst);
 
+            let resultSourceCode = generate(initialStateAst);
             try {
-                return formatJs(generate(initialStateAst));
+                return formatJs(resultSourceCode);
             } catch (e) {
-                throw Error('Generating initial state file. ' + e);
+                throw Error(e + ' Please look at file: ' + writeErrorFileFor(modules.initialState.outputFilePath, resultSourceCode));
             }
 
         } else {

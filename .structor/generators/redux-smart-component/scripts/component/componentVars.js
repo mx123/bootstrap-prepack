@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { isMetaRef, getMetaRefName, fixText } from '../commons/metaUtils.js';
 
 export function getComponentVars(options){
     let result = '';
@@ -19,9 +20,12 @@ export function fillLocalVars(options){
     const { props: metaProps, text: metaText } = meta.render[seqID];
     if(metaProps && !_.isEmpty(metaProps)){
         _.forOwn(metaProps, (value, prop) => {
-            if(value !== undefined && _.isString(value) && value.indexOf('$') === 0){
-                const localVarName = value.substr(1);
-                if(!meta.propVars.has(localVarName) && !meta.localVars.has(localVarName)){
+            if(isMetaRef(value)){
+                const localVarName = getMetaRefName(value);
+                if(!meta.propVars.has(localVarName)
+                    && !meta.localVars.has(localVarName)
+                    && !meta.handlerFuncs.has(localVarName)){
+
                     let modelPropValue = props[prop];
                     if(modelPropValue !== undefined){
                         meta.localVars.set(localVarName, api.getLocalVarValue({ value: modelPropValue, prop: localVarName, meta, api }));
@@ -37,10 +41,10 @@ export function fillLocalVars(options){
         });
     }
 
-    if(metaText !== undefined && _.isString(metaText) && metaText.indexOf('$') >= 0) {
-        const localVarName = metaText.substr(1);
+    if(isMetaRef(metaText)) {
+        const localVarName = getMetaRefName(metaText);
         if(!meta.propVars.has(localVarName) && !meta.localVars.has(localVarName)){
-            meta.localVars.set(localVarName, 'let ' + localVarName + ' = \'' + modelText + '\'');
+            meta.localVars.set(localVarName, 'let ' + localVarName + ' = \'' + fixText(modelText) + '\'');
         }
     }
 

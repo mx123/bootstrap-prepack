@@ -1,11 +1,23 @@
 var _ = require('lodash');
 var React = require('react');
+var ReactDOM = require('react-dom');
 var PreviewOverlay = require('./PreviewOverlay.js');
 var components = require('./index.js');
 import { matchPattern, formatPattern, getParams } from 'react-router/lib/PatternUtils.js';
 import pageDefaultModel from './model.js';
 
 var instanceMap = {};
+
+function wrapComponent(WrappedComponent, instanceMap) {
+    return React.createClass({
+        componentDidMount: function(){
+            instanceMap[this.props['data-umyid']] = ReactDOM.findDOMNode(this);
+        },
+        render: function(){
+            return <WrappedComponent {...this.props} />
+        }
+    });
+}
 
 var PageForDesk = React.createClass({
 
@@ -119,6 +131,7 @@ var PageForDesk = React.createClass({
     createElements: function(model){
 
         var elements = [];
+        instanceMap = {};
         model.children.forEach(function(child, index){
             elements.push(this.createElement(child, index));
         }.bind(this));
@@ -161,17 +174,18 @@ var PageForDesk = React.createClass({
             nestedElements = options.text;
         }
         var result = null;
-        instanceMap = {};
         try{
-            result = React.createElement(type, props, nestedElements);
+            if(_.isString(type)){
+                result = React.createElement(type, props, nestedElements);
+            } else {
+                result = React.createElement(wrapComponent(type, instanceMap), props, nestedElements);
+            }
             if(result.type.prototype){
                 if(result.type.prototype.render){
                     result.type.prototype.render = (function(fn){
                         return function render(){
                             try {
-                                let temp = fn.apply(this, arguments);
-                                instanceMap[this.props['data-umyid']] = temp._owner._rootNodeID;
-                                return temp;
+                                 return fn.apply(this, arguments);
                             } catch (err) {
                                 console.error(err);
                                 return React.createElement('div', {
@@ -227,11 +241,9 @@ var PageForDesk = React.createClass({
             var umyId = null;
             nodeList.each(function(index, node){
                 umyId = node.attributes['data-umyid'].value;
-                if(instanceMap[umyId]){
-                    nodeMap[umyId] = $('[data-reactid="' + instanceMap[umyId] + '"]')[0];
-                    visitedIds.push(umyId);
-                } else {
+                if(!instanceMap[umyId]){
                     nodeMap[umyId] = node;
+                    visitedIds.push(umyId);
                 }
             });
         }
@@ -239,7 +251,7 @@ var PageForDesk = React.createClass({
         var difference = _.difference(allIds, visitedIds);
         if(difference && difference.length > 0){
             difference.forEach(function( id ){
-                nodeMap[id] = $('[data-reactid="' + instanceMap[id] + '"]')[0];
+                nodeMap[id] = instanceMap[id];
             });
         }
         nodeList = null;

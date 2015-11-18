@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import fs from 'fs';
+import fs from 'fs-extra';
 import path from 'path';
 import esformatter from 'esformatter';
 import { esformatterOptions } from './esformatterUtils.js';
@@ -85,19 +85,31 @@ export function readFile(filePath) {
     });
 }
 
-
 export function writeFile(filePath, fileData){
     return new Promise((resolve, reject) => {
         if(!fileData){
             reject('File data is undefined. File path: ' + filePath);
         }
-        fs.writeFile(filePath, fileData, {encoding: 'utf8'}, err => {
+        fs.ensureFile(filePath, err => {
             if(err){
                 reject(err);
             } else {
-                resolve();
+                fs.writeFile(filePath, fileData, {encoding: 'utf8'}, err => {
+                    if(err){
+                        reject(err);
+                    } else {
+                        resolve();
+                    }
+                });
             }
         });
     });
+}
+
+export function writeErrorFileFor(outputFilePath, fileData){
+    const errorDirPath = path.dirname(outputFilePath);
+    const errorFilePath = path.join(errorDirPath, '$errorParsingFile.js');
+    writeFile(errorFilePath, fileData);
+    return errorFilePath;
 }
 

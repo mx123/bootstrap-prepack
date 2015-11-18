@@ -1,6 +1,43 @@
 import _ from 'lodash';
 import { parse, traverse, traverseModel, traverseWithResult, traverseModelWithResult } from './utils.js';
 
+export function fixText(textValue){
+    if(textValue){
+        return textValue.replace(/'/g, "\\'");
+    }
+}
+
+export function isMetaRef(value){
+    return value !== undefined && _.isString(value) && value.indexOf('$') === 0;
+}
+
+export function getMetaRefName(value){
+    if(value){
+        return value.substr(1);
+    }
+    return undefined;
+}
+
+export function getMetaVarObject(value){
+    if(value){
+        let result = {};
+        const arr = value.split('_');
+        if(arr.length > 0){
+            const ext = arr[arr.length -1];
+            const extArr = ext.split('$');
+            if(extArr.length > 0){
+                result.ext = extArr[0];
+                result.extRef = extArr[1];
+            } else {
+                result.ext = ext;
+            }
+        }
+        result.varName = arr[0];
+        return result;
+    }
+    return undefined;
+}
+
 export function getMetaModel(model){
     let result = [];
     traverseModelWithResult(model, (node, tree) => {
@@ -87,7 +124,7 @@ function initActionArgumentObj(meta, node, rawText){
     return actionArgumentObj;
 }
 
-function initActionObj(meta, node, actions, handler, label = 'none') {
+function initActionObj(meta, node, actions, handler) {
 
     let actionCallExpression = undefined;
     if (node.type === 'ExpressionStatement'
@@ -104,21 +141,29 @@ function initActionObj(meta, node, actions, handler, label = 'none') {
 
     if (actionCallExpression) {
         const { callee: { name: actionName }, arguments: actionArgs } = actionCallExpression;
-        if(!actions.has(actionName)){
-            let actionObj = {
-                label: label,
-                actionName: actionName,
-                arguments:[],
-                constantName: _.snakeCase(actionName).toUpperCase()
-            };
-            if(actionArgs && actionArgs.length > 0){
-                actionArgs.forEach( argumentNode => {
-                    actionObj.arguments.push(initActionArgumentObj(meta, argumentNode, handler.rawText));
-                });
+        const actionVarObj = getMetaVarObject(actionName);
+        if(actionVarObj){
+            const { varName, ext } = actionVarObj;
+            if(!actions.has(varName)){
+                if(actionVarObj){
+                    let actionObj = {
+                        label: ext || 'none',
+                        actionName: varName,
+                        arguments:[],
+                        constantName: _.snakeCase(varName).toUpperCase()
+                    };
+                    if(actionArgs && actionArgs.length > 0){
+                        actionArgs.forEach( argumentNode => {
+                            actionObj.arguments.push(initActionArgumentObj(meta, argumentNode, handler.rawText));
+                        });
+                    }
+                    actions.set(varName, actionObj);
+                }
             }
-            actions.set(actionName, actionObj);
+            handler.actions.set(varName, actions.get(varName));
+        } else{
+            throw Error('Action name can not be parsed: ' + actionName);
         }
-        handler.actions.set(actionName, actions.get(actionName));
     }
 }
 
@@ -140,16 +185,19 @@ export function enrichHandlers(meta){
                 //console.log('//---- ' + prop + ' ----------------');
                 //console.log(JSON.stringify(ast, null, 4));
                 traverse(ast, node => {
-                    if(node.type === 'ArrowFunctionExpression' && node.params && node.params.length > 0){
-                        node.params.forEach( funcParam => {
-                            handlerObj.parameters.push(funcParam.name);
-                        });
+                    if(node.type === 'ArrowFunctionExpression'){
+                        if(node.params && node.params.length > 0){
+                            node.params.forEach( funcParam => {
+                                handlerObj.parameters.push(funcParam.name);
+                            });
+                        }
                         traverse(node.body, innerNode => {
-                            if(innerNode.type === 'LabeledStatement' && innerNode.label && innerNode.label.type === 'Identifier'){
-                                initActionObj(meta, innerNode.body, actionObjs, handlerObj, innerNode.label.name);
-                            } else {
-                                initActionObj(meta, innerNode, actionObjs, handlerObj);
-                            }
+                            initActionObj(meta, innerNode, actionObjs, handlerObj);
+                            //if(innerNode.type === 'LabeledStatement' && innerNode.label && innerNode.label.type === 'Identifier'){
+                            //    initActionObj(meta, innerNode.body, actionObjs, handlerObj, innerNode.label.name);
+                            //} else {
+                            //
+                            //}
                         });
                     }
                 });

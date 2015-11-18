@@ -35,10 +35,11 @@ export function process(dataObject){
                 throw Error('Parsing file: ' + modules.reducersIndex.outputFilePath + '. ' + e);
             }
 
+            let resultSourceCode = generate(newAst);
             try{
-                return formatJs(generate(newAst));
+                return formatJs(resultSourceCode);
             } catch(e){
-                throw Error('Generating file: ' + modules.reducersIndex.outputFilePath + '. ' + e);
+                throw Error(e + ' Please look at file: ' + writeErrorFileFor(modules.reducersIndex.outputFilePath, resultSourceCode));
             }
 
         } else {

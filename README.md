@@ -7,9 +7,9 @@ Starter project with a set of React Bootstrap components. Includes: redux, redux
 <br/>
 ### Technologies and libraries
 The following libs and technologies were used:
-* ```react``` (0.14)
+* ```react```
 * ```react-router```
-* ```redux``` (```redux-thunk```, ```react-redux```, ```redux-actions```, ```redux-promise```)
+* ```redux```, ```redux-thunk```, ```react-redux```, ```redux-actions```, ```redux-promise```
 * ```react-bootstrap```
 * ```express```
  
@@ -44,10 +44,10 @@ Once you have started Structor you will see the project's workspace. Now you can
 or generate new React components from the combination, or add new pages, or whatever you want.
 <br/>
 <br/>
-### Project generators
+### The source code generators
 * [Generator for smart Redux component (container)](https://github.com/ipselon/bootstrap-prepack/wiki/Generator-for-smart-Redux-component-(container))
 <br/>
-<br/>
+
 ### Proxy setup
 We need to setup proxy because of CORS restriction, it means that Structor runs on 2222 port on localhost, 
 and our application may require to request REST service on 3000 port. That is restricted by browser policy.

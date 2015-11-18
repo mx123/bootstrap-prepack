@@ -28,7 +28,7 @@ If you want to see the app in action please do the following:
 * Run command: ```npm run build-client```
 * Run command: ```node ./server.js```
 * Go to http://localhost:3000
-<br/>
+
 <br/>
 ### Starting Structor 
 If you still didn't start the backend server please do the following: 

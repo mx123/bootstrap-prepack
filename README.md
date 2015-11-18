@@ -46,8 +46,8 @@ or generate new React components from the combination, or add new pages, or what
 <br/>
 ### The source code generators
 * [Generator for smart Redux component (container)](https://github.com/ipselon/bootstrap-prepack/wiki/Generator-for-smart-Redux-component-(container))
-<br/>
 
+<br/>
 ### Proxy setup
 We need to setup proxy because of CORS restriction, it means that Structor runs on 2222 port on localhost, 
 and our application may require to request REST service on 3000 port. That is restricted by browser policy.
@@ -80,5 +80,6 @@ Then, if everything were built and you didn't stop backend server, just go to ht
 ### The source code structure
 * [The source code structure description](https://github.com/ipselon/bootstrap-prepack/wiki/The-source-code-structure)
 
+<br/>
 ### License
 MIT

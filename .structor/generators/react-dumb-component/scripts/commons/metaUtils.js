@@ -14,8 +14,30 @@ export function isMetaRef(value){
 export function getMetaRefName(value){
     if(value){
         const arr = value.split('_');
-        if(arr.length > 0){
+        if(arr.length > 0 && arr[0] && arr[0].length > 0){
             return arr[0].substr(1);
+        }
+    }
+    return undefined;
+}
+
+export function getMetaRefObj(value){
+    if(value){
+        const arr = value.split('_');
+        if(arr.length > 0 && arr[0] && arr[0].length > 0){
+            const innerArr = arr[0].split('.');
+            if(innerArr.length >= 2){
+                return {
+                    shape: innerArr[0].substr(1),
+                    member: innerArr[1],
+                    fullName: innerArr[0].substr(1) + '.' + innerArr[1]
+                }
+            } else if(innerArr.length === 1) {
+                return {
+                    member: innerArr[0].substr(1),
+                    fullName: innerArr[0].substr(1)
+                }
+            }
         }
     }
     return undefined;
@@ -61,44 +83,62 @@ export function getMetaModel(model){
     return result;
 }
 
-export function enrichStateToPropVars(meta){
-    let propVars = new Map();
-    const { component: { stateToProps } } = meta;
-    if(stateToProps && stateToProps.length > 0){
-        //throw Error('Meta info parsing: component.stateToProps is not specified')
-        try{
-            const ast = parse('const ' + stateToProps + '=meta;', {tolerant: true, range: false, comment: false});
-            traverse(ast, node => {
-                if(node.type === 'Property' && node.value.type === 'Identifier'){
-                    propVars.set(node.value.name, true);
-                }
-            });
-        } catch(e){
-            throw Error('Meta info "stateToProps" parsing: ' + (e.message || e));
-        }
-    }
-    meta.propVars = propVars;
-    return meta;
-}
-
 export function enrichRefs(meta){
     let refs = new Map();
 
     if(meta.render && !_.isEmpty(meta.render)){
         traverseModel(meta.render, node => {
             if(node.props && node.props.ref){
-                //let refArray = node.props.ref.split(':');
-                //let refObj = {
-                //    name: refArray[0],
-                //    method: refArray[1]
-                //};
-                //refs.set(refArray[0], refObj);
                 refs.set(node.props.ref, true);
             }
         });
     }
 
     meta.refs = refs;
+    return meta;
+}
+
+function initMetaRef(propVarsMap, handlersObj, value){
+    if(isMetaRef(value)){
+        const metaRefObj = getMetaRefObj(value);
+        if(metaRefObj){
+            if(!handlersObj[metaRefObj.member]){
+                if(metaRefObj.shape){
+                    let shapeObj = propVarsMap.get(metaRefObj.shape);
+                    if(!shapeObj){
+                        shapeObj = {
+                            members: new Map()
+                        };
+                        propVarsMap.set(metaRefObj.shape, shapeObj);
+                    }
+                    shapeObj.members.set(metaRefObj.member, metaRefObj);
+                } else if(metaRefObj.member) {
+                    propVarsMap.set(metaRefObj.member, metaRefObj);
+                }
+            }
+        } else {
+            throw Error('Meta ref has not proper format: ' + value);
+        }
+    }
+}
+
+export function enrichPropVars(meta){
+    let propVars = new Map();
+    const { component: { handlers } } = meta;
+    if(meta.render && !_.isEmpty(meta.render)){
+        traverseModel(meta.render, node => {
+            if(node.props && !_.isEmpty(node.props)){
+                _.forOwn(node.props, (value, prop) => {
+                    initMetaRef(propVars, handlers, value);
+                });
+            }
+            if(node.text){
+                initMetaRef(propVars, handlers, node.text);
+            }
+        });
+    }
+
+    meta.propVars = propVars;
     return meta;
 }
 
@@ -144,28 +184,27 @@ function initActionObj(meta, node, actions, handler) {
 
     if (actionCallExpression) {
         const { callee: { name: actionName }, arguments: actionArgs } = actionCallExpression;
-        const actionVarObj = getMetaVarObject(actionName);
-        if(actionVarObj){
-            const { varName, ext } = actionVarObj;
-            if(!actions.has(varName)){
-                if(actionVarObj){
-                    let actionObj = {
-                        label: ext || 'none',
-                        actionName: varName,
-                        arguments:[],
-                        constantName: _.snakeCase(varName).toUpperCase()
-                    };
-                    if(actionArgs && actionArgs.length > 0){
-                        actionArgs.forEach( argumentNode => {
-                            actionObj.arguments.push(initActionArgumentObj(meta, argumentNode, handler.rawText));
-                        });
-                    }
-                    actions.set(varName, actionObj);
+        if(isMetaRef(actionName)){
+            const varName = getMetaRefName(actionName);
+            if(varName){
+                if(!actions.has(varName)){
+                        let actionObj = {
+                            actionName: varName,
+                            arguments:[]
+                        };
+                        if(actionArgs && actionArgs.length > 0){
+                            actionArgs.forEach( argumentNode => {
+                                actionObj.arguments.push(initActionArgumentObj(meta, argumentNode, handler.rawText));
+                            });
+                        }
+                        actions.set(varName, actionObj);
                 }
+                handler.actions.set(varName, actions.get(varName));
+            } else{
+                throw Error('Action name can not be parsed: ' + actionName);
             }
-            handler.actions.set(varName, actions.get(varName));
-        } else{
-            throw Error('Action name can not be parsed: ' + actionName);
+        } else {
+            throw Error('Action name is not a reference to prop: ' + actionName);
         }
     }
 }
@@ -196,11 +235,6 @@ export function enrichHandlers(meta){
                         }
                         traverse(node.body, innerNode => {
                             initActionObj(meta, innerNode, actionObjs, handlerObj);
-                            //if(innerNode.type === 'LabeledStatement' && innerNode.label && innerNode.label.type === 'Identifier'){
-                            //    initActionObj(meta, innerNode.body, actionObjs, handlerObj, innerNode.label.name);
-                            //} else {
-                            //
-                            //}
                         });
                     }
                 });

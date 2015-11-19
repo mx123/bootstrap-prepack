@@ -39,5 +39,8 @@ module.exports = {
         Alert: require('react-bootstrap').Alert,
         Jumbotron: require('react-bootstrap').Jumbotron,
         AlertDismissable: require('../../src/client/components/ReactBootstrap').AlertDismissable
+    },
+    Test: {
+        TestDumbComponent: require('../../src/client/components/Test/TestDumbComponent.jsx')
     }
 };

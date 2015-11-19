@@ -30,6 +30,303 @@
       "pageTitle": "MainPage",
       "pageProps": [],
       "pageScript": ""
+    },
+    {
+      "pageName": "UnnamedPage1",
+      "pagePath": "/UnnamedPage1",
+      "children": [
+        {
+          "type": "h3",
+          "props": {
+            "style": {
+              "padding": "1em",
+              "textAlign": "center"
+            },
+            "data-umyid": "5"
+          },
+          "children": [
+            {
+              "type": "span",
+              "text": "This is an empty page. To add new component select needed element on left-side panel and click on an element on the page where you want to put new component, than choose action for right component's place.",
+              "props": {
+                "data-umyid": "6"
+              }
+            }
+          ]
+        },
+        {
+          "variantName": "market repos grid",
+          "type": "Grid",
+          "props": {
+            "fluid": true,
+            "data-umyid": "7",
+            "style": {
+              "marginTop": "2em"
+            }
+          },
+          "children": [
+            {
+              "type": "Row",
+              "children": [
+                {
+                  "type": "Col",
+                  "props": {
+                    "xs": 12,
+                    "md": 4,
+                    "sm": 4,
+                    "lg": 4,
+                    "style": {
+                      "margin": 0,
+                      "padding": 10
+                    },
+                    "data-umyid": "9"
+                  },
+                  "children": [
+                    {
+                      "type": "Panel",
+                      "props": {
+                        "data-umyid": "10",
+                        "style": {
+                          "margin": 0
+                        }
+                      },
+                      "children": [
+                        {
+                          "type": "p",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty Panel",
+                              "props": {
+                                "data-umyid": "12"
+                              }
+                            }
+                          ],
+                          "props": {
+                            "data-umyid": "11"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "Col",
+                  "props": {
+                    "xs": 12,
+                    "md": 4,
+                    "sm": 4,
+                    "lg": 4,
+                    "style": {
+                      "margin": 0,
+                      "padding": 10
+                    },
+                    "data-umyid": "13"
+                  },
+                  "children": [
+                    {
+                      "type": "TestDumbComponent",
+                      "props": {
+                        "buttonBsStyle": "primary",
+                        "data-umyid": "14"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "type": "Col",
+                  "props": {
+                    "xs": 12,
+                    "md": 4,
+                    "sm": 4,
+                    "lg": 4,
+                    "style": {
+                      "margin": 0,
+                      "padding": 10
+                    },
+                    "data-umyid": "15"
+                  },
+                  "children": [
+                    {
+                      "type": "Panel",
+                      "props": {
+                        "data-umyid": "16",
+                        "style": {
+                          "margin": 0
+                        }
+                      },
+                      "children": [
+                        {
+                          "type": "p",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty Panel",
+                              "props": {
+                                "data-umyid": "18"
+                              }
+                            }
+                          ],
+                          "props": {
+                            "data-umyid": "17"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "props": {
+                "data-umyid": "8",
+                "style": {
+                  "padding": 0
+                }
+              }
+            },
+            {
+              "type": "Row",
+              "children": [
+                {
+                  "type": "Col",
+                  "props": {
+                    "xs": 12,
+                    "md": 4,
+                    "sm": 4,
+                    "lg": 4,
+                    "style": {
+                      "margin": 0,
+                      "padding": 10
+                    },
+                    "data-umyid": "20"
+                  },
+                  "children": [
+                    {
+                      "type": "Panel",
+                      "props": {
+                        "data-umyid": "21",
+                        "style": {
+                          "margin": 0
+                        }
+                      },
+                      "children": [
+                        {
+                          "type": "p",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty Panel",
+                              "props": {
+                                "data-umyid": "23"
+                              }
+                            }
+                          ],
+                          "props": {
+                            "data-umyid": "22"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "Col",
+                  "props": {
+                    "xs": 12,
+                    "md": 4,
+                    "sm": 4,
+                    "lg": 4,
+                    "style": {
+                      "margin": 0,
+                      "padding": 10
+                    },
+                    "data-umyid": "24"
+                  },
+                  "children": [
+                    {
+                      "type": "Panel",
+                      "props": {
+                        "data-umyid": "25",
+                        "style": {
+                          "margin": 0
+                        }
+                      },
+                      "children": [
+                        {
+                          "type": "p",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty Panel",
+                              "props": {
+                                "data-umyid": "27"
+                              }
+                            }
+                          ],
+                          "props": {
+                            "data-umyid": "26"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "Col",
+                  "props": {
+                    "xs": 12,
+                    "md": 4,
+                    "sm": 4,
+                    "lg": 4,
+                    "style": {
+                      "margin": 0,
+                      "padding": 10
+                    },
+                    "data-umyid": "28"
+                  },
+                  "children": [
+                    {
+                      "type": "Panel",
+                      "props": {
+                        "data-umyid": "29",
+                        "style": {
+                          "margin": 0
+                        }
+                      },
+                      "children": [
+                        {
+                          "type": "p",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty Panel",
+                              "props": {
+                                "data-umyid": "31"
+                              }
+                            }
+                          ],
+                          "props": {
+                            "data-umyid": "30"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "props": {
+                "data-umyid": "19",
+                "style": {
+                  "padding": 0
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "props": {
+        "data-umyid": "4"
+      }
     }
   ]
 }

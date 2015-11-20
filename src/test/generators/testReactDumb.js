@@ -33,22 +33,22 @@ fileManager.readJson('./model/PanelModel.json')
         //checkedMeta.component.handlers.handleOnClick = '() => action_async() ';
         //checkedMeta.component.reducerRoot = 'testPanel2';
         //checkedMeta.component.handlers.handleOnClick = '(e) => { async:myAsyncAction($testingRef.getValue(), $list2); }';
-        checkedMeta.component.handlers.handleOnClick1 = '(a1, a2) => { $onSelect(); $setState(); } ';
+        //checkedMeta.component.handlers.handleOnClick1 = '(a1, a2) => { $onSelect(); $setState(); } ';
         //checkedMeta.component.handlers.handleOnClick1 = '(a1, a2) => { $onSelect($testingRef.getValue(), a1, $testingRef2.value); }';
         //checkedMeta.component.handlers.handleOnClick2 = '(a3) => myNewAction2($error);';
 
-        checkedMeta.render.var = 'testingVariable';
-        checkedMeta.render.children[0].children[0].var = 'listItemVar_map$list2';
-        checkedMeta.render.children[0].children[1].var = 'listItemVar2_if$item2';
-        checkedMeta.render.children[0].children[1].children[0].text = '$listItemTex2_if';
-        checkedMeta.render.children[0].children[2].var = 'listItemVar3';
-        checkedMeta.render.children[0].children[0].props.ref = 'testingRef';
-        checkedMeta.render.children[0].children[0].props.onClick = '$handleOnClick1';
-        checkedMeta.render.children[0].children[1].props.ref = 'testingRef2';
-        checkedMeta.render.children[0].children[1].props.testObj = '$testObjVar.item3';
-        checkedMeta.render.children[0].children[1].props.style = '$listStyle';
-        checkedMeta.render.children[0].children[0].children[0].text = '$testObjVar.printText';
-        checkedMeta.render.children[0].children[3].props.arrayProp = '$myArray';
+        //checkedMeta.render.var = 'testingVariable';
+        //checkedMeta.render.children[0].children[0].var = 'listItemVar_map$list2';
+        //checkedMeta.render.children[0].children[1].var = 'listItemVar2_if$item2';
+        //checkedMeta.render.children[0].children[1].children[0].text = '$listItemTex2_if';
+        //checkedMeta.render.children[0].children[2].var = 'listItemVar3';
+        //checkedMeta.render.children[0].children[0].props.ref = 'testingRef';
+        //checkedMeta.render.children[0].children[0].props.onClick = '$handleOnClick1';
+        //checkedMeta.render.children[0].children[1].props.ref = 'testingRef2';
+        //checkedMeta.render.children[0].children[1].props.testObj = '$testObjVar.item3';
+        //checkedMeta.render.children[0].children[1].props.style = '$listStyle';
+        //checkedMeta.render.children[0].children[0].children[0].text = '$testObjVar.printText';
+        //checkedMeta.render.children[0].children[3].props.arrayProp = '$myArray';
 
         console.log('//--- CHECKED META ---//');
         console.log(JSON.stringify(checkedMeta, null, 4));

@@ -13,9 +13,9 @@ module.exports = [
         },
         module: {
             loaders: [
-                { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel', query: { stage: 0 } },
-                { test: /\.css$/, exclude: /node_modules/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
-                { test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)([\?]?.*)$/, exclude: /node_modules/, loader: 'url-loader' }
+                { test: /\.(js|jsx)$/, loader: 'babel', query: { stage: 0 } },
+                { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
+                { test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)([\?]?.*)$/, loader: 'url-loader' }
             ]
         },
         plugins: [

@@ -64,7 +64,6 @@
 
 %>
 import React, { Component, PropTypes } from 'react';
-<% _.forEach(resources.requires, function(item, index) { %><%= '\n' %>import '<%= item.relativeSource %>';<% }); %>
 <% _.forEach(imports, function(item, index) { %><%= '\n' %><% if(item.member){ %>import { <%= item.member %> } from '<%= item.relativeSource %>';<% } else {%>import <%= item.name %> from '<%= item.relativeSource %>';<% } %><% }); %>
 
 

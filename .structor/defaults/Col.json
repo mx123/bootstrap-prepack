@@ -1,5 +1,6 @@
 [
   {
+    "variantName": "empty col size 3",
     "type": "Col",
     "props": {
       "xs": 3,

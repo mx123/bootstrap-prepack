@@ -17,8 +17,8 @@ export function preProcess(dataObject){
                 metaModel: {
                     component: {
                         handlers: {
-                            handlerOnClick: '(e) => {}',
-                            handlerOnChange: '() => {}'
+                            handleOnClick: '(e) => {}',
+                            handleOnChange: '() => {}'
                         }
                     },
                     render: getMetaModel(dataObject.component.model)[0]

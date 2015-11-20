@@ -55,14 +55,11 @@
           ]
         },
         {
-          "variantName": "market repos grid",
+          "variantName": "2 colums",
           "type": "Grid",
           "props": {
             "fluid": true,
-            "data-umyid": "7",
-            "style": {
-              "marginTop": "2em"
-            }
+            "data-umyid": "7"
           },
           "children": [
             {
@@ -72,23 +69,16 @@
                   "type": "Col",
                   "props": {
                     "xs": 12,
-                    "md": 4,
-                    "sm": 4,
-                    "lg": 4,
-                    "style": {
-                      "margin": 0,
-                      "padding": 10
-                    },
+                    "md": 6,
+                    "sm": 12,
+                    "lg": 6,
                     "data-umyid": "9"
                   },
                   "children": [
                     {
                       "type": "Panel",
                       "props": {
-                        "data-umyid": "10",
-                        "style": {
-                          "margin": 0
-                        }
+                        "data-umyid": "10"
                       },
                       "children": [
                         {
@@ -105,6 +95,31 @@
                           "props": {
                             "data-umyid": "11"
                           }
+                        },
+                        {
+                          "variantName": "Unsaved variant",
+                          "type": "AlertDismissable",
+                          "props": {
+                            "data-umyid": "66"
+                          },
+                          "children": [
+                            {
+                              "variantName": "Unsaved variant",
+                              "type": "strong",
+                              "props": {
+                                "data-umyid": "67"
+                              },
+                              "text": "Strong text"
+                            },
+                            {
+                              "variantName": "Unsaved variant",
+                              "type": "span",
+                              "props": {
+                                "data-umyid": "68"
+                              },
+                              "text": "Text"
+                            }
+                          ]
                         }
                       ]
                     }
@@ -114,48 +129,17 @@
                   "type": "Col",
                   "props": {
                     "xs": 12,
-                    "md": 4,
-                    "sm": 4,
-                    "lg": 4,
-                    "style": {
-                      "margin": 0,
-                      "padding": 10
-                    },
+                    "md": 6,
+                    "sm": 12,
+                    "lg": 6,
                     "data-umyid": "13"
                   },
                   "children": [
                     {
-                      "type": "TestDumbComponent",
+                      "type": "Panel",
                       "props": {
-                        "buttonBsStyle": "primary",
                         "data-umyid": "14"
                       },
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "type": "Col",
-                  "props": {
-                    "xs": 12,
-                    "md": 4,
-                    "sm": 4,
-                    "lg": 4,
-                    "style": {
-                      "margin": 0,
-                      "padding": 10
-                    },
-                    "data-umyid": "15"
-                  },
-                  "children": [
-                    {
-                      "type": "Panel",
-                      "props": {
-                        "data-umyid": "16",
-                        "style": {
-                          "margin": 0
-                        }
-                      },
                       "children": [
                         {
                           "type": "p",
@@ -164,12 +148,12 @@
                               "type": "span",
                               "text": "Empty Panel",
                               "props": {
-                                "data-umyid": "18"
+                                "data-umyid": "16"
                               }
                             }
                           ],
                           "props": {
-                            "data-umyid": "17"
+                            "data-umyid": "15"
                           }
                         }
                       ]
@@ -178,147 +162,7 @@
                 }
               ],
               "props": {
-                "data-umyid": "8",
-                "style": {
-                  "padding": 0
-                }
-              }
-            },
-            {
-              "type": "Row",
-              "children": [
-                {
-                  "type": "Col",
-                  "props": {
-                    "xs": 12,
-                    "md": 4,
-                    "sm": 4,
-                    "lg": 4,
-                    "style": {
-                      "margin": 0,
-                      "padding": 10
-                    },
-                    "data-umyid": "20"
-                  },
-                  "children": [
-                    {
-                      "type": "Panel",
-                      "props": {
-                        "data-umyid": "21",
-                        "style": {
-                          "margin": 0
-                        }
-                      },
-                      "children": [
-                        {
-                          "type": "p",
-                          "children": [
-                            {
-                              "type": "span",
-                              "text": "Empty Panel",
-                              "props": {
-                                "data-umyid": "23"
-                              }
-                            }
-                          ],
-                          "props": {
-                            "data-umyid": "22"
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "Col",
-                  "props": {
-                    "xs": 12,
-                    "md": 4,
-                    "sm": 4,
-                    "lg": 4,
-                    "style": {
-                      "margin": 0,
-                      "padding": 10
-                    },
-                    "data-umyid": "24"
-                  },
-                  "children": [
-                    {
-                      "type": "Panel",
-                      "props": {
-                        "data-umyid": "25",
-                        "style": {
-                          "margin": 0
-                        }
-                      },
-                      "children": [
-                        {
-                          "type": "p",
-                          "children": [
-                            {
-                              "type": "span",
-                              "text": "Empty Panel",
-                              "props": {
-                                "data-umyid": "27"
-                              }
-                            }
-                          ],
-                          "props": {
-                            "data-umyid": "26"
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "Col",
-                  "props": {
-                    "xs": 12,
-                    "md": 4,
-                    "sm": 4,
-                    "lg": 4,
-                    "style": {
-                      "margin": 0,
-                      "padding": 10
-                    },
-                    "data-umyid": "28"
-                  },
-                  "children": [
-                    {
-                      "type": "Panel",
-                      "props": {
-                        "data-umyid": "29",
-                        "style": {
-                          "margin": 0
-                        }
-                      },
-                      "children": [
-                        {
-                          "type": "p",
-                          "children": [
-                            {
-                              "type": "span",
-                              "text": "Empty Panel",
-                              "props": {
-                                "data-umyid": "31"
-                              }
-                            }
-                          ],
-                          "props": {
-                            "data-umyid": "30"
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ],
-              "props": {
-                "data-umyid": "19",
-                "style": {
-                  "padding": 0
-                }
+                "data-umyid": "8"
               }
             }
           ]

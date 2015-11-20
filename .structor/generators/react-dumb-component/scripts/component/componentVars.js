@@ -8,39 +8,42 @@ export function getComponentVars(options){
     meta.localTypes = new Map();
     api.fillLocalVars({ model, meta, api });
 
-
-    let result = componentName + '.defaultProps = {';
-    meta.localVars.forEach( (localVar, name) => {
-        if(localVar.members){
-            result += ' ' + name + ': {';
-            localVar.members.forEach( (member, name) => {
-                result += ' ' + member + ',';
-            });
-            result = result.substr(0, result.length - 1);
-            result += '},'
-        } else {
-            result += ' ' + localVar + ',';
-        }
-    });
-    result = result.substr(0, result.length - 1) + '};\n';
-
-    result += componentName + '.propTypes = {';
-    meta.localTypes.forEach( (localType, name) => {
-        if(localType.members){
-            result += ' ' + name + ': PropTypes.shape({';
-            localType.members.forEach( (member, name) => {
-                result += ' ' + member + ',';
-            });
-            result = result.substr(0, result.length - 1);
-            result += '}),'
-        } else {
-            result += ' ' + localType + ',';
-        }
-    });
-    meta.actions.forEach( (actions, name) => {
-        result += name + ': PropTypes.func,'
-    });
-    result = result.substr(0, result.length - 1) + '};\n';
+    let result = '';
+    if(meta.localVars.size > 0){
+        result += componentName + '.defaultProps = {';
+        meta.localVars.forEach( (localVar, name) => {
+            if(localVar.members){
+                result += ' ' + name + ': {';
+                localVar.members.forEach( (member, name) => {
+                    result += ' ' + member + ',';
+                });
+                result = result.substr(0, result.length - 1);
+                result += '},'
+            } else {
+                result += ' ' + localVar + ',';
+            }
+        });
+        result = result.substr(0, result.length - 1) + '};\n';
+    }
+    if(meta.localTypes.size > 0){
+        result += componentName + '.propTypes = {';
+        meta.localTypes.forEach( (localType, name) => {
+            if(localType.members){
+                result += ' ' + name + ': PropTypes.shape({';
+                localType.members.forEach( (member, name) => {
+                    result += ' ' + member + ',';
+                });
+                result = result.substr(0, result.length - 1);
+                result += '}),'
+            } else {
+                result += ' ' + localType + ',';
+            }
+        });
+        meta.actions.forEach( (actions, name) => {
+            result += name + ': PropTypes.func,'
+        });
+        result = result.substr(0, result.length - 1) + '};\n';
+    }
 
     return result;
 }

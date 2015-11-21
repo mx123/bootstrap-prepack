@@ -1,0 +1,9 @@
+{
+  "name": "02-react-dumb",
+  "description": "02  |  React component, includes all children",
+  "component": {
+    "destDirPath": "src/client/components/{groupName}",
+    "fileExtension": "jsx",
+    "script": "component.js"
+  }
+}

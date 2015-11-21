@@ -1,4 +1,4 @@
-[![structor compatible](https://img.shields.io/badge/structor%20compatible-v0.1.1-0077dd.svg?style=flat)](http://helmetrex.com)
+[![structor compatible](https://img.shields.io/badge/structor%20compatible-v0.2.0-0077dd.svg?style=flat)](http://helmetrex.com)
 
 ### Description
 Starter project with a set of React Bootstrap components. Includes: redux, redux-actions, redux-promise, express

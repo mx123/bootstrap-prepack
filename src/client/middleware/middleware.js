@@ -1,6 +1,6 @@
 
 export default store => next => action => {
-    //console.log('In my middleware: ' + action.type);
+    //console.log('[' + action.type + '] ' + JSON.stringify(store.getState(), null, 4));
     return next(action);
 }
 

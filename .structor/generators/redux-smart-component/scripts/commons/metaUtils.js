@@ -52,9 +52,10 @@ export function getMetaModel(model){
         if(node.children && node.children.length > 0){
             metaNode.children = [];
         }
-        if(node.props && !_.isEmpty(node.props)){
-            metaNode.props = node.props;
-        }
+        metaNode.props = node.props || {};
+        //if(node.props && !_.isEmpty(node.props)){
+        //    metaNode.props = node.props;
+        //}
         tree.push(metaNode);
         return metaNode.children;
     }, result);

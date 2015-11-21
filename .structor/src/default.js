@@ -55,7 +55,3 @@ window.__createPageDesk = function(model){
 
 };
 
-//window.onbeforeunload = function(e) {
-//    ApplicationActions.stopAutosaveProjectModel();
-//
-//};

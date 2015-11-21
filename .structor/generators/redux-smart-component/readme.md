@@ -1,4 +1,4 @@
-#### Generator creates a scaffold for Redux smart component structure.
+## Generator creates a scaffold for Redux smart component structure.
 
 ##### Used libraries:
 * `redux` `react-redux` `redux-actions (sequence)` `redux-promise (sequence)` `reduce-reducers`
@@ -10,32 +10,40 @@
 * Actions index: ```src/client/actions/index.js```
 * Reducers combination: ```src/client/reducers/index.js```
 
-___*to change output file path edit ./structor/generators/react-smart/generator.json___
+___*to change output file path edit ./structor/generators/redux-smart-component/generator.json___
+
+### Examples
+
+Examples show how to set up a component's model with meta info before the source code generation. In meta section of each example you can see how to specify meta variables to obtain resulted JavaScript code which follows meta section.
+
 
 ----
-#### Action + event with prevent propagation + ref to input element
+## Action + event with prevent propagation + ref to input element
 
 * ___Meta___ 
 
-```
+```json5
 "component": {
     ...
     "handlers": {
+        // set up handler function which will invoke the dispatching of printText action,
+        // handler accepts only the arrow function syntax, you may specify a number of actions,
+        // $inputText is a ref to input component within model scope
         "handleClick": "(e) => printText($inputText.getValue())"
     },
-    "reducerRoot": "rootState"
+    "reducerRoot": "rootState" // all specified actions results will be reduced to this state node field
     ...
 }
 "render": {
     ...
     "type": "Button",
     "props": {
-        "onClick": "$handleClick"
+        "onClick": "$handleClick" // a reference to handler
     }
     ...
     "type": "Input",
     "props": {
-        "ref": "inputText"
+        "ref": "inputText" // ref of input element see handleClick handler above
     }
     ...
 }
@@ -43,7 +51,7 @@ ___*to change output file path edit ./structor/generators/react-smart/generator.
 
 * ___Component file___ 
 
-```
+```JavaScript
 ...
 handleClick(e) {
     e.preventDefault();
@@ -67,7 +75,7 @@ render(){
 
 * ___Actions file___ ```has to be edited after saving```
 
-```
+```JavaScript
 const PRINT_TEXT = 'PRINT_TEXT';
 
 export const printText = createAction(PRINT_TEXT, inputText => {
@@ -86,13 +94,13 @@ export default handleActions({
 
 * ___Actions index file___ ```no editing is needed```
 
-```
+```JavaScript
 export { printText } from './TestGroup/TestComponentActions.js';
 ```
 
 * ___Reducers combination file___ ```no editing is needed```
 
-```
+```JavaScript
 import testComponentReducer from '../actions/TestGroup/TestComponentActions.js';
 import { combineReducers } from 'redux';
 const rootReducer = combineReducers({
@@ -102,37 +110,41 @@ export default rootReducer;
 ```
 
 ----
-#### Async action + ref to input element
+## Async action + ref to input element + no state to props mapping
 
 * ___Meta___ 
 
-```
+```json5
 "component": {
     ...
     "handlers": {
-        "handleClick": "() => printText_async($inputText.getValue())"
+        // set up handler function which will invoke the dispatching of printText async action,
+        // handler accepts only the arrow function syntax, a number of actions can be specified,
+        // $inputText is a ref to input component within model scope
+        "handleClick": "() => { printText_async($inputText.getValue()) }"
     },
-    "reducerRoot": "rootState"
+    "reducerRoot": "rootState" // all specified actions results will be reduced to this state node field
     ...
 }
 "render": {
     ...
     "type": "Button",
     "props": {
-        "onClick": "$handleClick"
+        "onClick": "$handleClick" // a reference to handler
     }
     ...
     "type": "Input",
     "props": {
-        "ref": "inputText"
+        "ref": "inputText" // ref of input element see handleClick handler above
     }
     ...
 }
 ```
 
+
 * ___Component file___ 
 
-```
+```JavaScript
 ...
 handleClick() {
     const {dispatch} = this.props;
@@ -154,7 +166,7 @@ render(){
 
 * ___Actions file___ ```has to be edited after saving```
 
-```
+```JavaScript
 const PRINT_TEXT = 'PRINT_TEXT';
 
 export const printText = createAction(PRINT_TEXT, inputText => {
@@ -184,13 +196,13 @@ export default handleActions({
 
 * ___Actions index file___ ```no editing is needed```
 
-```
+```JavaScript
 export { printText } from './TestGroup/TestComponentActions.js';
 ```
 
 * ___Reducers combination file___ ```no editing is needed```
 
-```
+```JavaScript
 import testComponentReducer from '../actions/TestGroup/TestComponentActions.js';
 import { combineReducers } from 'redux';
 const rootReducer = combineReducers({
@@ -200,14 +212,17 @@ export default rootReducer;
 ```
 
 ----
-#### Existing action
+## Existing action - none of action creators will be generated
 
 * ___Meta___ 
 
-```
+```json5
 "component": {
     ...
     "handlers": {
+        // set up handler function which will invoke the dispatching of printText action,
+        // handler accepts only the arrow function syntax,
+        // $inputText is a ref to input component within model scope
         "handleClick": "() => printText($inputText.getValue())"
     }
     ...
@@ -216,12 +231,12 @@ export default rootReducer;
     ...
     "type": "Button",
     "props": {
-        "onClick": "$handleClick"
+        "onClick": "$handleClick" // a reference to handler
     }
     ...
     "type": "Input",
     "props": {
-        "ref": "inputText"
+        "ref": "inputText" // ref of input element see handleClick handler above
     }
     ...
 }
@@ -229,7 +244,7 @@ export default rootReducer;
 
 * ___Component file___ 
 
-```
+```JavaScript
 ...
 handleClick(e) {
     e.preventDefault();
@@ -252,13 +267,16 @@ render(){
 ```
 
 ---
-#### Specify state to props mapping as the destructuring assignment syntax
+## Specify state to props mapping using the destructuring assignment syntax
 
 * ___Meta___
   
-```
+```json5
 "component": {
     ...
+    // accepts only destructuring assignment syntax, 
+    // possible to specify variables labels { field1: anotherName } and arrays content destructuring [{id, name}],
+    // if some of fields of state does not exist they will be added to initial state in corresponding file.
     "stateToProps": "{ rootState: { domain1: { field1, field2 }, newDomain: { newField } } }"
     ...
 }
@@ -267,7 +285,7 @@ render(){
 
 * ___Component file___
 
-```
+```JavaScript
 ...
 function mapStateToProps(state) {
     const { rootState: { domain1: { field1, field2, newField }, newDomain: { newField2 } } } = state;
@@ -282,7 +300,7 @@ function mapStateToProps(state) {
 
 * ___Initial state file___
 
-```
+```JavaScript
 export default {
     rootState: {
         domain1: {
@@ -298,27 +316,30 @@ export default {
 ```
 
 ----
-#### Assign state props values to component (or child) props 
+## Assign state props values to component model props 
 
 * ___Meta___
   
-```
+```json5
 "component": {
     ...
+    // accepts only destructuring assignment syntax, 
+    // possible to specify variables labels and arrays content destructuring [{id, name}],
+    // if some of the fields of state do not exist they will be added to the initial state in the corresponding file.
     "stateToProps": "{ rootState: { domain1: { panelHeader, field2 }, newDomain: { newField } } }"
     ...
 },
 "render": {
     "type": "Panel",
     "props":{
-        "header": "$panelHeader"
+        "header": "$panelHeader" // a reference to one of state fields designated in stateToProps
     }
 }
 ```
 
 * ___Component file___
 
-```
+```JavaScript
 ...
 render() {
     const { panelHeader, field2, newField } = this.props;
@@ -328,40 +349,30 @@ render() {
 ```
 
 ----
-#### Extract component (or child) props as variables
+## Extract component model props as variables
 
-* ___Meta___ ```BEFORE```
+* ___Meta___
   
-```
+```json5
 ...
 "render": {
     "type": "Panel",
     "props":{
         "header": "Panel Header",
-        "style": {
-            "width": "100%",
-            "border": "1px solid #000000"
-        }
-    }
-}
-```
-
-* ___Meta___ ```AFTER``` 
- 
-```
-...
-"render": {
-    "type": "Panel",
-    "props":{
-        "header": "Panel Header",
-        "style": "$panelStyle"
+        // change style obejct to the reference variable
+--      "style": {
+--          "width": "100%",
+--          "border": "1px solid #000000"
+--      }
+        // if this variable is not specified in stateToProps fields, it will be created as local variable
+++      "style": "$panelStyle"
     }
 }
 ```
 
 * ___Component file___
 
-```
+```JavaScript
 ...
 render() {
     ...
@@ -375,21 +386,21 @@ render() {
 ```
 
 -----
-#### Extract component (or child) as a variable
+## Extract component (or child) as a variable
 
 * ___Meta___
   
-```
+```json5
 ...
 "render": {
     "type": "Panel",
-    "var": "panelVar"
+    "var": "panelVar" // this component will be assigned to local variable which will be included into JSX tree
 }
 ```
 
 * ___Component file___
 
-```
+```JavaScript
 ...
 render() {
     ...
@@ -400,21 +411,21 @@ render() {
 ```
 
 -----
-#### Extract component (or child) in loop statement
+## Extract component (or child) in loop statement
 
 * ___Meta___
   
-```
+```json5
 ...
 "render": {
     "type": "Panel",
-    "var": "panelVar_map"
+    "var": "panelVar_map" // this component will be pushed into a local array
 }
 ```
 
 * ___Component file___
 
-```
+```JavaScript
 ...
 render() {
     ...
@@ -428,22 +439,27 @@ render() {
 ```
 
 -----
-#### Extract component (or child) in loop statement traverse through one of the state props
+## Extract component (or child) in loop statement traverse through one of the state props
 * if propFromState is not specified in stateToProps expression new empty variable will be created.
 
 * ___Meta___
   
-```
+```json5
 ...
+"component": {
+    ...
+    "stateToProps": "{ rootState: { propFromState } }"
+    ...
+},
 "render": {
     "type": "Panel",
-    "var": "panelVar_map$propFromState"
+    "var": "panelVar_map$propFromState" // this component will be pushed into array which is created by traversing stateToProps array field
 }
 ```
 
 * ___Component file___
 
-```
+```JavaScript
 ...
 render() {
     ...
@@ -461,21 +477,21 @@ render() {
 ```
 
 -----
-#### Extract component (or child) in if statement
+## Extract component (or child) in if statement
 
 * ___Meta___
   
-```
+```json5
 ...
 "render": {
     "type": "Panel",
-    "var": "panelVar_if"
+    "var": "panelVar_if" // this component will be assigned to a local variable in scaffold of if expression statement
 }
 ```
 
 * ___Component file___
 
-```
+```JavaScript
 ...
 render() {
     ...
@@ -490,12 +506,12 @@ render() {
 ```
 
 -----
-#### Extract component (or child) in if statement with one of the state props
+## Extract component (or child) in if statement with one of the state props
 * if propFromState is not specified in stateToProps expression new empty variable will be created.
 
 * ___Meta___
   
-```
+```json5
 ...
 "render": {
     "type": "Panel",
@@ -505,7 +521,7 @@ render() {
 
 * ___Component file___
 
-```
+```JavaScript
 ...
 render() {
     ...
@@ -519,4 +535,3 @@ render() {
 }
 ...
 ```
-

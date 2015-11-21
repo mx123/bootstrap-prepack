@@ -25,7 +25,7 @@ export function getComponentVars(options){
         });
         result = result.substr(0, result.length - 1) + '};\n';
     }
-    if(meta.localTypes.size > 0){
+    if(meta.localTypes.size > 0 || meta.actions.size > 0){
         result += componentName + '.propTypes = {';
         meta.localTypes.forEach( (localType, name) => {
             if(localType.members){

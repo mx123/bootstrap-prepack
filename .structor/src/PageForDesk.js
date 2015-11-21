@@ -9,7 +9,7 @@ import pageDefaultModel from './model.js';
 var instanceMap = {};
 
 function wrapComponent(WrappedComponent, instanceMap) {
-    return React.createClass({
+    var klass = React.createClass({
         componentDidMount: function(){
             instanceMap[this.props['data-umyid']] = ReactDOM.findDOMNode(this);
         },
@@ -17,6 +17,8 @@ function wrapComponent(WrappedComponent, instanceMap) {
             return <WrappedComponent {...this.props} />
         }
     });
+    klass.displayName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
+    return klass;
 }
 
 var PageForDesk = React.createClass({

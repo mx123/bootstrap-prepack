@@ -1,7 +1,19 @@
 [![structor compatible](https://img.shields.io/badge/structor%20compatible-v0.2.0-0077dd.svg?style=flat)](http://helmetrex.com)
 
 ### Description
-Starter project with a set of React Bootstrap components. Includes: redux, redux-actions, redux-promise, express
+Starter project with a set of more than 40 React Bootstrap & React Widgets components. Also, has a scaffold for the server backend.
+ 
+### Documentation
+
+* [The files structure description](https://github.com/ipselon/bootstrap-prepack/wiki/The-source-code-structure)
+* [Generator for React component](https://github.com/ipselon/bootstrap-prepack/wiki/Generator-for-React-component)
+* [Generator for smart Redux component (container)](https://github.com/ipselon/bootstrap-prepack/wiki/Generator-for-smart-Redux-component-(container))
+
+Also get familiar with Structor documentation:
+
+* [Structor's component model representation](https://github.com/ipselon/structor/wiki/Structor's-component-model-representation)
+* [Generators metadata overview](https://github.com/ipselon/structor/wiki/Generators-metadata-overview)
+* [Structor shortcuts](https://github.com/ipselon/structor/wiki/Structor-shortcuts)
  
 <img src="https://github.com/ipselon/bootstrap-prepack/blob/master/screenshot.png" style="width: 100%"></img>
 <br/>
@@ -44,10 +56,6 @@ Once you have started Structor you will see the project's workspace. Now you can
 or generate new React components from the combination, or add new pages, or whatever you want.
 <br/>
 <br/>
-### The source code generators
-* [Generator for smart Redux component (container)](https://github.com/ipselon/bootstrap-prepack/wiki/Generator-for-smart-Redux-component-(container))
-
-<br/>
 ### Proxy setup
 We need to setup proxy because of CORS restriction, it means that Structor runs on 2222 port on localhost, 
 and our application may require to request REST service on 3000 port. That is restricted by browser policy.
@@ -76,10 +84,6 @@ Having exported pages and routes you can run webpack's build script:
 
 Then, if everything were built and you didn't stop backend server, just go to http://localhost:3000
 <br/>
-<br/>
-### The source code structure
-* [The source code structure description](https://github.com/ipselon/bootstrap-prepack/wiki/The-source-code-structure)
-
 <br/>
 ### License
 MIT

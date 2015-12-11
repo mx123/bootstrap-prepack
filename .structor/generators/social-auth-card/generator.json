@@ -1,0 +1,9 @@
+{
+  "name": "04-social-auth-card",
+  "description": "04  |  Facebook & GooglePlus auth card",
+  "component": {
+    "destDirPath": "src/client/containers/{groupName}",
+    "fileExtension": "jsx",
+    "script": "component.js"
+  }
+}

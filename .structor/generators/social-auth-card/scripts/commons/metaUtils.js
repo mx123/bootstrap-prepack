@@ -174,7 +174,7 @@ function initActionObj(meta, node, actions, handler) {
 export function enrichHandlers(meta){
     let handlerFuncs = new Map();
     let actionObjs = new Map();
-    const handlers = meta.component.handlers;
+    const { component: { handlers } } = meta;
     if(handlers && !_.isEmpty(handlers)){
         _.forOwn(handlers, (value, prop) => {
             try{

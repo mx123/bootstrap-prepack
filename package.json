@@ -8,7 +8,7 @@
     "build-server": "gulp --gulpfile ./build-conf/gulpfile.js build-server",
     "build-server-dev": "gulp --gulpfile ./build-conf/gulpfile.js build-server-dev",
     "build-client": "webpack --config ./build-conf/webpack.config.js --progress --colors",
-    "build-client-dev": "webpack --config ./build-conf/webpack-dev.config.js --progress --colors"
+    "build-client-dev": "webpack --config ./build-conf/webpack-dev.config.js --progress --colors --watch"
   },
   "dependencies": {
     "body-parser": "1.14.1",

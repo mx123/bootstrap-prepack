@@ -5,5 +5,13 @@
     "destDirPath": "src/client/containers/{groupName}",
     "fileExtension": "jsx",
     "script": "component.js"
-  }
+  },
+  "modules": [
+    {
+      "id": "initialState",
+      "destDirPath": "src/client/store",
+      "name": "initialState.js",
+      "script": "initialState.js"
+    }
+  ]
 }

@@ -15,7 +15,7 @@ module.exports = [
         debug: true,
         module: {
             loaders: [
-                { test: /\.js$/, loader: 'babel-loader', query: { stage: 0 } },
+                { test: /\.(js|jsx)$/, loader: 'babel', query: { stage: 0 } },
                 { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
                 { test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)([\?]?.*)$/, loader: 'url-loader' }
             ]

@@ -1,0 +1,9 @@
+{
+  "name": "component-simple-probe-01",
+  "description": "PROBE  |  React component, includes all children",
+  "component": {
+    "destDirPath": "src/client/components/{groupName}",
+    "fileExtension": "jsx",
+    "script": "component.js"
+  }
+}

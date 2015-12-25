@@ -1,19 +1,22 @@
-[![structor compatible](https://img.shields.io/badge/structor%20compatible-v0.2.x-0077dd.svg?style=flat)](http://helmetrex.com)
+[![structor compatible](https://img.shields.io/badge/structor%20compatible-v0.2.3-0077dd.svg?style=flat)](http://helmetrex.com)
 
 ### Description
 Starter project with a set of more than 40 React Bootstrap & React Widgets components. Also, has a scaffold for the server backend.
  
 ### Documentation
 
-* [The files structure description](https://github.com/ipselon/bootstrap-prepack/wiki/The-source-code-structure)
-* [Generator for React component](https://github.com/ipselon/bootstrap-prepack/wiki/Generator-for-React-component)
-* [Generator for smart Redux component (container)](https://github.com/ipselon/bootstrap-prepack/wiki/Generator-for-smart-Redux-component-(container))
-
-Also get familiar with Structor documentation:
+Structor's documentation:
 
 * [Structor's component model representation](https://github.com/ipselon/structor/wiki/Structor's-component-model-representation)
 * [Generators metadata overview](https://github.com/ipselon/structor/wiki/Generators-metadata-overview)
 * [Structor shortcuts](https://github.com/ipselon/structor/wiki/Structor-shortcuts)
+
+Prepack documentation
+
+* [The files structure description](https://github.com/ipselon/bootstrap-prepack/wiki/The-source-code-structure)
+* [Generator for React component](https://github.com/ipselon/bootstrap-prepack/wiki/Generator-for-React-component)
+* [Generator for smart Redux component (container)](https://github.com/ipselon/bootstrap-prepack/wiki/Generator-for-smart-Redux-component-(container))
+* [Migration guide](https://github.com/ipselon/bootstrap-prepack/wiki/Migration-guide)
  
 <img src="https://github.com/ipselon/bootstrap-prepack/blob/master/screenshot.png" style="width: 100%"></img>
 <br/>

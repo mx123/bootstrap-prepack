@@ -64,5 +64,8 @@ module.exports = {
         SelectList: require('react-widgets').SelectList,
         CalendarWrapper: require('../../src/client/components/Widgets/CalendarWrapper.jsx'),
         DateTimePickerWrapper: require('../../src/client/components/Widgets/DateTimePickerWrapper.jsx')
+    },
+    Test: {
+        TestComponent: require('../../src/client/components/Test/TestComponent.jsx')
     }
 };

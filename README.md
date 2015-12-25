@@ -1,4 +1,4 @@
-[![structor compatible](https://img.shields.io/badge/structor%20compatible-v0.2.3-0077dd.svg?style=flat)](http://helmetrex.com)
+[![structor compatible](https://img.shields.io/badge/structor%20compatible-v0.2.4-0077dd.svg?style=flat)](http://helmetrex.com)
 
 ### Description
 Starter project with a set of more than 40 React Bootstrap & React Widgets components. Also, has a scaffold for the server backend.

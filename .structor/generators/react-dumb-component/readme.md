@@ -3,7 +3,7 @@
 ##### Files:
 * Component: `src/client/containers/{groupName}/{componentName}.jsx`
 
-___*to change output file path edit ./structor/generators/redux-smart-component/generator.json___
+___*to change output file path edit ./structor/generators/redux-dumb-component/generator.json___
 
 ### Examples
 

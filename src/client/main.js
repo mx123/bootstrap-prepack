@@ -1,4 +1,4 @@
-import 'babel-core/polyfill';
+import 'babel-polyfill';
 import './assets/css/react-widgets.css';
 import './assets/css/bootstrap.css';
 import './assets/css/font-awesome.css';

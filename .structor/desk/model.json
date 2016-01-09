@@ -10,18 +10,42 @@
             "style": {
               "padding": "1em",
               "textAlign": "center"
-            }
+            },
+            "data-umyid": "2"
           },
           "children": [
             {
               "type": "span",
               "text": "This is an empty page. To add new component select needed element on left-side panel and click on an element on the page where you want to put new component, than choose action for right component's place.",
-              "props": {}
+              "props": {
+                "data-umyid": "3"
+              }
+            }
+          ]
+        },
+        {
+          "type": "h3",
+          "props": {
+            "style": {
+              "padding": "1em",
+              "textAlign": "center"
+            },
+            "data-umyid": "4"
+          },
+          "children": [
+            {
+              "type": "span",
+              "text": "This is an empty page. To add new component select needed element on left-side panel and click on an element on the page where you want to put new component, than choose action for right component's place.",
+              "props": {
+                "data-umyid": "5"
+              }
             }
           ]
         }
       ],
-      "props": {},
+      "props": {
+        "data-umyid": "1"
+      },
       "pageTitle": "UnnamedPage",
       "pageProps": [],
       "pageScript": ""

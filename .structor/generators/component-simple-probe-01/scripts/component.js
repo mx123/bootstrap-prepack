@@ -49,7 +49,7 @@ function fetch(url, body){
 
 export function preProcess(dataObject){
     return fetch(
-        'http://localhost:8080/gengine/preprocess',
+        'http://localhost:3000/gengine/preprocess',
         {
             generatorName: 'component-simple-probe-01',
             scriptName: 'component.js',
@@ -61,7 +61,7 @@ export function preProcess(dataObject){
 export function process(dataObject){
 
     return fetch(
-        'http://localhost:8080/gengine/process',
+        'http://localhost:3000/gengine/process',
         {
             generatorName: 'component-simple-probe-01',
             scriptName: 'component.js',

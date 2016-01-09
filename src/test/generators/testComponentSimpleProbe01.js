@@ -1,4 +1,4 @@
-
+require('babel-register');
 var GeneratorManager = require ('structor/server/GeneratorManager.js');
 var FileManager = require('structor/server/FileManager.js');
 var StateManager = require('structor/server/StateManager.js');

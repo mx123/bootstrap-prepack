@@ -2,10 +2,10 @@
   {
     "type": "Link",
     "props": {
-      "to": "primary"
+      "to": "/main"
     },
     "children":[
-	{"type": "span", "text": "Link"}
+	{"type": "span", "text": "Link to /main"}
     ]
   }
 ]

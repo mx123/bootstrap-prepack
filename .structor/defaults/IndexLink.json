@@ -2,10 +2,10 @@
   {
     "type": "IndexLink",
     "props": {
-      "to": "primary"
+      "to": "/main"
     },
     "children":[
-	{"type": "span", "text": "IndexLink"}
+	{"type": "span", "text": "IndexLink to /main"}
     ]
   }
 ]

@@ -1,21 +1,27 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 
-var PageForDesk = React.createClass({
+class PageForDesk extends Component{
 
-    handleClose: function () {
+    constructor(props, content) {
+        super(props, content);
+        this.handleClose = this.handleClose.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
+    }
+
+    handleClose() {
         if (this.props.onClose) {
             this.props.onClose();
         }
-    },
+    }
 
-    handleDelete: function () {
+    handleDelete () {
         if (this.props.onDelete) {
             this.props.onDelete();
         }
-    },
+    }
 
-    render: function () {
+    render () {
         var style = {
             position: 'relative',
             padding: '2em',
@@ -71,6 +77,6 @@ var PageForDesk = React.createClass({
         );
     }
 
-});
+}
 
-module.exports = PageForDesk;
+export default PageForDesk;

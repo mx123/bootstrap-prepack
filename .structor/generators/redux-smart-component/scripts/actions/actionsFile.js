@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
 const asyncActionHandler = _.template(
-`[<%= action.constantName %>]: {
-    start(state, action){
+`if(type === <%= action.constantName %>){
+    if(stage === START){
         state = Object.assign({}, state, {
             status: {
                 code: 'start',
@@ -11,73 +11,82 @@ const asyncActionHandler = _.template(
             result: null
         });
         return state;
-    },
-    next(state, action){
+    }
+    if(stage === DONE){
         state = Object.assign({}, state, {
             status: {
                 code: 'done',
                 text: 'Completed successfully'
             },
-            result: action.payload
+            result: payload
         });
         return state;
-    },
-    throw(state, action){
+    }
+    if(stage === ERROR){
         state = Object.assign({}, state, {
             status: {
                 code: 'error',
-                text: 'Completed with error: ' + action.payload
+                text: 'Completed with error: ' + payload
             },
             result: null
         });
         return state;
     }
-}`);
+}
+`);
 
 const actionHandler = _.template(
-`[<%= action.constantName %>]: (state, action) => {
+`if(type === <%= action.constantName %>){
     state = Object.assign({}, state, {
-        result: action.payload
+        result: payload
     });
     return state;
-}`);
+}
+`);
 
 const asyncActionReturn = _.template(
-`return new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve({});
-    }, 3000);
-});\n`);
+`return (dispatch, getState) => wrapPromise(<%= action.constantName %>, dispatch, () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve({});
+        }, 3000);
+    });
+});
+`);
 
 const actionReturn = _.template(
-`return {};\n`);
+`return {
+    type: <%= action.constantName %>, payload: {}
+};
+`);
 
 const newAction = _.template(
-`export const <%= action.actionName %> = createAction(<%= action.constantName %>, <%= api.getActionParameters({ action: action }) %> => {
-    <%= api.getActionReturnObject({ action: action }) %>});\n`);
+`export function <%= action.actionName %>(<%= api.getActionParameters({ action: action }) %>){
+    <%= api.getActionReturnObject({ action: action }) %>
+}
+`);
 
 const actionsWrapper = _.template(
-`import { createAction, handleActions } from '../reduxActionsSequence';
+`import { START, DONE, ERROR, parseAction, wrapPromise } from '../reduxActionsSequence/reduxActionsUtils.js';
 
 <%= api.getActionsConstants({ newActions: newActions }) %>
 <%= api.getActionsCreators({ newActions: newActions, api: api }) %>
-export default handleActions({
-
+export default function(state = {}, action = {type: 'UNKNOWN'}){
+    const { type, stage, payload } = parseAction(action);
     <%= api.getActionsHandlers({ newActions: newActions }) %>
-
-}, {});\n`);
+    return state;
+}\n`);
 
 export function getActionsHandlers(options){
     const { newActions } = options;
     let result = '';
     newActions.forEach( (action, name) => {
         if(action.label && action.label === 'async'){
-            result += asyncActionHandler({ action }) + ',';
+            result += asyncActionHandler({ action });
         } else {
-            result += actionHandler({ action }) + ',';
+            result += actionHandler({ action });
         }
     });
-    result = result.substr(0, result.length - 1);
     return result;
 }
 
@@ -102,7 +111,7 @@ export function getActionsCreators(options){
 export function getActionParameters(options){
     const { action } = options;
     if(action.arguments.length === 0){
-        return '()';
+        return '';
     }
     let paramsText = '';
     action.arguments.forEach( argument => {
@@ -115,19 +124,15 @@ export function getActionParameters(options){
         }
     });
     paramsText = paramsText.substr(0, paramsText.length - 1);
-    if(action.arguments.length > 1){
-        return '(' + paramsText + ')';
-    } else {
-        return paramsText;
-    }
+    return paramsText;
 }
 
 export function getActionReturnObject(options){
     const { action } = options;
     if(action.label && action.label === 'async'){
-        return asyncActionReturn();
+        return asyncActionReturn({ action });
     } else {
-        return actionReturn();
+        return actionReturn({ action });
     }
 }
 

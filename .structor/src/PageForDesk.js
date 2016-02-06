@@ -1,12 +1,12 @@
-var _ = require('lodash');
-var React = require('react');
-var ReactDOM = require('react-dom');
-var PreviewOverlay = require('./PreviewOverlay.js');
-var components = require('./index.js');
+import  _ from 'lodash';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import PreviewOverlay from './PreviewOverlay.js';
+import components from './index.js';
 import { matchPattern, formatPattern, getParams } from 'react-router/lib/PatternUtils.js';
 import pageDefaultModel from './model.js';
 
-var instanceMap = {};
+let instanceMap = {};
 
 function wrapComponent(WrappedComponent, instanceMap) {
     var klass = React.createClass({
@@ -21,57 +21,67 @@ function wrapComponent(WrappedComponent, instanceMap) {
     return klass;
 }
 
-var PageForDesk = React.createClass({
+class PageForDesk extends Component {
 
-    getInitialState: function(){
-        return {
+    constructor(props, content) {
+        super(props, content);
+        this.state = {
             pageModel: pageDefaultModel
         };
-    },
+        this._updatePageModel = this._updatePageModel.bind(this);
+        this.updateModel = this.updateModel.bind(this);
+        this.updatePreviewModel = this.updatePreviewModel.bind(this);
+        this.handleClosePreview = this.handleClosePreview.bind(this);
+        this.handleDeletePreview = this.handleDeletePreview.bind(this);
+        this.createElements = this.createElements.bind(this);
+        this.createElement = this.createElement.bind(this);
+        this.findComponent = this.findComponent.bind(this);
+        this.getInstanceMap = this.getInstanceMap.bind(this);
+    }
 
-    componentDidMount: function(){
+    componentDidMount(){
         window.Page = this;
         var pathname = this.props.location.pathname;
         this._updatePageModel(pathname);
         if(window.onPageDidMount){
             window.onPageDidMount();
         }
-    },
+    }
 
-    componentWillUnmount: function(){
+    componentWillUnmount(){
         window.Page = null;
         if(window.onPageWillUnmount){
             window.onPageWillUnmount();
         }
-    },
+    }
 
     componentWillReceiveProps(nextProps){
         if(nextProps.location.pathname !== this.props.location.pathname){
             this._updatePageModel(nextProps.location.pathname);
         }
-    },
+    }
 
-    componentDidUpdate: function(prevProps, prevState){
+    componentDidUpdate(prevProps, prevState){
         if(window.onPageDidUpdate){
             window.onPageDidUpdate();
         }
-    },
+    }
 
-    componentWillUpdate: function(nextProps, nextState){
+    componentWillUpdate(nextProps, nextState){
         if(window.onPageWillUpdate){
             window.onPageWillUpdate();
         }
-    },
+    }
 
-    shouldComponentUpdate: function(nextProps, nextState){
+    shouldComponentUpdate(nextProps, nextState){
         return (this.state.pageModel !== nextProps.pageModel
         || this.state.previewModel !== nextProps.previewModel);
-    },
+    }
 
-    _updatePageModel: function(pathname){
-        var pageModel = null;
+    _updatePageModel(pathname){
+        let pageModel = null;
         if(window.__model && window.__model.pages && window.__model.pages.length > 0){
-            var pages = window.__model.pages;
+            let pages = window.__model.pages;
             if(pathname === '/'){
                 pageModel = pages[0];
             } else {
@@ -82,10 +92,10 @@ var PageForDesk = React.createClass({
                 });
                 if(!pageModel){
                     //check if pathname has valid parameters for route path pattern
-                    pages.forEach( function(page, index){
+                    pages.forEach((page, index) => {
                         try{
-                            var paramsObj = getParams(page.pagePath, pathname);
-                            var formattedPath = formatPattern(page.pagePath, paramsObj);
+                            let paramsObj = getParams(page.pagePath, pathname);
+                            let formattedPath = formatPattern(page.pagePath, paramsObj);
                             if(pathname === formattedPath){
                                 pageModel = page;
                             }
@@ -105,44 +115,44 @@ var PageForDesk = React.createClass({
         if(window.__setCurrentPathname && pageModel){
             window.__setCurrentPathname(pageModel.pagePath);
         }
-    },
+    }
 
-    updateModel: function(model){
+    updateModel(model){
         window.__model = model;
         if(this.props.location.pathname){
             this._updatePageModel(this.props.location.pathname);
         }
-    },
+    }
 
-    updatePreviewModel: function(model){
+    updatePreviewModel(model){
         this.setState({ previewModel: model });
-    },
+    }
 
-    handleClosePreview: function(){
+    handleClosePreview(){
         if(window.__closePreview){
             window.__closePreview();
         }
-    },
+    }
 
-    handleDeletePreview: function(){
+    handleDeletePreview(){
         if(window.__deletePreview){
             window.__deletePreview();
         }
-    },
+    }
 
-    createElements: function(model){
+    createElements(model){
 
-        var elements = [];
+        let elements = [];
         instanceMap = {};
-        model.children.forEach(function(child, index){
+        model.children.forEach((child, index) => {
             elements.push(this.createElement(child, index));
-        }.bind(this));
+        });
         return elements;
-    },
+    }
 
-    createElement: function(options, ref){
+    createElement(options, ref){
 
-        var type = 'div';
+        let type = 'div';
         if(options.type){
             type = this.findComponent(components, options.type, 0);
             if(!type){
@@ -153,29 +163,28 @@ var PageForDesk = React.createClass({
             }
         }
 
-        var props = _.extend({}, { params: this.props.params }, options.props);
+        let props = _.extend({}, { params: this.props.params }, options.props);
         props.key = ref;
 
-        var self = this;
         if(_.isObject(type)){
-            _.forOwn(props, function(prop, propName){
+            _.forOwn(props, (prop, propName) => {
                 if(prop && _.isObject(prop) && prop.type){
-                    props[propName] = self.createElement(prop, 0);
+                    props[propName] = this.createElement(prop, 0);
                 }
             });
         }
 
-        var nestedElements = null;
+        let nestedElements = null;
         if(options.children && options.children.length > 0){
-            var children = [];
-            options.children.forEach(function(childOptions){
-                children.push(self.createElement(childOptions, ++ref));
+            let children = [];
+            options.children.forEach(childOptions => {
+                children.push(this.createElement(childOptions, ++ref));
             });
             nestedElements = children;
         } else if(options.text) {
             nestedElements = options.text;
         }
-        var result = null;
+        let result = null;
         try{
             if(_.isString(type)){
                 result = React.createElement(type, props, nestedElements);
@@ -184,7 +193,7 @@ var PageForDesk = React.createClass({
             }
             if(result.type.prototype){
                 if(result.type.prototype.render){
-                    result.type.prototype.render = (function(fn){
+                    result.type.prototype.render = ((fn) => {
                         return function render(){
                             try {
                                  return fn.apply(this, arguments);
@@ -208,7 +217,7 @@ var PageForDesk = React.createClass({
                                 }, '\`' + options.type + '\` ' + err.toString()));
                             }
                         }
-                    }(result.type.prototype.render));
+                    })(result.type.prototype.render);
                 }
             }
 
@@ -216,13 +225,13 @@ var PageForDesk = React.createClass({
             console.error('Element type: ' + options.type + ' is not valid React Element. Please check your index.js file. ' + e);
         }
         return result;
-    },
+    }
 
-    findComponent: function(index, componentName, level){
-        var result;
+    findComponent(index, componentName, level){
+        let result = null;
         if(index && _.isObject(index) && level <= 1){
             level++;
-            _.forOwn(index, function(value, key){
+            _.forOwn(index, (value, key) => {
                 if(!result){
                     if(key === componentName){
                         result = value;
@@ -230,18 +239,18 @@ var PageForDesk = React.createClass({
                         result = this.findComponent(value, componentName, level);
                     }
                 }
-            }, this);
+            });
         }
         return result;
-    },
+    }
 
-    getInstanceMap: function(){
-        var nodeMap = {};
-        var nodeList = $("[data-umyid]");
-        var visitedIds = [];
+    getInstanceMap(){
+        let nodeMap = {};
+        let nodeList = $("[data-umyid]");
+        let visitedIds = [];
         if(nodeList && nodeList.length > 0){
-            var umyId = null;
-            nodeList.each(function(index, node){
+            let umyId = null;
+            nodeList.each((index, node) => {
                 umyId = node.attributes['data-umyid'].value;
                 if(!instanceMap[umyId]){
                     nodeMap[umyId] = node;
@@ -249,21 +258,21 @@ var PageForDesk = React.createClass({
                 }
             });
         }
-        var allIds = _.keys(instanceMap);
-        var difference = _.difference(allIds, visitedIds);
+        let allIds = _.keys(instanceMap);
+        let difference = _.difference(allIds, visitedIds);
         if(difference && difference.length > 0){
-            difference.forEach(function( id ){
+            difference.forEach( id => {
                 nodeMap[id] = instanceMap[id];
             });
         }
         nodeList = null;
         return nodeMap;
-    },
+    }
 
-    render: function(){
-        var content = null;
+    render(){
+        let content = null;
         if(this.state.previewModel){
-            var previewElementTree = this.createElements(this.state.previewModel);
+            let previewElementTree = this.createElements(this.state.previewModel);
             content = (
                 <PreviewOverlay
                     onClose={this.handleClosePreview}
@@ -281,7 +290,7 @@ var PageForDesk = React.createClass({
         );
     }
 
-});
+}
 
-module.exports = PageForDesk;
+export default PageForDesk;
 

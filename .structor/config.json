@@ -1,3 +1,5 @@
 {
-  "exportDirPath": "src/client/routes"
+  "exportDirPath": "src/client/routes",
+  "compatibleVersion": "0.2.8",
+  "proxyURL": "http://localhost:3000"
 }

@@ -1,15 +1,17 @@
-var React = require('react');
+import React, {Component} from 'react';
 
-var PageForDesk = React.createClass({
+class PageForDesk extends Component {
 
+    constructor(props, content) {
+        super(props, content);
+    }
 
-    render: function() {
-
+    render() {
         return (
             <h4>{'Route not found: ' + this.props.location.pathname}</h4>
         );
     }
 
-});
+}
 
-module.exports = PageForDesk;
+export default PageForDesk;

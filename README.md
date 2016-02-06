@@ -24,7 +24,7 @@ Prepack documentation
 The following libs and technologies were used:
 * ```react```
 * ```react-router```
-* ```redux```, ```redux-thunk```, ```react-redux```, ```redux-actions```, ```redux-promise```
+* ```redux```, ```redux-thunk```, ```react-redux```
 * ```react-bootstrap```
 * ```express```
  

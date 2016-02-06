@@ -1,1 +1,0 @@
-## Generator creates auth card component for Facebook & GooglePlus auth menu.

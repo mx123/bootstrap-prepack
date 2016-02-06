@@ -1,1 +1,0 @@
-## Generator creates a login menu for Facebook & GooglePlus.

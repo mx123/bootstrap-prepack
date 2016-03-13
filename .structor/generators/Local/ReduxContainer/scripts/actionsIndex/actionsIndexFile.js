@@ -1,6 +1,10 @@
+import _ from 'lodash';
 import { getNonExistingActions } from './actionsUtils.js';
 
 export function injectNonExistingActions(ast, actionsMap, actionsFilePath){
+    _.remove(ast.body, item => {
+        return (item.type === 'ExportNamedDeclaration' && item.source && item.source.value === actionsFilePath);
+    });
     const nonExistingActionsMap = getNonExistingActions(ast, actionsMap);
     if(nonExistingActionsMap.size > 0){
         if(ast.body){

@@ -67,7 +67,7 @@ const newAction = _.template(
 `);
 
 const actionsWrapper = _.template(
-`import { START, DONE, ERROR, parseAction, wrapPromise } from '../reduxActionsSequence/reduxActionsUtils.js';
+`import { START, DONE, ERROR, parseAction, wrapPromise } from '../commons';
 
 <%= api.getActionsConstants({ newActions: newActions }) %>
 <%= api.getActionsCreators({ newActions: newActions, api: api }) %>

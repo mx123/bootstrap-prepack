@@ -163,7 +163,7 @@ class PageForDesk extends Component {
             }
         }
 
-        let props = _.extend({}, { params: this.props.params }, options.props);
+        let props = _.extend({}, { params: this.props.params, location: this.props.location }, options.props);
         props.key = ref;
 
         if(_.isObject(type)){

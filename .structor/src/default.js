@@ -3,8 +3,8 @@ require("babel-polyfill");
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createHistory, useBasename } from 'history';
-import { Router, Route, Link } from 'react-router';
+import { createHistory } from 'history';
+import { Router, Route, Link, useRouterHistory } from 'react-router';
 
 import storeManager from '../../src/client/store/storeManager.js';
 import PageForDesk from './PageForDesk.js';
@@ -18,12 +18,12 @@ window.__createPageDesk = function(model){
     window.pageReadyState = 'initialized';
     window.__model = model;
 
-    const history = useBasename(createHistory)({
+    const history = useRouterHistory(createHistory)({
         basename: '/deskpage'
     });
 
     window.__switchToPath = function(pagePath){
-        history.pushState(null, pagePath);
+        history.push(pagePath);
     };
 
     const store = storeManager();

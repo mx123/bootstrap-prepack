@@ -28,7 +28,7 @@ export const esformatterOptions = {
         "maxAttrsOnTag": 1,
         // if the attributes are going to be put each one on its own line, then keep the first
         // on the same line as the open tag
-        "firstAttributeOnSameLine": true,
+        "firstAttributeOnSameLine": false,
         // align the attributes with the first attribute (if the first attribute was kept on the same line as on the open tag)
         "alignWithFirstAttribute": true,
         "spaceInJSXExpressionContainers": " ",

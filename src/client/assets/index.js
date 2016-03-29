@@ -1,0 +1,10 @@
+require('./css/react-widgets.css');
+require('./css/bootstrap.css');
+require('./css/font-awesome.css');
+require('./css/app.css');
+require('./js/bootstrap.js');
+var Moment = require('moment');
+var momentLocalizer = require('react-widgets/lib/localizers/moment');
+momentLocalizer(Moment);
+var numberLocalizer = require('react-widgets/lib/localizers/simple-number');
+numberLocalizer();

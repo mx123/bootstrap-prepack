@@ -1,23 +1,87 @@
-import  _ from 'lodash';
+import { forOwn, isObject, isString, extend, difference, keys } from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import PreviewOverlay from './PreviewOverlay.js';
+//import PreviewOverlay from './PreviewOverlay.js';
+import MouseOverOverlay from './MouseOverOverlay.js';
+import SelectedOverlay from './SelectedOverlay.js';
+import HighlightedOverlay from './HighlightedOverlay.js';
 import components from './index.js';
 import { matchPattern, formatPattern, getParams } from 'react-router/lib/PatternUtils.js';
 import pageDefaultModel from './model.js';
 
-let instanceMap = {};
-
-function wrapComponent(WrappedComponent, instanceMap) {
+function wrapComponent(WrappedComponent, props) {
+    const { onMouseDown, initialState, key, type } = props;
+    const myName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
     var klass = React.createClass({
-        componentDidMount: function(){
-            instanceMap[this.props['data-umyid']] = ReactDOM.findDOMNode(this);
+        subscribeToInitialState(){
+            if(initialState){
+                initialState.elements[key] = {
+                    getDOMNode: () => {
+                        return this.DOMNode;
+                    }
+                }
+            }
+        },
+        componentWillMount(){
+            this.subscribeToInitialState();
+        },
+        componentDidMount(){
+            this.DOMNode = ReactDOM.findDOMNode(this);
+            this.$DOMNode = $(this.DOMNode);
+            this.$DOMNode
+                .on('mousedown', this.handleMouseDown)
+                .on('mouseover', this.handleMouseOver)
+                .on('mouseout', this.handleMouseOut)
+                .on('click', this.handleNoop)
+                .on('doubleclick', this.handleNoop)
+                .on('mouseup', this.handleNoop);
+        },
+        componentWillUnmount(){
+            if(this.$DOMNode){
+                this.$DOMNode
+                    .off('mousedown')
+                    .off('mouseover')
+                    .off('mouseout')
+                    .off('click')
+                    .off('doubleclick')
+                    .off('mouseup');
+            }
+            this.$DOMNode = undefined;
+            this.DOMNode = undefined;
+        },
+        componentWillReceiveProps(nextProps){
+            this.subscribeToInitialState();
+        },
+        handleMouseDown(e){
+            if(!e.shiftKey){
+                e.stopPropagation();
+                e.preventDefault();
+                if(onMouseDown){
+                    onMouseDown(key, e.metaKey || e.ctrlKey);
+                }
+            }
+        },
+        handleMouseOver(e){
+            if(initialState && initialState.onMouseOver){
+                initialState.onMouseOver({ targetDOMNode: this.DOMNode, type});
+            }
+        },
+        handleMouseOut(e){
+            if(initialState && initialState.onMouseOut){
+                initialState.onMouseOut({ targetDOMNode: this.DOMNode, remove: true});
+            }
+        },
+        handleNoop(e){
+            if(!e.shiftKey) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
         },
         render: function(){
-            return <WrappedComponent {...this.props} />
+            return <WrappedComponent {...this.props} />;
         }
     });
-    klass.displayName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
+    klass.displayName = myName;
     return klass;
 }
 
@@ -26,177 +90,237 @@ class PageForDesk extends Component {
     constructor(props, content) {
         super(props, content);
         this.state = {
-            pageModel: pageDefaultModel
+            pageModel: pageDefaultModel,
+            isEditModeOn: true
         };
-        this._updatePageModel = this._updatePageModel.bind(this);
-        this.updateModel = this.updateModel.bind(this);
-        this.updatePreviewModel = this.updatePreviewModel.bind(this);
-        this.handleClosePreview = this.handleClosePreview.bind(this);
-        this.handleDeletePreview = this.handleDeletePreview.bind(this);
+        this.elementTree = [];
+        this.initialState = {elements: {}, selected: [], highlighted: []};
+        this.updatePageModel = this.updatePageModel.bind(this);
+        this.setGraphApi = this.setGraphApi.bind(this);
+        this.setOnComponentMouseDown = this.setOnComponentMouseDown.bind(this);
+        this.getModelByPathname = this.getModelByPathname.bind(this);
+        this.visitGraphNode = this.visitGraphNode.bind(this);
+        this.updateInitialState = this.updateInitialState.bind(this);
+        this.traverseModel = this.traverseModel.bind(this);
         this.createElements = this.createElements.bind(this);
         this.createElement = this.createElement.bind(this);
         this.findComponent = this.findComponent.bind(this);
-        this.getInstanceMap = this.getInstanceMap.bind(this);
+    }
+
+    setGraphApi(graph){
+        this.graph = graph;
+    }
+
+    setOnComponentMouseDown(func){
+        this.onComponentMouseDown = func;
+    }
+
+    setOnPathnameChanged(func){
+        this.onPathnameChanged = func;
+    }
+
+    setOnSelectParentClick(func){
+        this.initialState.onSelectParent = func;
     }
 
     componentDidMount(){
-        window.Page = this;
         var pathname = this.props.location.pathname;
-        this._updatePageModel(pathname);
         if(window.onPageDidMount){
-            window.onPageDidMount();
+            window.onPageDidMount(this, pathname);
         }
+        //this.updatePageModel({pathname});
     }
 
     componentWillUnmount(){
-        window.Page = null;
-        if(window.onPageWillUnmount){
-            window.onPageWillUnmount();
-        }
+        this.initialState = undefined;
+        this.elementTree = undefined;
     }
 
     componentWillReceiveProps(nextProps){
+        //console.log('it happens when a user changes route through the live preview');
         if(nextProps.location.pathname !== this.props.location.pathname){
-            this._updatePageModel(nextProps.location.pathname);
-        }
-    }
-
-    componentDidUpdate(prevProps, prevState){
-        if(window.onPageDidUpdate){
-            window.onPageDidUpdate();
-        }
-    }
-
-    componentWillUpdate(nextProps, nextState){
-        if(window.onPageWillUpdate){
-            window.onPageWillUpdate();
+            this.updatePageModel({pathname: nextProps.location.pathname});
+            if(this.onPathnameChanged){
+                this.onPathnameChanged(nextProps.location.pathname);
+            }
         }
     }
 
     shouldComponentUpdate(nextProps, nextState){
-        return (this.state.pageModel !== nextProps.pageModel
-        || this.state.previewModel !== nextProps.previewModel);
+        return (this.state.pageModel !== nextProps.pageModel);
     }
 
-    _updatePageModel(pathname){
-        let pageModel = null;
-        if(window.__model && window.__model.pages && window.__model.pages.length > 0){
-            let pages = window.__model.pages;
-            if(pathname === '/'){
-                pageModel = pages[0];
-            } else {
-                pages.forEach( function(page, index){
-                    if(pathname === page.pagePath){
-                        pageModel = page;
-                    }
-                });
-                if(!pageModel){
+    getModelByPathname(pathname){
+        const graph = this.graph;
+        let pageModel = pageDefaultModel;
+        if(graph){
+            const model = graph.getModel();
+            if(model && model.pages && model.pages.length > 0){
+                let graphRootKey = pathname === '/' ? model.pages[0].pagePath : pathname;
+                if(graph.getGraph().hasNode(graphRootKey)){
+                    pageModel = graph.traverseGraph(graphRootKey);
+                } else {
                     //check if pathname has valid parameters for route path pattern
-                    pages.forEach((page, index) => {
-                        try{
+                    try{
+                        model.pages.forEach((page, index) => {
                             let paramsObj = getParams(page.pagePath, pathname);
                             let formattedPath = formatPattern(page.pagePath, paramsObj);
-                            if(pathname === formattedPath){
-                                pageModel = page;
+                            if (pathname === formattedPath) {
+                                graphRootKey = formattedPath;
                             }
-                        } catch(e){
-                            console.error(e.message);
-                            pageDefaultModel.children[0].children[0].text = e.message;
+                        });
+                        if(graph.getGraph().hasNode(graphRootKey)){
+                            pageModel = graph.traverseGraph(graphRootKey);
+                        } else {
+                            pageModel.children[0].children[0].modelNode.text =
+                                'Route was not found: ' + pathname + '. Try to select another route.';
                         }
-                    });
+                    } catch(e){
+                        console.error('Path name ' + pathname + ' in project model was not found. ' + String(e));
+                        pageModel.children[0].children[0].modelNode.text = String(e);
+                    }
                 }
             }
         }
-        if(pageModel){
-            this.setState({ pageModel: pageModel });
-        } else {
-            this.setState({ pageModel: pageDefaultModel });
-        }
-        if(window.__setCurrentPathname && pageModel){
-            window.__setCurrentPathname(pageModel.pagePath);
-        }
+        return pageModel;
     }
 
-    updateModel(model){
-        window.__model = model;
-        if(this.props.location.pathname){
-            this._updatePageModel(this.props.location.pathname);
+    updatePageModel(options){
+
+        let {pathname, isEditModeOn} = options;
+        let pageModel = this.getModelByPathname(pathname);
+        isEditModeOn = isEditModeOn !== undefined ? isEditModeOn : this.state.isEditModeOn;
+
+        this.initialState.elements = {};
+        this.initialState.selected = [];
+        this.initialState.highlighted = [];
+        if(isEditModeOn === true){
+            this.traverseModel(pageModel, this.initialState, {isEditModeOn: true});
         }
-    }
+        this.elementTree = this.createElements(pageModel, this.initialState, {isEditModeOn});
 
-    updatePreviewModel(model){
-        this.setState({ previewModel: model });
-    }
-
-    handleClosePreview(){
-        if(window.__closePreview){
-            window.__closePreview();
-        }
-    }
-
-    handleDeletePreview(){
-        if(window.__deletePreview){
-            window.__deletePreview();
-        }
-    }
-
-    createElements(model){
-
-        let elements = [];
-        instanceMap = {};
-        model.children.forEach((child, index) => {
-            elements.push(this.createElement(child, index));
+        console.log('Page should be updated');
+        this.setState({
+            pageModel: pageModel,
+            isEditModeOn: isEditModeOn
         });
-        return elements;
     }
 
-    createElement(options, ref){
+    updateInitialState(){
+        let pageModel = this.getModelByPathname(this.props.location.pathname);
+        this.initialState.selected = [];
+        this.initialState.highlighted = [];
+        this.traverseModel(pageModel, this.initialState, {isEditModeOn: true});
+        console.log('Initial state should be updated');
+        this.setState({
+            pageModel: pageModel
+        });
+    }
+
+    traverseModel(model, initialState, options){
+        model.children.forEach((child, index) => {
+            this.visitGraphNode(child, initialState, options);
+        });
+    }
+
+    visitGraphNode(graphNode, initialState, options){
+
+        if(options.isEditModeOn){
+            if(graphNode.selected){
+                initialState.selected.push(graphNode.key);
+            }
+            if(graphNode.highlighted){
+                initialState.highlighted.push(graphNode.key);
+            }
+        }
+
+        if(graphNode.props){
+            forOwn(graphNode.props, (prop, propName) => {
+                this.visitGraphNode(prop, initialState, options);
+            });
+        }
+        if(graphNode.children && graphNode.children.length > 0){
+            graphNode.children.forEach(node => {
+                this.visitGraphNode(node, initialState, options);
+            });
+        }
+
+    }
+
+    findComponent(index, componentName, level){
+        let result = null;
+        if(index && isObject(index) && level <= 1){
+            level++;
+            forOwn(index, (value, key) => {
+                if(!result){
+                    if(key === componentName){
+                        result = value;
+                    } else if(value && isObject(value)){
+                        result = this.findComponent(value, componentName, level);
+                    }
+                }
+            });
+        }
+        return result;
+    }
+
+    createElement(graphNode, initialState, options){
 
         let type = 'div';
-        if(options.type){
-            type = this.findComponent(components, options.type, 0);
+        let modelNode = graphNode.modelNode;
+        if(modelNode.type){
+            type = this.findComponent(components, modelNode.type, 0);
             if(!type){
-                type = options.type;
-            } else if(!_.isObject(type)){
-                console.error('Element type: ' + options.type + ' is not object. Please check your index.js file');
+                type = modelNode.type;
+            } else if(!isObject(type)){
+                console.error('Element type: ' + modelNode.type + ' is not object. Please check your index.js file');
                 type = 'div';
             }
         }
 
-        let props = _.extend({}, { params: this.props.params, location: this.props.location }, options.props);
-        props.key = ref;
+        let props = extend({}, {
+            key: graphNode.key,
+            params: this.props.params,
+            location: this.props.location
+        }, modelNode.props);
 
-        if(_.isObject(type)){
-            _.forOwn(props, (prop, propName) => {
-                if(prop && _.isObject(prop) && prop.type){
-                    props[propName] = this.createElement(prop, 0);
-                }
+        if(graphNode.props){
+            forOwn(graphNode.props, (prop, propName) => {
+                props[propName] = this.createElement(prop, initialState, options);
             });
         }
 
         let nestedElements = null;
-        if(options.children && options.children.length > 0){
+
+        if(graphNode.children && graphNode.children.length > 0){
             let children = [];
-            options.children.forEach(childOptions => {
-                children.push(this.createElement(childOptions, ++ref));
+            graphNode.children.forEach(node => {
+                children.push(this.createElement(node, initialState, options));
             });
             nestedElements = children;
-        } else if(options.text) {
-            nestedElements = options.text;
+        } else if(modelNode.text) {
+            nestedElements = [modelNode.text];
         }
+
         let result = null;
         try{
-            if(_.isString(type)){
-                result = React.createElement(type, props, nestedElements);
+            if(options.isEditModeOn){
+                const wrapperProps = {
+                    onMouseDown: this.onComponentMouseDown,
+                    key: graphNode.key,
+                    type: modelNode.type,
+                    initialState: initialState
+                };
+                result = React.createElement(wrapComponent(type, wrapperProps), props, nestedElements);
             } else {
-                result = React.createElement(wrapComponent(type, instanceMap), props, nestedElements);
+                result = React.createElement(type, props, nestedElements);
             }
             if(result.type.prototype){
                 if(result.type.prototype.render){
                     result.type.prototype.render = ((fn) => {
                         return function render(){
                             try {
-                                 return fn.apply(this, arguments);
+                                return fn.apply(this, arguments);
                             } catch (err) {
                                 console.error(err);
                                 return React.createElement('div', {
@@ -207,14 +331,13 @@ class PageForDesk extends Component {
                                         color: 'white',
                                         padding: '3px',
                                         display: 'table'
-                                    },
-                                    'data-umyid': this.props['data-umyid']
+                                    }
                                 }, React.createElement('span', {
                                     style: {
                                         display: 'table-cell',
                                         verticalAlign: 'middle'
                                     }
-                                }, '\`' + options.type + '\` ' + err.toString()));
+                                }, '\'' + modelNode.type + '\' ' + err.toString()));
                             }
                         }
                     })(result.type.prototype.render);
@@ -222,67 +345,63 @@ class PageForDesk extends Component {
             }
 
         } catch(e){
-            console.error('Element type: ' + options.type + ' is not valid React Element. Please check your index.js file. ' + e);
+            console.error('Element type: ' + modelNode.type + ' is not valid React Element. Please check your index.js file. ' + e);
         }
         return result;
     }
 
-    findComponent(index, componentName, level){
-        let result = null;
-        if(index && _.isObject(index) && level <= 1){
-            level++;
-            _.forOwn(index, (value, key) => {
-                if(!result){
-                    if(key === componentName){
-                        result = value;
-                    } else if(value && _.isObject(value)){
-                        result = this.findComponent(value, componentName, level);
-                    }
-                }
-            });
-        }
-        return result;
-    }
-
-    getInstanceMap(){
-        let nodeMap = {};
-        let nodeList = $("[data-umyid]");
-        let visitedIds = [];
-        if(nodeList && nodeList.length > 0){
-            let umyId = null;
-            nodeList.each((index, node) => {
-                umyId = node.attributes['data-umyid'].value;
-                if(!instanceMap[umyId]){
-                    nodeMap[umyId] = node;
-                    visitedIds.push(umyId);
-                }
-            });
-        }
-        let allIds = _.keys(instanceMap);
-        let difference = _.difference(allIds, visitedIds);
-        if(difference && difference.length > 0){
-            difference.forEach( id => {
-                nodeMap[id] = instanceMap[id];
-            });
-        }
-        nodeList = null;
-        return nodeMap;
+    createElements(model, initialState, options){
+        let elements = [];
+        model.children.forEach(child => {
+            elements.push(this.createElement(child, initialState, options));
+        });
+        console.log('Elements are created');
+        return elements;
     }
 
     render(){
         let content = null;
-        if(this.state.previewModel){
-            let previewElementTree = this.createElements(this.state.previewModel);
-            content = (
-                <PreviewOverlay
-                    onClose={this.handleClosePreview}
-                    onDelete={this.handleDeletePreview}>
-                    {previewElementTree}
-                </PreviewOverlay>
-            );
-        } else {
-            content = this.createElements(this.state.pageModel);
+        //if(this.state.previewModel){
+        //    let previewElementTree = this.createElements(this.state.previewModel);
+        //    content = (
+        //        <PreviewOverlay
+        //            onClose={this.handleClosePreview}
+        //            onDelete={this.handleDeletePreview}>
+        //            {previewElementTree}
+        //        </PreviewOverlay>
+        //    );
+        //} else {
+        let elementTree = this.elementTree;
+        let boundaryOverlays = [];
+        if(this.initialState.selected && this.initialState.selected.length > 0){
+            this.initialState.selected.forEach(key => {
+                console.log('Add boundary for selected element: ' + key);
+                boundaryOverlays.push(
+                    <SelectedOverlay key={'selected' + key}
+                                     initialState={this.initialState}
+                                     selectedKey={key} />
+                );
+            });
         }
+        if(this.initialState.highlighted && this.initialState.highlighted.length > 0){
+            this.initialState.highlighted.forEach(key => {
+                boundaryOverlays.push(
+                    <HighlightedOverlay key={'highlighted' + key}
+                                     initialState={this.initialState}
+                                     selectedKey={key} />
+                );
+            });
+        }
+        content = (
+            <div id="pageContainer">
+                {elementTree}
+                {boundaryOverlays}
+                <MouseOverOverlay ref="mouseOverBoundary"
+                                  initialState={this.initialState}
+                                  bSize="1px"/>
+            </div>
+        );
+        //}
         return (
             <div>
                 {content}

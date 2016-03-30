@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import MouseOverOverlay from './MouseOverOverlay.js';
 import SelectedOverlay from './SelectedOverlay.js';
 import HighlightedOverlay from './HighlightedOverlay.js';
+import ClipboardOverlay from './ClipboardOverlay.js';
 import components from './index.js';
 import { matchPattern, formatPattern, getParams } from 'react-router/lib/PatternUtils.js';
 import pageDefaultModel from './model.js';
@@ -94,7 +95,7 @@ class PageForDesk extends Component {
             isEditModeOn: true
         };
         this.elementTree = [];
-        this.initialState = {elements: {}, selected: [], highlighted: []};
+        this.initialState = {elements: {}, selected: [], highlighted: [], forCutting: []};
         this.updatePageModel = this.updatePageModel.bind(this);
         this.setGraphApi = this.setGraphApi.bind(this);
         this.setOnComponentMouseDown = this.setOnComponentMouseDown.bind(this);
@@ -158,6 +159,7 @@ class PageForDesk extends Component {
             if(model && model.pages && model.pages.length > 0){
                 let graphRootKey = pathname === '/' ? model.pages[0].pagePath : pathname;
                 if(graph.getGraph().hasNode(graphRootKey)){
+                    console.log('Traversing graph key: ' + graphRootKey);
                     pageModel = graph.traverseGraph(graphRootKey);
                 } else {
                     //check if pathname has valid parameters for route path pattern
@@ -170,6 +172,7 @@ class PageForDesk extends Component {
                             }
                         });
                         if(graph.getGraph().hasNode(graphRootKey)){
+                            console.log('Traversing graph key: ' + graphRootKey);
                             pageModel = graph.traverseGraph(graphRootKey);
                         } else {
                             pageModel.children[0].children[0].modelNode.text =
@@ -194,6 +197,7 @@ class PageForDesk extends Component {
         this.initialState.elements = {};
         this.initialState.selected = [];
         this.initialState.highlighted = [];
+        this.initialState.forCutting = [];
         if(isEditModeOn === true){
             this.traverseModel(pageModel, this.initialState, {isEditModeOn: true});
         }
@@ -210,6 +214,7 @@ class PageForDesk extends Component {
         let pageModel = this.getModelByPathname(this.props.location.pathname);
         this.initialState.selected = [];
         this.initialState.highlighted = [];
+        this.initialState.forCutting = [];
         this.traverseModel(pageModel, this.initialState, {isEditModeOn: true});
         console.log('Initial state should be updated');
         this.setState({
@@ -218,9 +223,11 @@ class PageForDesk extends Component {
     }
 
     traverseModel(model, initialState, options){
-        model.children.forEach((child, index) => {
-            this.visitGraphNode(child, initialState, options);
-        });
+        if(model.children && model.children.length > 0){
+            model.children.forEach((child, index) => {
+                this.visitGraphNode(child, initialState, options);
+            });
+        }
     }
 
     visitGraphNode(graphNode, initialState, options){
@@ -231,6 +238,9 @@ class PageForDesk extends Component {
             }
             if(graphNode.highlighted){
                 initialState.highlighted.push(graphNode.key);
+            }
+            if(graphNode.isForCutting){
+                initialState.forCutting.push(graphNode.key);
             }
         }
 
@@ -375,10 +385,20 @@ class PageForDesk extends Component {
         let boundaryOverlays = [];
         if(this.initialState.selected && this.initialState.selected.length > 0){
             this.initialState.selected.forEach(key => {
-                console.log('Add boundary for selected element: ' + key);
                 boundaryOverlays.push(
                     <SelectedOverlay key={'selected' + key}
                                      initialState={this.initialState}
+                                     selectedKey={key} />
+                );
+            });
+        }
+        if(this.initialState.forCutting && this.initialState.forCutting.length > 0){
+            this.initialState.forCutting.forEach(key => {
+                boundaryOverlays.push(
+                    <ClipboardOverlay key={'forCutting' + key}
+                                     initialState={this.initialState}
+                                     bSize="2px"
+                                      bStyle="dashed #f0ad4e"
                                      selectedKey={key} />
                 );
             });

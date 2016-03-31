@@ -120,8 +120,8 @@ class PageForDesk extends Component {
         this.onPathnameChanged = func;
     }
 
-    setOnSelectParentClick(func){
-        this.initialState.onSelectParent = func;
+    bindToState(signature, func){
+        this.initialState[signature] = func;
     }
 
     componentDidMount(){

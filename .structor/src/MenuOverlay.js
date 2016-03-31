@@ -7,21 +7,30 @@ class MenuOverlay extends Component {
     }
 
     render() {
-        const { menuItems, menuTitle } = this.props;
+        const { menuItems, menuTitle, onTitleClick } = this.props;
         let boxStyle = {
             display: 'inline-block'
         };
         let items = [];
         if(menuItems && menuItems.length > 0){
-            menuItems.forEach(item => {
+            menuItems.forEach((item, index) => {
                 items.push(
-                    <div className="selected-overlay-menu-item" onClick={item.onClick}>{item.label}</div>
+                    <div key={index}
+                         className="selected-overlay-menu-item"
+                         onClick={item.onClick}>
+                        {item.label}
+                    </div>
                 )
             });
         }
         let content = (
-            <div style={boxStyle} className="selected-overlay-menu-box">
-                <p className="selected-overlay-menu-title">{menuTitle}</p>
+            <div style={boxStyle}
+                 className="selected-overlay-menu-box">
+                <p className="selected-overlay-menu-title"
+                   onClick={onTitleClick}>
+                    <span className="selected-overlay-menu-title-close-button">&times;</span>
+                    <span>{menuTitle}</span>
+                </p>
                 {items}
             </div>
         );

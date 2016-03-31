@@ -29,6 +29,8 @@ function isVisible(element) {
 
 const QUICK_ADD_NEW_MENU = 1;
 const QUICK_ADD_NEW_PANEL = 2;
+const SELECTION_MENU = 3;
+const CLIPBOARD_MENU = 4;
 
 export const ADD_BEFORE = 1;
 export const INSERT_FIRST = 2;
@@ -97,10 +99,10 @@ class SelectedOverlay extends Component {
             if(selectedKey && initialState){
                 //this.doShowButtonLine = initialState.selected && initialState.selected.length === 1;
                 console.log('Try to setup a subscription to selected');
-                const selected = initialState.elements[selectedKey];
-                if(selected){
+                const element = initialState.elements[selectedKey];
+                if(element){
                     console.log('Set subscription to selected');
-                    const targetDOMNode = selected.getDOMNode();
+                    const targetDOMNode = element.getDOMNode();
                     this.isSubscribed = true;
                     this.setSelectedPosition({targetDOMNode});
                 }
@@ -170,7 +172,9 @@ class SelectedOverlay extends Component {
 
     render(){
         const {newPos, border, contextMenuType, contextMenuItem } = this.state;
-        const { selectedKey, initialState: {selected, onSelectParent} } = this.props;
+        const { selectedKey, initialState: {selected} } = this.props;
+        const { initialState: {onSelectParent, onCopy, onCut, onClone, onDelete} } = this.props;
+        const { initialState: {onBefore, onFirst, onLast, onAfter, onReplace, onWrap} } = this.props;
         let isMultipleSelection = selected && selected.length > 1;
         let content;
         if(newPos){
@@ -266,27 +270,23 @@ class SelectedOverlay extends Component {
                         menuItems = [];
                         menuItems.push({
                             onClick: () => {this.setState({contextMenuType: QUICK_ADD_NEW_PANEL, contextMenuItem: ADD_BEFORE});},
-                            label: 'Append before'
+                            label: 'Before'
                         });
                         menuItems.push({
                             onClick: () => {this.setState({contextMenuType: QUICK_ADD_NEW_PANEL, contextMenuItem: INSERT_FIRST});},
-                            label: 'Insert as first'
+                            label: 'First'
                         });
                         menuItems.push({
                             onClick: () => {this.setState({contextMenuType: QUICK_ADD_NEW_PANEL, contextMenuItem: INSERT_LAST});},
-                            label: 'Insert as last'
+                            label: 'Last'
                         });
                         menuItems.push({
                             onClick: () => {this.setState({contextMenuType: QUICK_ADD_NEW_PANEL, contextMenuItem: ADD_AFTER});},
-                            label: 'Append after'
+                            label: 'After'
                         });
                         menuItems.push({
                             onClick: () => {this.setState({contextMenuType: QUICK_ADD_NEW_PANEL, contextMenuItem: REPLACE});},
                             label: 'Replace'
-                        });
-                        menuItems.push({
-                            onClick: () => {this.setState({contextMenuType: QUICK_ADD_NEW_PANEL, contextMenuItem: REPLACE_WRAP});},
-                            label: 'Replace & Wrap'
                         });
                         menuItems.push({
                             onClick: () => {this.setState({contextMenuType: QUICK_ADD_NEW_PANEL, contextMenuItem: WRAP});},
@@ -306,10 +306,54 @@ class SelectedOverlay extends Component {
                             menuTitle = 'Enter component name to replace selected';
                         } else if(contextMenuItem === WRAP){
                             menuTitle = 'Enter component name to wrap selected';
-                        } else if(contextMenuItem === REPLACE_WRAP){
-                            menuTitle = 'Enter component name to replace selected and wrap children';
                         }
                         menuSubTitle = 'Escape to close';
+                    } else if(contextMenuType === SELECTION_MENU){
+                        menuTitle = 'Selected component';
+                        menuItems = [];
+                        menuItems.push({
+                            onClick: (e) => this.handleButtonClick(selectedKey, onCopy, e),
+                            label: 'Copy'
+                        });
+                        menuItems.push({
+                            onClick: (e) => this.handleButtonClick(selectedKey, onCut, e),
+                            label: 'Cut'
+                        });
+                        menuItems.push({
+                            onClick: (e) => this.handleButtonClick(selectedKey, onClone, e),
+                            label: 'Clone'
+                        });
+                        menuItems.push({
+                            onClick: (e) => this.handleButtonClick(selectedKey, onDelete, e),
+                            label: 'Delete'
+                        });
+                    } else if(contextMenuType === CLIPBOARD_MENU){
+                        menuTitle = 'Paste from clipboard';
+                        menuItems = [];
+                        menuItems.push({
+                            onClick: (e) => this.handleButtonClick(selectedKey, onBefore, e),
+                            label: 'Before'
+                        });
+                        menuItems.push({
+                            onClick: (e) => this.handleButtonClick(selectedKey, onFirst, e),
+                            label: 'First'
+                        });
+                        menuItems.push({
+                            onClick: (e) => this.handleButtonClick(selectedKey, onLast, e),
+                            label: 'Last'
+                        });
+                        menuItems.push({
+                            onClick: (e) => this.handleButtonClick(selectedKey, onAfter, e),
+                            label: 'After'
+                        });
+                        menuItems.push({
+                            onClick: (e) => this.handleButtonClick(selectedKey, onReplace, e),
+                            label: 'Replace'
+                        });
+                        menuItems.push({
+                            onClick: (e) => this.handleButtonClick(selectedKey, onWrap, e),
+                            label: 'Wrap'
+                        });
                     }
                 }
             }
@@ -326,11 +370,16 @@ class SelectedOverlay extends Component {
                                  onClick={(e) => this.handleButtonClick(selectedKey, onSelectParent, e)}></div>
                             <div className={firstButtonClassName}
                                  onClick={() => {this.setState({contextMenuType: QUICK_ADD_NEW_MENU});}}></div>
+                            <div className={firstButtonClassName}
+                                 onClick={() => {this.setState({contextMenuType: SELECTION_MENU});}}></div>
+                            <div className={firstButtonClassName}
+                                 onClick={() => {this.setState({contextMenuType: CLIPBOARD_MENU});}}></div>
                         </div> : null
                     }
-                    {contextMenuType === QUICK_ADD_NEW_MENU ?
+                    {contextMenuType === QUICK_ADD_NEW_MENU || contextMenuType === SELECTION_MENU || contextMenuType === CLIPBOARD_MENU ?
                         <MenuOverlay style={menuBox}
                                      menuTitle={menuTitle}
+                                     onTitleClick={() => {this.setState({contextMenuType: null, contextMenuItem: null});}}
                                      onMouseLeave={() => {this.setState({contextMenuType: null, contextMenuItem: null});}}
                                      menuItems={menuItems}
                             /> : null

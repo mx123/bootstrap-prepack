@@ -40,7 +40,7 @@ class QuickAddNewOverlay extends Component {
         let content = (
             <div style={boxStyle} className="selected-overlay-quick-add-panel">
                 <div className="selected-overlay-quick-add-close-button"
-                     onClick={() => {this.props.onClose();}}>X</div>
+                     onClick={() => {this.props.onClose();}}>&times;</div>
                 <form onSubmit={(e) => {e.stopPropagation(); e.preventDefault(); alert('Submit selection');}}>
                     <span style={{color: '#9a9a9a'}}>{this.props.menuTitle}</span>
                     <input ref="inputElement"

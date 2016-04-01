@@ -58,6 +58,7 @@ class HighlightedOverlay extends Component {
                 const targetDOMNode = element.getDOMNode();
                 this.setSelectedPosition({targetDOMNode});
             } else {
+                this.setState({newPos: null});
                 console.error('HighlightedOverlay: selection element was not found in state.');
             }
         }

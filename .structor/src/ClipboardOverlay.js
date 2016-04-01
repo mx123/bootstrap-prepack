@@ -77,12 +77,13 @@ class ClipboardOverlay extends Component {
                 const selected = initialState.elements[selectedKey];
                 if(selected){
                     const targetDOMNode = selected.getDOMNode();
-                    this.isSubscribed = true;
                     this.setSelectedPosition({targetDOMNode});
                 } else {
-                    console.error('ClipboardOverlay: selection element was not found in state.');
+                    this.resetTimer();
+                    this.setState({newPos: null});
                 }
             }
+            this.isSubscribed = true;
         }
     }
 

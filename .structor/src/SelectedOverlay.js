@@ -103,9 +103,11 @@ class SelectedOverlay extends Component {
                     this.isSubscribed = true;
                     this.setSelectedPosition({targetDOMNode});
                 } else {
-                    console.error('SelectedOverlay: selection element was not found in state.');
+                    this.resetTimer();
+                    this.setState({newPos: null});
                 }
             }
+            this.isSubscribed = true;
         }
     }
 

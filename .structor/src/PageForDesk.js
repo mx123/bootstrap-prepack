@@ -1,14 +1,14 @@
-import { forOwn, isObject, isString, extend, difference, keys } from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-//import PreviewOverlay from './PreviewOverlay.js';
+import { forOwn, isObject, isString, extend, difference, keys } from 'lodash';
+
+import components from './index.js';
+import pageDefaultModel from './model.js';
+
 import MouseOverOverlay from './MouseOverOverlay.js';
 import SelectedOverlay from './SelectedOverlay.js';
 import HighlightedOverlay from './HighlightedOverlay.js';
 import ClipboardOverlay from './ClipboardOverlay.js';
-import components from './index.js';
-import { matchPattern, formatPattern, getParams } from 'react-router/lib/PatternUtils.js';
-import pageDefaultModel from './model.js';
 
 function wrapComponent(WrappedComponent, props) {
     const { onMouseDown, initialState, key, type } = props;
@@ -90,33 +90,44 @@ class PageForDesk extends Component {
 
     constructor(props, content) {
         super(props, content);
+
         this.state = {
             pageModel: pageDefaultModel,
-            isEditModeOn: true
+            isEditModeOn: true,
+            updateCounter: 0
         };
         this.elementTree = [];
-        this.initialState = {elements: {}, selected: [], highlighted: [], forCutting: []};
+        this.initialState = {
+            elements: {},
+            selected: [],
+            highlighted: [],
+            forCutting: []
+        };
+
         this.updatePageModel = this.updatePageModel.bind(this);
-        this.setGraphApi = this.setGraphApi.bind(this);
-        this.setOnComponentMouseDown = this.setOnComponentMouseDown.bind(this);
+        this.bindGetPageModel = this.bindGetPageModel.bind(this);
+        this.bindGetMarked = this.bindGetMarked.bind(this);
+        this.bindOnComponentMouseDown = this.bindOnComponentMouseDown.bind(this);
         this.getModelByPathname = this.getModelByPathname.bind(this);
-        this.visitGraphNode = this.visitGraphNode.bind(this);
         this.updateInitialState = this.updateInitialState.bind(this);
-        this.traverseModel = this.traverseModel.bind(this);
         this.createElements = this.createElements.bind(this);
         this.createElement = this.createElement.bind(this);
         this.findComponent = this.findComponent.bind(this);
     }
 
-    setGraphApi(graph){
-        this.graph = graph;
+    bindGetPageModel(func){
+        this.getPageModel = func;
     }
 
-    setOnComponentMouseDown(func){
+    bindGetMarked(func){
+        this.getMarked = func;
+    }
+
+    bindOnComponentMouseDown(func){
         this.onComponentMouseDown = func;
     }
 
-    setOnPathnameChanged(func){
+    bindOnPathnameChanged(func){
         this.onPathnameChanged = func;
     }
 
@@ -129,7 +140,6 @@ class PageForDesk extends Component {
         if(window.onPageDidMount){
             window.onPageDidMount(this, pathname);
         }
-        //this.updatePageModel({pathname});
     }
 
     componentWillUnmount(){
@@ -148,113 +158,54 @@ class PageForDesk extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState){
-        return (this.state.pageModel !== nextProps.pageModel);
-    }
-
-    getModelByPathname(pathname){
-        const graph = this.graph;
-        let pageModel = pageDefaultModel;
-        if(graph){
-            const model = graph.getModel();
-            if(model && model.pages && model.pages.length > 0){
-                let graphRootKey = pathname === '/' ? model.pages[0].pagePath : pathname;
-                if(graph.getGraph().hasNode(graphRootKey)){
-                    console.log('Traversing graph key: ' + graphRootKey);
-                    pageModel = graph.traverseGraph(graphRootKey);
-                } else {
-                    //check if pathname has valid parameters for route path pattern
-                    try{
-                        model.pages.forEach((page, index) => {
-                            let paramsObj = getParams(page.pagePath, pathname);
-                            let formattedPath = formatPattern(page.pagePath, paramsObj);
-                            if (pathname === formattedPath) {
-                                graphRootKey = formattedPath;
-                            }
-                        });
-                        if(graph.getGraph().hasNode(graphRootKey)){
-                            console.log('Traversing graph key: ' + graphRootKey);
-                            pageModel = graph.traverseGraph(graphRootKey);
-                        } else {
-                            pageModel.children[0].children[0].modelNode.text =
-                                'Route was not found: ' + pathname + '. Try to select another route.';
-                        }
-                    } catch(e){
-                        console.error('Path name ' + pathname + ' in project model was not found. ' + String(e));
-                        pageModel.children[0].children[0].modelNode.text = String(e);
-                    }
-                }
-            }
-        }
-        return pageModel;
+        return (this.state.updateCounter !== nextProps.updateCounter);
     }
 
     updatePageModel(options){
 
         let {pathname, isEditModeOn} = options;
+
+        if(isEditModeOn === true){
+            const {selected, highlighted, forCutting} = this.getMarked(this.props.location.pathname);
+            this.initialState.selected = selected;
+            this.initialState.highlighted = highlighted;
+            this.initialState.forCutting = forCutting;
+        } else {
+            this.initialState.selected = [];
+            this.initialState.highlighted = [];
+            this.initialState.forCutting = [];
+        }
         let pageModel = this.getModelByPathname(pathname);
         isEditModeOn = isEditModeOn !== undefined ? isEditModeOn : this.state.isEditModeOn;
-
-        this.initialState.elements = {};
-        this.initialState.selected = [];
-        this.initialState.highlighted = [];
-        this.initialState.forCutting = [];
-        if(isEditModeOn === true){
-            this.traverseModel(pageModel, this.initialState, {isEditModeOn: true});
-        }
         this.elementTree = this.createElements(pageModel, this.initialState, {isEditModeOn});
 
         console.log('Page should be updated');
         this.setState({
             pageModel: pageModel,
-            isEditModeOn: isEditModeOn
+            isEditModeOn: isEditModeOn,
+            updateCounter: this.state.updateCounter + 1
         });
     }
 
     updateInitialState(){
-        let pageModel = this.getModelByPathname(this.props.location.pathname);
-        this.initialState.selected = [];
-        this.initialState.highlighted = [];
-        this.initialState.forCutting = [];
-        this.traverseModel(pageModel, this.initialState, {isEditModeOn: true});
+        const {selected, highlighted, forCutting} = this.getMarked(this.props.location.pathname);
+        this.initialState.selected = selected;
+        this.initialState.highlighted = highlighted;
+        this.initialState.forCutting = forCutting;
         console.log('Initial state should be updated');
         this.setState({
-            pageModel: pageModel
+            updateCounter: this.state.updateCounter + 1
         });
     }
 
-    traverseModel(model, initialState, options){
-        if(model.children && model.children.length > 0){
-            model.children.forEach((child, index) => {
-                this.visitGraphNode(child, initialState, options);
-            });
+    getModelByPathname(pathname){
+        let pageModel = this.getPageModel(pathname);
+        if(!pageModel){
+            pageModel = pageDefaultModel;
+            pageModel.children[0].children[0].modelNode.text =
+                'Route was not found: ' + pathname + '. Try to select another route.';
         }
-    }
-
-    visitGraphNode(graphNode, initialState, options){
-
-        if(options.isEditModeOn){
-            if(graphNode.selected){
-                initialState.selected.push(graphNode.key);
-            }
-            if(graphNode.highlighted){
-                initialState.highlighted.push(graphNode.key);
-            }
-            if(graphNode.isForCutting){
-                initialState.forCutting.push(graphNode.key);
-            }
-        }
-
-        if(graphNode.props){
-            forOwn(graphNode.props, (prop, propName) => {
-                this.visitGraphNode(prop, initialState, options);
-            });
-        }
-        if(graphNode.children && graphNode.children.length > 0){
-            graphNode.children.forEach(node => {
-                this.visitGraphNode(node, initialState, options);
-            });
-        }
-
+        return pageModel;
     }
 
     findComponent(index, componentName, level){
@@ -274,10 +225,10 @@ class PageForDesk extends Component {
         return result;
     }
 
-    createElement(graphNode, initialState, options){
+    createElement(node, initialState, options){
 
         let type = 'div';
-        let modelNode = graphNode.modelNode;
+        let modelNode = node.modelNode;
         if(modelNode.type){
             type = this.findComponent(components, modelNode.type, 0);
             if(!type){
@@ -289,22 +240,22 @@ class PageForDesk extends Component {
         }
 
         let props = extend({}, {
-            key: graphNode.key,
+            key: node.key,
             params: this.props.params,
             location: this.props.location
         }, modelNode.props);
 
-        if(graphNode.props){
-            forOwn(graphNode.props, (prop, propName) => {
+        if(node.props){
+            forOwn(node.props, (prop, propName) => {
                 props[propName] = this.createElement(prop, initialState, options);
             });
         }
 
         let nestedElements = null;
 
-        if(graphNode.children && graphNode.children.length > 0){
+        if(node.children && node.children.length > 0){
             let children = [];
-            graphNode.children.forEach(node => {
+            node.children.forEach(node => {
                 children.push(this.createElement(node, initialState, options));
             });
             nestedElements = children;
@@ -317,7 +268,7 @@ class PageForDesk extends Component {
             if(options.isEditModeOn){
                 const wrapperProps = {
                     onMouseDown: this.onComponentMouseDown,
-                    key: graphNode.key,
+                    key: node.key,
                     type: modelNode.type,
                     initialState: initialState
                 };
@@ -361,6 +312,7 @@ class PageForDesk extends Component {
     }
 
     createElements(model, initialState, options){
+        initialState.elements = {};
         let elements = [];
         model.children.forEach(child => {
             elements.push(this.createElement(child, initialState, options));
@@ -370,21 +322,10 @@ class PageForDesk extends Component {
     }
 
     render(){
-        let content = null;
-        //if(this.state.previewModel){
-        //    let previewElementTree = this.createElements(this.state.previewModel);
-        //    content = (
-        //        <PreviewOverlay
-        //            onClose={this.handleClosePreview}
-        //            onDelete={this.handleDeletePreview}>
-        //            {previewElementTree}
-        //        </PreviewOverlay>
-        //    );
-        //} else {
-        let elementTree = this.elementTree;
         let boundaryOverlays = [];
-        if(this.initialState.selected && this.initialState.selected.length > 0){
-            this.initialState.selected.forEach(key => {
+        const {selected, forCutting, highlighted} = this.initialState;
+        if(selected && selected.length > 0){
+            selected.forEach(key => {
                 boundaryOverlays.push(
                     <SelectedOverlay key={'selected' + key}
                                      initialState={this.initialState}
@@ -392,8 +333,8 @@ class PageForDesk extends Component {
                 );
             });
         }
-        if(this.initialState.forCutting && this.initialState.forCutting.length > 0){
-            this.initialState.forCutting.forEach(key => {
+        if(forCutting && forCutting.length > 0){
+            forCutting.forEach(key => {
                 boundaryOverlays.push(
                     <ClipboardOverlay key={'forCutting' + key}
                                      initialState={this.initialState}
@@ -403,8 +344,8 @@ class PageForDesk extends Component {
                 );
             });
         }
-        if(this.initialState.highlighted && this.initialState.highlighted.length > 0){
-            this.initialState.highlighted.forEach(key => {
+        if(highlighted && highlighted.length > 0){
+            highlighted.forEach(key => {
                 boundaryOverlays.push(
                     <HighlightedOverlay key={'highlighted' + key}
                                      initialState={this.initialState}
@@ -412,19 +353,16 @@ class PageForDesk extends Component {
                 );
             });
         }
-        content = (
-            <div id="pageContainer">
-                {elementTree}
-                {boundaryOverlays}
-                <MouseOverOverlay ref="mouseOverBoundary"
-                                  initialState={this.initialState}
-                                  bSize="1px"/>
-            </div>
-        );
         //}
         return (
             <div>
-                {content}
+                <div id="pageContainer">
+                    {this.elementTree}
+                    {boundaryOverlays}
+                    <MouseOverOverlay ref="mouseOverBoundary"
+                                      initialState={this.initialState}
+                                      bSize="1px"/>
+                </div>
             </div>
         );
     }

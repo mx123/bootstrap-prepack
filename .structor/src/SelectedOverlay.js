@@ -173,9 +173,8 @@ class SelectedOverlay extends Component {
     render(){
         const {newPos, border, contextMenuType, contextMenuItem } = this.state;
         const { selectedKey, initialState: {selected} } = this.props;
-        const { initialState: {onSelectParent, onCopy, onCut, onClone, onDelete} } = this.props;
-        const { initialState: {onBefore, onFirst, onLast, onAfter, onReplace, onWrap} } = this.props;
-        let isMultipleSelection = selected && selected.length > 1;
+        const { initialState: {onSelectParent} } = this.props;
+        const isMultipleSelection = selected && selected.length > 1;
         let content;
         if(newPos){
             const endPoint = {
@@ -309,6 +308,7 @@ class SelectedOverlay extends Component {
                         }
                         menuSubTitle = 'Escape to close';
                     } else if(contextMenuType === SELECTION_MENU){
+                        const { initialState: {onCopy, onCut, onClone, onDelete} } = this.props;
                         menuTitle = 'Selected component';
                         menuItems = [];
                         menuItems.push({
@@ -328,32 +328,42 @@ class SelectedOverlay extends Component {
                             label: 'Delete'
                         });
                     } else if(contextMenuType === CLIPBOARD_MENU){
-                        menuTitle = 'Paste from clipboard';
+                        const { initialState: {isAvailableToPaste, forCutting} } = this.props;
+                        const isClipboardEmpty = forCutting && forCutting.length <= 0;
+                        const isKeyAvailableToPaste = isAvailableToPaste(selectedKey);
                         menuItems = [];
-                        menuItems.push({
-                            onClick: (e) => this.handleButtonClick(selectedKey, onBefore, e),
-                            label: 'Before'
-                        });
-                        menuItems.push({
-                            onClick: (e) => this.handleButtonClick(selectedKey, onFirst, e),
-                            label: 'First'
-                        });
-                        menuItems.push({
-                            onClick: (e) => this.handleButtonClick(selectedKey, onLast, e),
-                            label: 'Last'
-                        });
-                        menuItems.push({
-                            onClick: (e) => this.handleButtonClick(selectedKey, onAfter, e),
-                            label: 'After'
-                        });
-                        menuItems.push({
-                            onClick: (e) => this.handleButtonClick(selectedKey, onReplace, e),
-                            label: 'Replace'
-                        });
-                        menuItems.push({
-                            onClick: (e) => this.handleButtonClick(selectedKey, onWrap, e),
-                            label: 'Wrap'
-                        });
+                        if(!isKeyAvailableToPaste){
+                            menuTitle = 'Paste operation is not available';
+                        } else if(!isClipboardEmpty){
+                            const { initialState: {onBefore, onFirst, onLast, onAfter, onReplace, onWrap} } = this.props;
+                            menuTitle = 'Paste from clipboard';
+                            menuItems.push({
+                                onClick: (e) => this.handleButtonClick(selectedKey, onBefore, e),
+                                label: 'Before'
+                            });
+                            menuItems.push({
+                                onClick: (e) => this.handleButtonClick(selectedKey, onFirst, e),
+                                label: 'First'
+                            });
+                            menuItems.push({
+                                onClick: (e) => this.handleButtonClick(selectedKey, onLast, e),
+                                label: 'Last'
+                            });
+                            menuItems.push({
+                                onClick: (e) => this.handleButtonClick(selectedKey, onAfter, e),
+                                label: 'After'
+                            });
+                            menuItems.push({
+                                onClick: (e) => this.handleButtonClick(selectedKey, onReplace, e),
+                                label: 'Replace'
+                            });
+                            menuItems.push({
+                                onClick: (e) => this.handleButtonClick(selectedKey, onWrap, e),
+                                label: 'Wrap'
+                            });
+                        } else {
+                            menuTitle = 'Clipboard is empty';
+                        }
                     }
                 }
             }

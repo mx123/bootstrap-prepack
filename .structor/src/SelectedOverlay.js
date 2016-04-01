@@ -97,14 +97,13 @@ class SelectedOverlay extends Component {
         if(!this.isSubscribed){
             const { selectedKey, initialState } = this.props;
             if(selectedKey && initialState){
-                //this.doShowButtonLine = initialState.selected && initialState.selected.length === 1;
-                console.log('Try to setup a subscription to selected');
                 const element = initialState.elements[selectedKey];
                 if(element){
-                    console.log('Set subscription to selected');
                     const targetDOMNode = element.getDOMNode();
                     this.isSubscribed = true;
                     this.setSelectedPosition({targetDOMNode});
+                } else {
+                    console.error('SelectedOverlay: selection element was not found in state.');
                 }
             }
         }
@@ -153,12 +152,13 @@ class SelectedOverlay extends Component {
     }
 
     setSelectedPosition(options){
-        console.log('Set selected position: ' + options.targetDOMNode);
         let targetDOMNode = options.targetDOMNode;
+        this.resetTimer();
         if(targetDOMNode){
-            this.resetTimer();
             this.$DOMNode = $(targetDOMNode);
             this.refreshPosition();
+        } else {
+            console.error('')
         }
     }
 
@@ -172,9 +172,8 @@ class SelectedOverlay extends Component {
 
     render(){
         const {newPos, border, contextMenuType, contextMenuItem } = this.state;
-        const { selectedKey, initialState: {selected} } = this.props;
-        const { initialState: {onSelectParent} } = this.props;
-        const isMultipleSelection = selected && selected.length > 1;
+        const { selectedKey, initialState: {onSelectParent, isMultipleSelection} } = this.props;
+        const isMultiple = isMultipleSelection();
         let content;
         if(newPos){
             const endPoint = {
@@ -230,7 +229,7 @@ class SelectedOverlay extends Component {
             let menuTitle;
             let menuSubTitle;
             let menuItems;
-            if(!isMultipleSelection){
+            if(!isMultiple){
                 buttonLine = {
                     display: 'flex',
                     flexDirection: 'row',
@@ -328,13 +327,11 @@ class SelectedOverlay extends Component {
                             label: 'Delete'
                         });
                     } else if(contextMenuType === CLIPBOARD_MENU){
-                        const { initialState: {isAvailableToPaste, forCutting} } = this.props;
-                        const isClipboardEmpty = forCutting && forCutting.length <= 0;
-                        const isKeyAvailableToPaste = isAvailableToPaste(selectedKey);
+                        const { initialState: {isAvailableToPaste, isClipboardEmpty, isAvailableToWrap} } = this.props;
                         menuItems = [];
-                        if(!isKeyAvailableToPaste){
+                        if(!isAvailableToPaste(selectedKey)){
                             menuTitle = 'Paste operation is not available';
-                        } else if(!isClipboardEmpty){
+                        } else if(!isClipboardEmpty()){
                             const { initialState: {onBefore, onFirst, onLast, onAfter, onReplace, onWrap} } = this.props;
                             menuTitle = 'Paste from clipboard';
                             menuItems.push({
@@ -357,10 +354,12 @@ class SelectedOverlay extends Component {
                                 onClick: (e) => this.handleButtonClick(selectedKey, onReplace, e),
                                 label: 'Replace'
                             });
-                            menuItems.push({
-                                onClick: (e) => this.handleButtonClick(selectedKey, onWrap, e),
-                                label: 'Wrap'
-                            });
+                            if(isAvailableToWrap(selectedKey)){
+                                menuItems.push({
+                                    onClick: (e) => this.handleButtonClick(selectedKey, onWrap, e),
+                                    label: 'Wrap'
+                                });
+                            }
                         } else {
                             menuTitle = 'Clipboard is empty';
                         }
@@ -374,7 +373,7 @@ class SelectedOverlay extends Component {
                     <div style={leftLine}></div>
                     <div style={bottomLine}></div>
                     <div style={rightLine}></div>
-                    {!isMultipleSelection ?
+                    {!isMultiple ?
                         <div style={buttonLine}>
                             <div className={firstButtonClassName}
                                  onClick={(e) => this.handleButtonClick(selectedKey, onSelectParent, e)}></div>

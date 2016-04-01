@@ -21,7 +21,8 @@
 }
 .selected-overlay-highlighted {
     border: 2px solid #f0ad4e;
-    background-color: rgba(240, 173, 78, 0.48);
+    background-color: rgba(240, 173, 78, 0.25);
+    border-radius: 2px;
 }
 .selected-overlay-button:hover {
     opacity: 1;

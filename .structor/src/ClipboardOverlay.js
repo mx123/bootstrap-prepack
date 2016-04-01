@@ -74,14 +74,13 @@ class ClipboardOverlay extends Component {
         if(!this.isSubscribed){
             const { selectedKey, initialState } = this.props;
             if(selectedKey && initialState){
-                //this.doShowButtonLine = initialState.selected && initialState.selected.length === 1;
-                console.log('Try to setup a subscription to selected');
                 const selected = initialState.elements[selectedKey];
                 if(selected){
-                    console.log('Set subscription to selected');
                     const targetDOMNode = selected.getDOMNode();
                     this.isSubscribed = true;
                     this.setSelectedPosition({targetDOMNode});
+                } else {
+                    console.error('ClipboardOverlay: selection element was not found in state.');
                 }
             }
         }
@@ -131,10 +130,12 @@ class ClipboardOverlay extends Component {
 
     setSelectedPosition(options){
         let targetDOMNode = options.targetDOMNode;
+        this.resetTimer();
         if(targetDOMNode){
-            this.resetTimer();
             this.$DOMNode = $(targetDOMNode);
             this.refreshPosition();
+        } else {
+            console.error('ClipboardOverlay: target DOM node is null');
         }
     }
 

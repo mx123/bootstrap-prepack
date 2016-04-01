@@ -4,8 +4,6 @@ const borderRadius = '2px';
 const nullPx = '0px';
 const px = 'px';
 const position = 'absolute';
-const borderStyle = 'solid #35b3ee';
-const borderSize = '2px';
 
 function isVisible(element) {
     let invisibleParent = false;
@@ -55,11 +53,12 @@ class HighlightedOverlay extends Component {
     subscribeToInitialState(){
         const { selectedKey, initialState } = this.props;
         if(selectedKey && initialState){
-            //this.doShowButtonLine = initialState.selected && initialState.selected.length === 1;
             const element = initialState.elements[selectedKey];
             if(element){
                 const targetDOMNode = element.getDOMNode();
                 this.setSelectedPosition({targetDOMNode});
+            } else {
+                console.error('HighlightedOverlay: selection element was not found in state.');
             }
         }
     }
@@ -80,13 +79,13 @@ class HighlightedOverlay extends Component {
                     this.setState({newPos});
                 }
             }
+        } else {
+            console.error('HighlightedOverlay: target DOM node is null');
         }
     }
 
     render(){
         const {newPos} = this.state;
-        const { selectedKey, initialState: {highlighted} } = this.props;
-        let isHighlighted = highlighted && highlighted.length > 0 && highlighted.indexOf(selectedKey) >= 0;
         let content;
         if(newPos){
             const endPoint = {
@@ -97,21 +96,15 @@ class HighlightedOverlay extends Component {
                 position: position,
                 zIndex: 1030
             };
-            let highlightedBox;
-            if(isHighlighted){
-                highlightedBox = {
+            let highlightedBox = {
                     top: nullPx,
                     left: nullPx,
                     width: newPos.width + px,
-                    height: newPos.height + px,
-                    borderRadius: borderRadius
-                }
-            }
+                    height: newPos.height + px
+            };
             content = (
                 <div style={endPoint}>
-                    {isHighlighted ?
-                        <div className="selected-overlay-highlighted" style={highlightedBox}></div> : null
-                    }
+                    <div className="selected-overlay-highlighted" style={highlightedBox}></div>
                 </div>
             );
         } else {

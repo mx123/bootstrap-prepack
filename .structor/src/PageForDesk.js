@@ -18,7 +18,11 @@ function wrapComponent(WrappedComponent, props) {
             if(initialState){
                 initialState.elements[key] = {
                     getDOMNode: () => {
-                        return this.DOMNode;
+                        if(!this.$DOMNode){
+                            return ReactDOM.findDOMNode(this);
+                        } else {
+                            return this.$DOMNode[0];
+                        }
                     }
                 }
             }
@@ -27,8 +31,8 @@ function wrapComponent(WrappedComponent, props) {
             this.subscribeToInitialState();
         },
         componentDidMount(){
-            this.DOMNode = ReactDOM.findDOMNode(this);
-            this.$DOMNode = $(this.DOMNode);
+            const DOMNode = ReactDOM.findDOMNode(this);
+            this.$DOMNode = $(DOMNode);
             this.$DOMNode
                 .on('mousedown', this.handleMouseDown)
                 .on('mouseover', this.handleMouseOver)
@@ -48,7 +52,6 @@ function wrapComponent(WrappedComponent, props) {
                     .off('mouseup');
             }
             this.$DOMNode = undefined;
-            this.DOMNode = undefined;
         },
         componentWillReceiveProps(nextProps){
             this.subscribeToInitialState();
@@ -64,12 +67,12 @@ function wrapComponent(WrappedComponent, props) {
         },
         handleMouseOver(e){
             if(initialState && initialState.onMouseOver){
-                initialState.onMouseOver({ targetDOMNode: this.DOMNode, type});
+                initialState.onMouseOver({ targetDOMNode: this.$DOMNode[0], type});
             }
         },
         handleMouseOut(e){
             if(initialState && initialState.onMouseOut){
-                initialState.onMouseOut({ targetDOMNode: this.DOMNode, remove: true});
+                initialState.onMouseOut({ targetDOMNode: this.$DOMNode[0], remove: true});
             }
         },
         handleNoop(e){
@@ -92,24 +95,18 @@ class PageForDesk extends Component {
         super(props, content);
 
         this.state = {
-            pageModel: pageDefaultModel,
             isEditModeOn: true,
             updateCounter: 0
         };
         this.elementTree = [];
-        this.initialState = {
-            elements: {},
-            selected: [],
-            highlighted: [],
-            forCutting: []
-        };
+        this.initialState = { elements: {} };
 
         this.updatePageModel = this.updatePageModel.bind(this);
         this.bindGetPageModel = this.bindGetPageModel.bind(this);
         this.bindGetMarked = this.bindGetMarked.bind(this);
         this.bindOnComponentMouseDown = this.bindOnComponentMouseDown.bind(this);
         this.getModelByPathname = this.getModelByPathname.bind(this);
-        this.updateInitialState = this.updateInitialState.bind(this);
+        this.updateMarks = this.updateMarks.bind(this);
         this.createElements = this.createElements.bind(this);
         this.createElement = this.createElement.bind(this);
         this.findComponent = this.findComponent.bind(this);
@@ -148,7 +145,6 @@ class PageForDesk extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        //console.log('it happens when a user changes route through the live preview');
         if(nextProps.location.pathname !== this.props.location.pathname){
             this.updatePageModel({pathname: nextProps.location.pathname});
             if(this.onPathnameChanged){
@@ -162,38 +158,20 @@ class PageForDesk extends Component {
     }
 
     updatePageModel(options){
-
         let {pathname, isEditModeOn} = options;
-
-        if(isEditModeOn === true){
-            const {selected, highlighted, forCutting} = this.getMarked(this.props.location.pathname);
-            this.initialState.selected = selected;
-            this.initialState.highlighted = highlighted;
-            this.initialState.forCutting = forCutting;
-        } else {
-            this.initialState.selected = [];
-            this.initialState.highlighted = [];
-            this.initialState.forCutting = [];
-        }
-        let pageModel = this.getModelByPathname(pathname);
         isEditModeOn = isEditModeOn !== undefined ? isEditModeOn : this.state.isEditModeOn;
+        let pageModel = this.getModelByPathname(pathname);
         this.elementTree = this.createElements(pageModel, this.initialState, {isEditModeOn});
-
-        console.log('Page should be updated');
         this.setState({
-            pageModel: pageModel,
+            pathName: pathname,
             isEditModeOn: isEditModeOn,
             updateCounter: this.state.updateCounter + 1
         });
     }
 
-    updateInitialState(){
-        const {selected, highlighted, forCutting} = this.getMarked(this.props.location.pathname);
-        this.initialState.selected = selected;
-        this.initialState.highlighted = highlighted;
-        this.initialState.forCutting = forCutting;
-        console.log('Initial state should be updated');
+    updateMarks(){
         this.setState({
+            pathname: this.props.location.pathname,
             updateCounter: this.state.updateCounter + 1
         });
     }
@@ -317,51 +295,67 @@ class PageForDesk extends Component {
         model.children.forEach(child => {
             elements.push(this.createElement(child, initialState, options));
         });
-        console.log('Elements are created');
         return elements;
     }
 
     render(){
+
         let boundaryOverlays = [];
-        const {selected, forCutting, highlighted} = this.initialState;
-        if(selected && selected.length > 0){
-            selected.forEach(key => {
-                boundaryOverlays.push(
-                    <SelectedOverlay key={'selected' + key}
-                                     initialState={this.initialState}
-                                     selectedKey={key} />
-                );
-            });
+        if(this.state.isEditModeOn && this.state.pathname){
+            const {selected, highlighted, forCutting, forCopying} = this.getMarked(this.state.pathname);
+            if(selected && selected.length > 0){
+                selected.forEach(key => {
+                    boundaryOverlays.push(
+                        <SelectedOverlay key={'selected' + key}
+                                         initialState={this.initialState}
+                                         selectedKey={key} />
+                    );
+                });
+            }
+            if(forCutting && forCutting.length > 0){
+                forCutting.forEach(key => {
+                    boundaryOverlays.push(
+                        <ClipboardOverlay key={'forCutting' + key}
+                                          initialState={this.initialState}
+                                          bSize="2px"
+                                          bStyle="dashed #f0ad4e"
+                                          selectedKey={key} />
+                    );
+                });
+            }
+            if(forCopying && forCopying.length > 0){
+                forCopying.forEach(key => {
+                    boundaryOverlays.push(
+                        <ClipboardOverlay key={'forCopying' + key}
+                                          initialState={this.initialState}
+                                          bSize="2px"
+                                          bStyle="dashed #5cb85c"
+                                          selectedKey={key} />
+                    );
+                });
+            }
+            if(highlighted && highlighted.length > 0){
+                highlighted.forEach(key => {
+                    boundaryOverlays.push(
+                        <HighlightedOverlay key={'highlighted' + key}
+                                            initialState={this.initialState}
+                                            selectedKey={key} />
+                    );
+                });
+            }
         }
-        if(forCutting && forCutting.length > 0){
-            forCutting.forEach(key => {
-                boundaryOverlays.push(
-                    <ClipboardOverlay key={'forCutting' + key}
-                                     initialState={this.initialState}
-                                     bSize="2px"
-                                      bStyle="dashed #f0ad4e"
-                                     selectedKey={key} />
-                );
-            });
-        }
-        if(highlighted && highlighted.length > 0){
-            highlighted.forEach(key => {
-                boundaryOverlays.push(
-                    <HighlightedOverlay key={'highlighted' + key}
-                                     initialState={this.initialState}
-                                     selectedKey={key} />
-                );
-            });
-        }
-        //}
         return (
             <div>
                 <div id="pageContainer">
                     {this.elementTree}
                     {boundaryOverlays}
-                    <MouseOverOverlay ref="mouseOverBoundary"
-                                      initialState={this.initialState}
-                                      bSize="1px"/>
+                    {this.state.isEditModeOn ?
+                        <MouseOverOverlay key="mouseOverBoundary"
+                                          ref="mouseOverBoundary"
+                                          initialState={this.initialState}
+                                          bSize="1px"/> : null
+                    }
+
                 </div>
             </div>
         );

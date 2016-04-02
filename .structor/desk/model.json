@@ -39,9 +39,15 @@
                       "text": "Link",
                       "props": {
                         "data-umyid": "7"
+                      },
+                      "graphRef": {
+                        "key": 5
                       }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 4
+                  }
                 },
                 {
                   "type": "NavItem",
@@ -55,9 +61,15 @@
                       "text": "Link",
                       "props": {
                         "data-umyid": "9"
+                      },
+                      "graphRef": {
+                        "key": 7
                       }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 6
+                  }
                 },
                 {
                   "variantName": "default",
@@ -79,10 +91,16 @@
                           "text": "Menu Item Link",
                           "props": {
                             "data-umyid": "12"
+                          },
+                          "graphRef": {
+                            "key": 10
                           }
                         }
                       ],
-                      "type": "MenuItem"
+                      "type": "MenuItem",
+                      "graphRef": {
+                        "key": 9
+                      }
                     },
                     {
                       "props": {
@@ -95,10 +113,16 @@
                           "text": "Menu Item Link",
                           "props": {
                             "data-umyid": "14"
+                          },
+                          "graphRef": {
+                            "key": 12
                           }
                         }
                       ],
-                      "type": "MenuItem"
+                      "type": "MenuItem",
+                      "graphRef": {
+                        "key": 11
+                      }
                     },
                     {
                       "props": {
@@ -111,14 +135,26 @@
                           "text": "Menu Item Link",
                           "props": {
                             "data-umyid": "16"
+                          },
+                          "graphRef": {
+                            "key": 14
                           }
                         }
                       ],
-                      "type": "MenuItem"
+                      "type": "MenuItem",
+                      "graphRef": {
+                        "key": 13
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 8
+                  }
                 }
-              ]
+              ],
+              "graphRef": {
+                "key": 3
+              }
             },
             {
               "variantName": "left",
@@ -140,9 +176,15 @@
                       "text": "Link",
                       "props": {
                         "data-umyid": "19"
+                      },
+                      "graphRef": {
+                        "key": 17
                       }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 16
+                  }
                 },
                 {
                   "type": "NavItem",
@@ -156,9 +198,15 @@
                       "text": "Link",
                       "props": {
                         "data-umyid": "21"
+                      },
+                      "graphRef": {
+                        "key": 19
                       }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 18
+                  }
                 },
                 {
                   "variantName": "default",
@@ -180,10 +228,16 @@
                           "text": "Menu Item Link",
                           "props": {
                             "data-umyid": "24"
+                          },
+                          "graphRef": {
+                            "key": 22
                           }
                         }
                       ],
-                      "type": "MenuItem"
+                      "type": "MenuItem",
+                      "graphRef": {
+                        "key": 21
+                      }
                     },
                     {
                       "props": {
@@ -196,10 +250,16 @@
                           "text": "Menu Item Link",
                           "props": {
                             "data-umyid": "26"
+                          },
+                          "graphRef": {
+                            "key": 24
                           }
                         }
                       ],
-                      "type": "MenuItem"
+                      "type": "MenuItem",
+                      "graphRef": {
+                        "key": 23
+                      }
                     },
                     {
                       "props": {
@@ -212,16 +272,31 @@
                           "text": "Menu Item Link",
                           "props": {
                             "data-umyid": "28"
+                          },
+                          "graphRef": {
+                            "key": 26
                           }
                         }
                       ],
-                      "type": "MenuItem"
+                      "type": "MenuItem",
+                      "graphRef": {
+                        "key": 25
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 20
+                  }
                 }
-              ]
+              ],
+              "graphRef": {
+                "key": 15
+              }
             }
-          ]
+          ],
+          "graphRef": {
+            "key": 2
+          }
         },
         {
           "type": "h3",
@@ -238,9 +313,15 @@
               "text": "This is an empty page. To add new component select needed element on left-side panel and click on an element on the page where you want to put new component, than choose action for right component's place.",
               "props": {
                 "data-umyid": "3"
+              },
+              "graphRef": {
+                "key": 28
               }
             }
-          ]
+          ],
+          "graphRef": {
+            "key": 27
+          }
         },
         {
           "variantName": "small mesh",
@@ -270,23 +351,165 @@
                       },
                       "children": [
                         {
-                          "type": "p",
-                          "children": [
-                            {
-                              "type": "span",
-                              "text": "Empty Panel",
-                              "props": {
-                                "data-umyid": "34"
-                              }
-                            }
-                          ],
+                          "type": "Input",
                           "props": {
-                            "data-umyid": "33"
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "78"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "79"
+                                  },
+                                  "graphRef": {
+                                    "key": 232
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 231
+                              }
+                            },
+                            "data-umyid": "77"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 230
+                          }
+                        },
+                        {
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "78"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "79"
+                                  },
+                                  "graphRef": {
+                                    "key": 235
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 234
+                              }
+                            },
+                            "data-umyid": "77"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 233
                           }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 32
+                      }
+                    },
+                    {
+                      "type": "Panel",
+                      "props": {
+                        "data-umyid": "32"
+                      },
+                      "children": [
+                        {
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "78"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "79"
+                                  },
+                                  "graphRef": {
+                                    "key": 255
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 254
+                              }
+                            },
+                            "data-umyid": "77"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 253
+                          }
+                        },
+                        {
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "78"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "79"
+                                  },
+                                  "graphRef": {
+                                    "key": 258
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 257
+                              }
+                            },
+                            "data-umyid": "77"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 256
+                          }
+                        }
+                      ],
+                      "graphRef": {
+                        "key": 252
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 31
+                  }
                 },
                 {
                   "type": "Col",
@@ -305,6 +528,76 @@
                       },
                       "children": [
                         {
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "75"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "76"
+                                  },
+                                  "graphRef": {
+                                    "key": 52
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 51
+                              }
+                            },
+                            "data-umyid": "74"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 50
+                          }
+                        },
+                        {
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "75"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "76"
+                                  },
+                                  "graphRef": {
+                                    "key": 240
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 239
+                              }
+                            },
+                            "data-umyid": "74"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 238
+                          }
+                        },
+                        {
                           "type": "p",
                           "children": [
                             {
@@ -312,11 +605,17 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "38"
+                              },
+                              "graphRef": {
+                                "key": 38
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "37"
+                          },
+                          "graphRef": {
+                            "key": 37
                           }
                         },
                         {
@@ -327,11 +626,38 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "66"
+                              },
+                              "graphRef": {
+                                "key": 40
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "65"
+                          },
+                          "graphRef": {
+                            "key": 39
+                          }
+                        },
+                        {
+                          "type": "p",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty Panel",
+                              "props": {
+                                "data-umyid": "66"
+                              },
+                              "graphRef": {
+                                "key": 237
+                              }
+                            }
+                          ],
+                          "props": {
+                            "data-umyid": "65"
+                          },
+                          "graphRef": {
+                            "key": 236
                           }
                         },
                         {
@@ -342,11 +668,17 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "68"
+                              },
+                              "graphRef": {
+                                "key": 42
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "67"
+                          },
+                          "graphRef": {
+                            "key": 41
                           }
                         },
                         {
@@ -357,16 +689,214 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "70"
+                              },
+                              "graphRef": {
+                                "key": 44
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "69"
+                          },
+                          "graphRef": {
+                            "key": 43
                           }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 36
+                      }
+                    },
+                    {
+                      "type": "Panel",
+                      "props": {
+                        "data-umyid": "36"
+                      },
+                      "children": [
+                        {
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "75"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "76"
+                                  },
+                                  "graphRef": {
+                                    "key": 262
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 261
+                              }
+                            },
+                            "data-umyid": "74"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 260
+                          }
+                        },
+                        {
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "75"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "76"
+                                  },
+                                  "graphRef": {
+                                    "key": 265
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 264
+                              }
+                            },
+                            "data-umyid": "74"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 263
+                          }
+                        },
+                        {
+                          "type": "p",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty Panel",
+                              "props": {
+                                "data-umyid": "38"
+                              },
+                              "graphRef": {
+                                "key": 267
+                              }
+                            }
+                          ],
+                          "props": {
+                            "data-umyid": "37"
+                          },
+                          "graphRef": {
+                            "key": 266
+                          }
+                        },
+                        {
+                          "type": "p",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty Panel",
+                              "props": {
+                                "data-umyid": "66"
+                              },
+                              "graphRef": {
+                                "key": 269
+                              }
+                            }
+                          ],
+                          "props": {
+                            "data-umyid": "65"
+                          },
+                          "graphRef": {
+                            "key": 268
+                          }
+                        },
+                        {
+                          "type": "p",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty Panel",
+                              "props": {
+                                "data-umyid": "66"
+                              },
+                              "graphRef": {
+                                "key": 271
+                              }
+                            }
+                          ],
+                          "props": {
+                            "data-umyid": "65"
+                          },
+                          "graphRef": {
+                            "key": 270
+                          }
+                        },
+                        {
+                          "type": "p",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty Panel",
+                              "props": {
+                                "data-umyid": "68"
+                              },
+                              "graphRef": {
+                                "key": 273
+                              }
+                            }
+                          ],
+                          "props": {
+                            "data-umyid": "67"
+                          },
+                          "graphRef": {
+                            "key": 272
+                          }
+                        },
+                        {
+                          "type": "p",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty Panel",
+                              "props": {
+                                "data-umyid": "70"
+                              },
+                              "graphRef": {
+                                "key": 275
+                              }
+                            }
+                          ],
+                          "props": {
+                            "data-umyid": "69"
+                          },
+                          "graphRef": {
+                            "key": 274
+                          }
+                        }
+                      ],
+                      "graphRef": {
+                        "key": 259
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 35
+                  }
                 },
                 {
                   "type": "Col",
@@ -402,13 +932,22 @@
                                   "text": "Default",
                                   "props": {
                                     "data-umyid": "73"
+                                  },
+                                  "graphRef": {
+                                    "key": 49
                                   }
                                 }
-                              ]
+                              ],
+                              "graphRef": {
+                                "key": 48
+                              }
                             },
                             "data-umyid": "71"
                           },
-                          "children": []
+                          "children": [],
+                          "graphRef": {
+                            "key": 47
+                          }
                         },
                         {
                           "type": "Input",
@@ -420,21 +959,30 @@
                               "type": "Button",
                               "props": {
                                 "bsStyle": "default",
-                                "data-umyid": "75"
+                                "data-umyid": "72"
                               },
                               "children": [
                                 {
                                   "type": "span",
                                   "text": "Default",
                                   "props": {
-                                    "data-umyid": "76"
+                                    "data-umyid": "73"
+                                  },
+                                  "graphRef": {
+                                    "key": 243
                                   }
                                 }
-                              ]
+                              ],
+                              "graphRef": {
+                                "key": 242
+                              }
                             },
-                            "data-umyid": "74"
+                            "data-umyid": "71"
                           },
-                          "children": []
+                          "children": [],
+                          "graphRef": {
+                            "key": 241
+                          }
                         },
                         {
                           "type": "Input",
@@ -454,13 +1002,57 @@
                                   "text": "Default",
                                   "props": {
                                     "data-umyid": "79"
+                                  },
+                                  "graphRef": {
+                                    "key": 55
                                   }
                                 }
-                              ]
+                              ],
+                              "graphRef": {
+                                "key": 54
+                              }
                             },
                             "data-umyid": "77"
                           },
-                          "children": []
+                          "children": [],
+                          "graphRef": {
+                            "key": 53
+                          }
+                        },
+                        {
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "78"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "79"
+                                  },
+                                  "graphRef": {
+                                    "key": 246
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 245
+                              }
+                            },
+                            "data-umyid": "77"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 244
+                          }
                         },
                         {
                           "type": "Input",
@@ -480,17 +1072,288 @@
                                   "text": "Default",
                                   "props": {
                                     "data-umyid": "82"
+                                  },
+                                  "graphRef": {
+                                    "key": 58
                                   }
                                 }
-                              ]
+                              ],
+                              "graphRef": {
+                                "key": 57
+                              }
                             },
                             "data-umyid": "80"
                           },
-                          "children": []
+                          "children": [],
+                          "graphRef": {
+                            "key": 56
+                          }
+                        },
+                        {
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "81"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "82"
+                                  },
+                                  "graphRef": {
+                                    "key": 249
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 248
+                              }
+                            },
+                            "data-umyid": "80"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 247
+                          }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 46
+                      }
+                    },
+                    {
+                      "type": "Panel",
+                      "props": {
+                        "data-umyid": "40"
+                      },
+                      "children": [
+                        {
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "72"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "73"
+                                  },
+                                  "graphRef": {
+                                    "key": 279
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 278
+                              }
+                            },
+                            "data-umyid": "71"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 277
+                          }
+                        },
+                        {
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "72"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "73"
+                                  },
+                                  "graphRef": {
+                                    "key": 282
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 281
+                              }
+                            },
+                            "data-umyid": "71"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 280
+                          }
+                        },
+                        {
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "78"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "79"
+                                  },
+                                  "graphRef": {
+                                    "key": 285
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 284
+                              }
+                            },
+                            "data-umyid": "77"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 283
+                          }
+                        },
+                        {
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "78"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "79"
+                                  },
+                                  "graphRef": {
+                                    "key": 288
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 287
+                              }
+                            },
+                            "data-umyid": "77"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 286
+                          }
+                        },
+                        {
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "81"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "82"
+                                  },
+                                  "graphRef": {
+                                    "key": 291
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 290
+                              }
+                            },
+                            "data-umyid": "80"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 289
+                          }
+                        },
+                        {
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "81"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "82"
+                                  },
+                                  "graphRef": {
+                                    "key": 294
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 293
+                              }
+                            },
+                            "data-umyid": "80"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 292
+                          }
+                        }
+                      ],
+                      "graphRef": {
+                        "key": 276
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 45
+                  }
                 },
                 {
                   "type": "Col",
@@ -516,20 +1379,109 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "46"
+                              },
+                              "graphRef": {
+                                "key": 62
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "45"
+                          },
+                          "graphRef": {
+                            "key": 61
+                          }
+                        },
+                        {
+                          "type": "p",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty Panel",
+                              "props": {
+                                "data-umyid": "46"
+                              },
+                              "graphRef": {
+                                "key": 251
+                              }
+                            }
+                          ],
+                          "props": {
+                            "data-umyid": "45"
+                          },
+                          "graphRef": {
+                            "key": 250
                           }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 60
+                      }
+                    },
+                    {
+                      "type": "Panel",
+                      "props": {
+                        "data-umyid": "44"
+                      },
+                      "children": [
+                        {
+                          "type": "p",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty Panel",
+                              "props": {
+                                "data-umyid": "46"
+                              },
+                              "graphRef": {
+                                "key": 297
+                              }
+                            }
+                          ],
+                          "props": {
+                            "data-umyid": "45"
+                          },
+                          "graphRef": {
+                            "key": 296
+                          }
+                        },
+                        {
+                          "type": "p",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty Panel",
+                              "props": {
+                                "data-umyid": "46"
+                              },
+                              "graphRef": {
+                                "key": 299
+                              }
+                            }
+                          ],
+                          "props": {
+                            "data-umyid": "45"
+                          },
+                          "graphRef": {
+                            "key": 298
+                          }
+                        }
+                      ],
+                      "graphRef": {
+                        "key": 295
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 59
+                  }
                 }
               ],
               "props": {
                 "data-umyid": "30"
+              },
+              "graphRef": {
+                "key": 30
               }
             },
             {
@@ -548,7 +1500,7 @@
                     {
                       "type": "Panel",
                       "props": {
-                        "data-umyid": "49"
+                        "data-umyid": "53"
                       },
                       "children": [
                         {
@@ -558,17 +1510,29 @@
                               "type": "span",
                               "text": "Empty Panel",
                               "props": {
-                                "data-umyid": "51"
+                                "data-umyid": "55"
+                              },
+                              "graphRef": {
+                                "key": 216
                               }
                             }
                           ],
                           "props": {
-                            "data-umyid": "50"
+                            "data-umyid": "54"
+                          },
+                          "graphRef": {
+                            "key": 215
                           }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 214
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 64
+                  }
                 },
                 {
                   "type": "Col",
@@ -583,27 +1547,344 @@
                     {
                       "type": "Panel",
                       "props": {
-                        "data-umyid": "53"
+                        "data-umyid": "40"
                       },
                       "children": [
                         {
-                          "type": "p",
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "72"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "73"
+                                  },
+                                  "graphRef": {
+                                    "key": 220
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 219
+                              }
+                            },
+                            "data-umyid": "71"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 218
+                          }
+                        },
+                        {
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "75"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "76"
+                                  },
+                                  "graphRef": {
+                                    "key": 223
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 222
+                              }
+                            },
+                            "data-umyid": "74"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 221
+                          }
+                        },
+                        {
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "78"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "79"
+                                  },
+                                  "graphRef": {
+                                    "key": 226
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 225
+                              }
+                            },
+                            "data-umyid": "77"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 224
+                          }
+                        },
+                        {
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "81"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "82"
+                                  },
+                                  "graphRef": {
+                                    "key": 229
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 228
+                              }
+                            },
+                            "data-umyid": "80"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 227
+                          }
+                        },
+                        {
+                          "type": "Panel",
+                          "props": {
+                            "data-umyid": "40"
+                          },
                           "children": [
                             {
-                              "type": "span",
-                              "text": "Empty Panel",
+                              "type": "Input",
                               "props": {
-                                "data-umyid": "55"
+                                "type": "text",
+                                "placeholder": "Enter value",
+                                "addonBefore": "$",
+                                "buttonAfter": {
+                                  "type": "Button",
+                                  "props": {
+                                    "bsStyle": "default",
+                                    "data-umyid": "72"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "span",
+                                      "text": "Default",
+                                      "props": {
+                                        "data-umyid": "73"
+                                      },
+                                      "graphRef": {
+                                        "key": 220
+                                      }
+                                    }
+                                  ],
+                                  "graphRef": {
+                                    "key": 219
+                                  }
+                                },
+                                "data-umyid": "71"
+                              },
+                              "children": [],
+                              "graphRef": {
+                                "key": 218
+                              }
+                            },
+                            {
+                              "type": "Input",
+                              "props": {
+                                "type": "text",
+                                "placeholder": "Enter value",
+                                "addonBefore": "$",
+                                "buttonAfter": {
+                                  "type": "Button",
+                                  "props": {
+                                    "bsStyle": "default",
+                                    "data-umyid": "78"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "span",
+                                      "text": "Default",
+                                      "props": {
+                                        "data-umyid": "79"
+                                      },
+                                      "graphRef": {
+                                        "key": 223
+                                      }
+                                    }
+                                  ],
+                                  "graphRef": {
+                                    "key": 222
+                                  }
+                                },
+                                "data-umyid": "77"
+                              },
+                              "children": [],
+                              "graphRef": {
+                                "key": 221
+                              }
+                            },
+                            {
+                              "type": "Input",
+                              "props": {
+                                "type": "text",
+                                "placeholder": "Enter value",
+                                "addonBefore": "$",
+                                "buttonAfter": {
+                                  "type": "Button",
+                                  "props": {
+                                    "bsStyle": "default",
+                                    "data-umyid": "78"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "span",
+                                      "text": "Default",
+                                      "props": {
+                                        "data-umyid": "79"
+                                      },
+                                      "graphRef": {
+                                        "key": 226
+                                      }
+                                    }
+                                  ],
+                                  "graphRef": {
+                                    "key": 225
+                                  }
+                                },
+                                "data-umyid": "77"
+                              },
+                              "children": [],
+                              "graphRef": {
+                                "key": 224
+                              }
+                            },
+                            {
+                              "type": "Input",
+                              "props": {
+                                "type": "text",
+                                "placeholder": "Enter value",
+                                "addonBefore": "$",
+                                "buttonAfter": {
+                                  "type": "Button",
+                                  "props": {
+                                    "bsStyle": "default",
+                                    "data-umyid": "81"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "span",
+                                      "text": "Default",
+                                      "props": {
+                                        "data-umyid": "82"
+                                      },
+                                      "graphRef": {
+                                        "key": 229
+                                      }
+                                    }
+                                  ],
+                                  "graphRef": {
+                                    "key": 228
+                                  }
+                                },
+                                "data-umyid": "80"
+                              },
+                              "children": [],
+                              "graphRef": {
+                                "key": 227
+                              }
+                            },
+                            {
+                              "type": "Input",
+                              "props": {
+                                "type": "text",
+                                "placeholder": "Enter value",
+                                "addonBefore": "$",
+                                "buttonAfter": {
+                                  "type": "Button",
+                                  "props": {
+                                    "bsStyle": "default",
+                                    "data-umyid": "81"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "span",
+                                      "text": "Default",
+                                      "props": {
+                                        "data-umyid": "82"
+                                      },
+                                      "graphRef": {
+                                        "key": 232
+                                      }
+                                    }
+                                  ],
+                                  "graphRef": {
+                                    "key": 231
+                                  }
+                                },
+                                "data-umyid": "80"
+                              },
+                              "children": [],
+                              "graphRef": {
+                                "key": 230
                               }
                             }
                           ],
-                          "props": {
-                            "data-umyid": "54"
+                          "graphRef": {
+                            "key": 214
                           }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 217
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 68
+                  }
                 },
                 {
                   "type": "Col",
@@ -629,20 +1910,35 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "59"
+                              },
+                              "graphRef": {
+                                "key": 75
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "58"
+                          },
+                          "graphRef": {
+                            "key": 74
                           }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 73
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 72
+                  }
                 }
               ],
               "props": {
                 "data-umyid": "47"
+              },
+              "graphRef": {
+                "key": 63
               }
             },
             {
@@ -672,23 +1968,41 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "64"
+                              },
+                              "graphRef": {
+                                "key": 80
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "63"
+                          },
+                          "graphRef": {
+                            "key": 79
                           }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 78
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 77
+                  }
                 }
               ],
               "props": {
                 "data-umyid": "60"
+              },
+              "graphRef": {
+                "key": 76
               }
             }
-          ]
+          ],
+          "graphRef": {
+            "key": 29
+          }
         }
       ],
       "props": {
@@ -696,7 +2010,10 @@
       },
       "pageTitle": "UnnamedPage",
       "pageProps": [],
-      "pageScript": ""
+      "pageScript": "",
+      "graphRef": {
+        "key": 1
+      }
     },
     {
       "pageName": "MainPage_copy",
@@ -737,9 +2054,15 @@
                       "text": "Link",
                       "props": {
                         "data-umyid": "87"
+                      },
+                      "graphRef": {
+                        "key": 85
                       }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 84
+                  }
                 },
                 {
                   "type": "NavItem",
@@ -753,9 +2076,15 @@
                       "text": "Link",
                       "props": {
                         "data-umyid": "89"
+                      },
+                      "graphRef": {
+                        "key": 87
                       }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 86
+                  }
                 },
                 {
                   "variantName": "default",
@@ -777,10 +2106,16 @@
                           "text": "Menu Item Link",
                           "props": {
                             "data-umyid": "92"
+                          },
+                          "graphRef": {
+                            "key": 90
                           }
                         }
                       ],
-                      "type": "MenuItem"
+                      "type": "MenuItem",
+                      "graphRef": {
+                        "key": 89
+                      }
                     },
                     {
                       "props": {
@@ -793,10 +2128,16 @@
                           "text": "Menu Item Link",
                           "props": {
                             "data-umyid": "94"
+                          },
+                          "graphRef": {
+                            "key": 92
                           }
                         }
                       ],
-                      "type": "MenuItem"
+                      "type": "MenuItem",
+                      "graphRef": {
+                        "key": 91
+                      }
                     },
                     {
                       "props": {
@@ -809,14 +2150,26 @@
                           "text": "Menu Item Link",
                           "props": {
                             "data-umyid": "96"
+                          },
+                          "graphRef": {
+                            "key": 94
                           }
                         }
                       ],
-                      "type": "MenuItem"
+                      "type": "MenuItem",
+                      "graphRef": {
+                        "key": 93
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 88
+                  }
                 }
-              ]
+              ],
+              "graphRef": {
+                "key": 83
+              }
             },
             {
               "variantName": "left",
@@ -838,9 +2191,15 @@
                       "text": "Link",
                       "props": {
                         "data-umyid": "99"
+                      },
+                      "graphRef": {
+                        "key": 97
                       }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 96
+                  }
                 },
                 {
                   "type": "NavItem",
@@ -854,9 +2213,15 @@
                       "text": "Link",
                       "props": {
                         "data-umyid": "101"
+                      },
+                      "graphRef": {
+                        "key": 99
                       }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 98
+                  }
                 },
                 {
                   "variantName": "default",
@@ -878,10 +2243,16 @@
                           "text": "Menu Item Link",
                           "props": {
                             "data-umyid": "104"
+                          },
+                          "graphRef": {
+                            "key": 102
                           }
                         }
                       ],
-                      "type": "MenuItem"
+                      "type": "MenuItem",
+                      "graphRef": {
+                        "key": 101
+                      }
                     },
                     {
                       "props": {
@@ -894,10 +2265,16 @@
                           "text": "Menu Item Link",
                           "props": {
                             "data-umyid": "106"
+                          },
+                          "graphRef": {
+                            "key": 104
                           }
                         }
                       ],
-                      "type": "MenuItem"
+                      "type": "MenuItem",
+                      "graphRef": {
+                        "key": 103
+                      }
                     },
                     {
                       "props": {
@@ -910,16 +2287,31 @@
                           "text": "Menu Item Link",
                           "props": {
                             "data-umyid": "108"
+                          },
+                          "graphRef": {
+                            "key": 106
                           }
                         }
                       ],
-                      "type": "MenuItem"
+                      "type": "MenuItem",
+                      "graphRef": {
+                        "key": 105
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 100
+                  }
                 }
-              ]
+              ],
+              "graphRef": {
+                "key": 95
+              }
             }
-          ]
+          ],
+          "graphRef": {
+            "key": 82
+          }
         },
         {
           "type": "h3",
@@ -936,9 +2328,15 @@
               "text": "This is an empty page. To add new component select needed element on left-side panel and click on an element on the page where you want to put new component, than choose action for right component's place.",
               "props": {
                 "data-umyid": "110"
+              },
+              "graphRef": {
+                "key": 108
               }
             }
-          ]
+          ],
+          "graphRef": {
+            "key": 107
+          }
         },
         {
           "variantName": "small mesh",
@@ -975,16 +2373,28 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "116"
+                              },
+                              "graphRef": {
+                                "key": 114
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "115"
+                          },
+                          "graphRef": {
+                            "key": 113
                           }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 112
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 111
+                  }
                 },
                 {
                   "type": "Col",
@@ -1010,11 +2420,17 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "120"
+                              },
+                              "graphRef": {
+                                "key": 118
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "119"
+                          },
+                          "graphRef": {
+                            "key": 117
                           }
                         },
                         {
@@ -1025,11 +2441,17 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "122"
+                              },
+                              "graphRef": {
+                                "key": 120
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "121"
+                          },
+                          "graphRef": {
+                            "key": 119
                           }
                         },
                         {
@@ -1040,11 +2462,17 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "124"
+                              },
+                              "graphRef": {
+                                "key": 122
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "123"
+                          },
+                          "graphRef": {
+                            "key": 121
                           }
                         },
                         {
@@ -1055,16 +2483,28 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "126"
+                              },
+                              "graphRef": {
+                                "key": 124
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "125"
+                          },
+                          "graphRef": {
+                            "key": 123
                           }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 116
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 115
+                  }
                 },
                 {
                   "type": "Col",
@@ -1100,13 +2540,22 @@
                                   "text": "Default",
                                   "props": {
                                     "data-umyid": "131"
+                                  },
+                                  "graphRef": {
+                                    "key": 129
                                   }
                                 }
-                              ]
+                              ],
+                              "graphRef": {
+                                "key": 128
+                              }
                             },
                             "data-umyid": "129"
                           },
-                          "children": []
+                          "children": [],
+                          "graphRef": {
+                            "key": 127
+                          }
                         },
                         {
                           "type": "Input",
@@ -1126,13 +2575,22 @@
                                   "text": "Default",
                                   "props": {
                                     "data-umyid": "134"
+                                  },
+                                  "graphRef": {
+                                    "key": 132
                                   }
                                 }
-                              ]
+                              ],
+                              "graphRef": {
+                                "key": 131
+                              }
                             },
                             "data-umyid": "132"
                           },
-                          "children": []
+                          "children": [],
+                          "graphRef": {
+                            "key": 130
+                          }
                         },
                         {
                           "type": "Input",
@@ -1152,13 +2610,22 @@
                                   "text": "Default",
                                   "props": {
                                     "data-umyid": "137"
+                                  },
+                                  "graphRef": {
+                                    "key": 135
                                   }
                                 }
-                              ]
+                              ],
+                              "graphRef": {
+                                "key": 134
+                              }
                             },
                             "data-umyid": "135"
                           },
-                          "children": []
+                          "children": [],
+                          "graphRef": {
+                            "key": 133
+                          }
                         },
                         {
                           "type": "Input",
@@ -1178,17 +2645,32 @@
                                   "text": "Default",
                                   "props": {
                                     "data-umyid": "140"
+                                  },
+                                  "graphRef": {
+                                    "key": 138
                                   }
                                 }
-                              ]
+                              ],
+                              "graphRef": {
+                                "key": 137
+                              }
                             },
                             "data-umyid": "138"
                           },
-                          "children": []
+                          "children": [],
+                          "graphRef": {
+                            "key": 136
+                          }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 126
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 125
+                  }
                 },
                 {
                   "type": "Col",
@@ -1214,20 +2696,35 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "144"
+                              },
+                              "graphRef": {
+                                "key": 142
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "143"
+                          },
+                          "graphRef": {
+                            "key": 141
                           }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 140
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 139
+                  }
                 }
               ],
               "props": {
                 "data-umyid": "112"
+              },
+              "graphRef": {
+                "key": 110
               }
             },
             {
@@ -1257,16 +2754,28 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "149"
+                              },
+                              "graphRef": {
+                                "key": 147
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "148"
+                          },
+                          "graphRef": {
+                            "key": 146
                           }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 145
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 144
+                  }
                 },
                 {
                   "type": "Col",
@@ -1292,16 +2801,28 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "153"
+                              },
+                              "graphRef": {
+                                "key": 151
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "152"
+                          },
+                          "graphRef": {
+                            "key": 150
                           }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 149
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 148
+                  }
                 },
                 {
                   "type": "Col",
@@ -1327,20 +2848,35 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "157"
+                              },
+                              "graphRef": {
+                                "key": 155
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "156"
+                          },
+                          "graphRef": {
+                            "key": 154
                           }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 153
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 152
+                  }
                 }
               ],
               "props": {
                 "data-umyid": "145"
+              },
+              "graphRef": {
+                "key": 143
               }
             },
             {
@@ -1370,23 +2906,41 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "162"
+                              },
+                              "graphRef": {
+                                "key": 160
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "161"
+                          },
+                          "graphRef": {
+                            "key": 159
                           }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 158
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 157
+                  }
                 }
               ],
               "props": {
                 "data-umyid": "158"
+              },
+              "graphRef": {
+                "key": 156
               }
             }
-          ]
+          ],
+          "graphRef": {
+            "key": 109
+          }
         }
       ],
       "props": {
@@ -1394,7 +2948,10 @@
       },
       "pageTitle": "UnnamedPage",
       "pageProps": [],
-      "pageScript": ""
+      "pageScript": "",
+      "graphRef": {
+        "key": 81
+      }
     },
     {
       "pageName": "UnnamedPage2",
@@ -1415,9 +2972,15 @@
               "text": "This is an empty page. To add new component select needed element on left-side panel and click on an element on the page where you want to put new component, than choose action for right component's place.",
               "props": {
                 "data-umyid": "165"
+              },
+              "graphRef": {
+                "key": 163
               }
             }
-          ]
+          ],
+          "graphRef": {
+            "key": 162
+          }
         },
         {
           "variantName": "small mesh",
@@ -1454,16 +3017,28 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "171"
+                              },
+                              "graphRef": {
+                                "key": 169
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "170"
+                          },
+                          "graphRef": {
+                            "key": 168
                           }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 167
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 166
+                  }
                 },
                 {
                   "type": "Col",
@@ -1500,15 +3075,24 @@
                                   "props": {
                                     "data-umyid": "205"
                                   },
-                                  "componentName": null
+                                  "componentName": null,
+                                  "graphRef": {
+                                    "key": 174
+                                  }
                                 }
                               ],
                               "props": {
                                 "data-umyid": "204"
+                              },
+                              "graphRef": {
+                                "key": 173
                               }
                             }
                           ],
-                          "componentName": null
+                          "componentName": null,
+                          "graphRef": {
+                            "key": 172
+                          }
                         },
                         {
                           "type": "Panel",
@@ -1527,15 +3111,24 @@
                                   "props": {
                                     "data-umyid": "208"
                                   },
-                                  "componentName": null
+                                  "componentName": null,
+                                  "graphRef": {
+                                    "key": 177
+                                  }
                                 }
                               ],
                               "props": {
                                 "data-umyid": "207"
+                              },
+                              "graphRef": {
+                                "key": 176
                               }
                             }
                           ],
-                          "componentName": null
+                          "componentName": null,
+                          "graphRef": {
+                            "key": 175
+                          }
                         },
                         {
                           "type": "Panel",
@@ -1554,15 +3147,24 @@
                                   "props": {
                                     "data-umyid": "218"
                                   },
-                                  "componentName": null
+                                  "componentName": null,
+                                  "graphRef": {
+                                    "key": 180
+                                  }
                                 }
                               ],
                               "props": {
                                 "data-umyid": "217"
+                              },
+                              "graphRef": {
+                                "key": 179
                               }
                             }
                           ],
-                          "componentName": null
+                          "componentName": null,
+                          "graphRef": {
+                            "key": 178
+                          }
                         },
                         {
                           "type": "Panel",
@@ -1581,20 +3183,35 @@
                                   "props": {
                                     "data-umyid": "221"
                                   },
-                                  "componentName": null
+                                  "componentName": null,
+                                  "graphRef": {
+                                    "key": 183
+                                  }
                                 }
                               ],
                               "props": {
                                 "data-umyid": "220"
+                              },
+                              "graphRef": {
+                                "key": 182
                               }
                             }
                           ],
-                          "componentName": null
+                          "componentName": null,
+                          "graphRef": {
+                            "key": 181
+                          }
                         }
                       ],
-                      "componentName": null
+                      "componentName": null,
+                      "graphRef": {
+                        "key": 171
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 170
+                  }
                 },
                 {
                   "type": "Col",
@@ -1631,15 +3248,24 @@
                                   "props": {
                                     "data-umyid": "212"
                                   },
-                                  "componentName": null
+                                  "componentName": null,
+                                  "graphRef": {
+                                    "key": 188
+                                  }
                                 }
                               ],
                               "props": {
                                 "data-umyid": "211"
+                              },
+                              "graphRef": {
+                                "key": 187
                               }
                             }
                           ],
-                          "componentName": null
+                          "componentName": null,
+                          "graphRef": {
+                            "key": 186
+                          }
                         },
                         {
                           "type": "Panel",
@@ -1659,20 +3285,35 @@
                                   "props": {
                                     "data-umyid": "215"
                                   },
-                                  "componentName": null
+                                  "componentName": null,
+                                  "graphRef": {
+                                    "key": 191
+                                  }
                                 }
                               ],
                               "props": {
                                 "data-umyid": "214"
+                              },
+                              "graphRef": {
+                                "key": 190
                               }
                             }
                           ],
-                          "componentName": null
+                          "componentName": null,
+                          "graphRef": {
+                            "key": 189
+                          }
                         }
                       ],
-                      "componentName": null
+                      "componentName": null,
+                      "graphRef": {
+                        "key": 185
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 184
+                  }
                 },
                 {
                   "type": "Col",
@@ -1698,20 +3339,35 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "183"
+                              },
+                              "graphRef": {
+                                "key": 195
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "182"
+                          },
+                          "graphRef": {
+                            "key": 194
                           }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 193
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 192
+                  }
                 }
               ],
               "props": {
                 "data-umyid": "167"
+              },
+              "graphRef": {
+                "key": 165
               }
             },
             {
@@ -1741,16 +3397,28 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "188"
+                              },
+                              "graphRef": {
+                                "key": 200
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "187"
+                          },
+                          "graphRef": {
+                            "key": 199
                           }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 198
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 197
+                  }
                 },
                 {
                   "type": "Col",
@@ -1776,16 +3444,28 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "192"
+                              },
+                              "graphRef": {
+                                "key": 204
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "191"
+                          },
+                          "graphRef": {
+                            "key": 203
                           }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 202
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 201
+                  }
                 },
                 {
                   "type": "Col",
@@ -1811,20 +3491,35 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "196"
+                              },
+                              "graphRef": {
+                                "key": 208
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "195"
+                          },
+                          "graphRef": {
+                            "key": 207
                           }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 206
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 205
+                  }
                 }
               ],
               "props": {
                 "data-umyid": "184"
+              },
+              "graphRef": {
+                "key": 196
               }
             },
             {
@@ -1854,27 +3549,48 @@
                               "text": "Empty Panel",
                               "props": {
                                 "data-umyid": "201"
+                              },
+                              "graphRef": {
+                                "key": 213
                               }
                             }
                           ],
                           "props": {
                             "data-umyid": "200"
+                          },
+                          "graphRef": {
+                            "key": 212
                           }
                         }
-                      ]
+                      ],
+                      "graphRef": {
+                        "key": 211
+                      }
                     }
-                  ]
+                  ],
+                  "graphRef": {
+                    "key": 210
+                  }
                 }
               ],
               "props": {
                 "data-umyid": "197"
+              },
+              "graphRef": {
+                "key": 209
               }
             }
-          ]
+          ],
+          "graphRef": {
+            "key": 164
+          }
         }
       ],
       "props": {
         "data-umyid": "163"
+      },
+      "graphRef": {
+        "key": 161
       }
     }
   ]

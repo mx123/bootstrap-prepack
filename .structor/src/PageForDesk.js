@@ -163,7 +163,7 @@ class PageForDesk extends Component {
         let pageModel = this.getModelByPathname(pathname);
         this.elementTree = this.createElements(pageModel, this.initialState, {isEditModeOn});
         this.setState({
-            pathName: pathname,
+            pathname: pathname,
             isEditModeOn: isEditModeOn,
             updateCounter: this.state.updateCounter + 1
         });
@@ -299,7 +299,6 @@ class PageForDesk extends Component {
     }
 
     render(){
-
         let boundaryOverlays = [];
         if(this.state.isEditModeOn && this.state.pathname){
             const {selected, highlighted, forCutting, forCopying} = this.getMarked(this.state.pathname);

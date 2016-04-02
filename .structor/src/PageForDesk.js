@@ -9,6 +9,7 @@ import MouseOverOverlay from './MouseOverOverlay.js';
 import SelectedOverlay from './SelectedOverlay.js';
 import HighlightedOverlay from './HighlightedOverlay.js';
 import ClipboardOverlay from './ClipboardOverlay.js';
+import PreviewOverlay from './PreviewOverlay.js';
 
 function wrapComponent(WrappedComponent, props) {
     const { onMouseDown, initialState, key, type } = props;
@@ -126,6 +127,10 @@ class PageForDesk extends Component {
 
     bindOnPathnameChanged(func){
         this.onPathnameChanged = func;
+    }
+
+    bindGetComponentInPreview(func){
+        this.getComponentInPreview = func;
     }
 
     bindToState(signature, func){
@@ -298,8 +303,42 @@ class PageForDesk extends Component {
         return elements;
     }
 
+    createPreviewElement(node){
+
+        let type = 'div';
+        let modelNode = node.modelNode;
+        if(modelNode.type){
+            type = this.findComponent(components, modelNode.type, 0);
+            if(!type){
+                type = modelNode.type;
+            } else if(!isObject(type)){
+                console.error('Element type: ' + modelNode.type + ' is not object. Please check your index.js file');
+                type = 'div';
+            }
+        }
+        let props = Object.assign({}, {key: node.key}, modelNode.props);
+        if(node.props){
+            forOwn(node.props, (prop, propName) => {
+                props[propName] = this.createPreviewElement(prop);
+            });
+        }
+        let nestedElements = null;
+        if(node.children && node.children.length > 0){
+            let children = [];
+            node.children.forEach(node => {
+                children.push(this.createPreviewElement(node));
+            });
+            nestedElements = children;
+        } else if(modelNode.text) {
+            nestedElements = [modelNode.text];
+        }
+
+        return React.createElement(type, props, nestedElements);
+    }
+
     render(){
         let boundaryOverlays = [];
+        let previewOverlay = null;
         if(this.state.isEditModeOn && this.state.pathname){
             const {selected, highlighted, forCutting, forCopying} = this.getMarked(this.state.pathname);
             if(selected && selected.length > 0){
@@ -342,6 +381,18 @@ class PageForDesk extends Component {
                     );
                 });
             }
+            const preview = this.getComponentInPreview();
+            if(preview){
+                const { componentInPreview, variantsInPreview, previewModel, defaultVariantKey } = preview;
+                previewOverlay = (
+                    <PreviewOverlay initialState={this.initialState}
+                                    variantsInPreview={variantsInPreview}
+                                    defaultVariantKey={defaultVariantKey}
+                                    componentInPreview={componentInPreview}>
+                        {this.createPreviewElement(previewModel, null, {isEditModeOn: false})}
+                    </PreviewOverlay>
+                );
+            }
         }
         return (
             <div>
@@ -354,7 +405,7 @@ class PageForDesk extends Component {
                                           initialState={this.initialState}
                                           bSize="1px"/> : null
                     }
-
+                    {previewOverlay}
                 </div>
             </div>
         );

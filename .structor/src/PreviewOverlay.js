@@ -5,73 +5,46 @@ class PageForDesk extends Component{
 
     constructor(props, content) {
         super(props, content);
-        this.handleClose = this.handleClose.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
+        this.handleViewVariant = this.handleViewVariant.bind(this);
     }
 
-    handleClose() {
-        if (this.props.onClose) {
-            this.props.onClose();
-        }
-    }
-
-    handleDelete () {
-        if (this.props.onDelete) {
-            this.props.onDelete();
+    handleViewVariant(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        const {initialState, componentInPreview} = this.props;
+        if(initialState){
+            initialState.setDefaultVariant(componentInPreview, e.currentTarget.dataset.key);
         }
     }
 
     render () {
-        var style = {
-            position: 'relative',
-            padding: '2em',
-            minHeight: '300px'
-        };
-        var overlayStyle = {
-            position: 'fixed',
-            top: '0',
-            left: '0',
-            right: '0',
-            bottom: '0',
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-            padding: '2em',
-            'zIndex': 9999,
-            'overflow': 'auto'
-        };
-        const closeButtonStyle = {
-            position: 'absolute',
-            top: '1em',
-            right: '1em',
-            height: '1em',
-            color: '#224466',
-            verticalAlign: 'middle',
-            textAlign: 'center',
-            cursor: 'pointer',
-            fontSize: '16px'
-        };
-        const deleteButtonStyle = {
-            position: 'absolute',
-            bottom: '1em',
-            right: '1em',
-            height: '1em',
-            color: '#770A0B',
-            verticalAlign: 'middle',
-            textAlign: 'center',
-            cursor: 'pointer',
-            fontSize: '16px'
-        };
-        return (
-            <div style={overlayStyle}>
-                <div style={{position: 'relative', width: '100%', backgroundColor: '#fff', borderRadius: '5px'}}>
-                    <div style={style}>
-                        {this.props.children}
+
+        const {variantsInPreview, defaultVariantKey} = this.props;
+        let variantButtons = [];
+        if(variantsInPreview && variantsInPreview.length > 0){
+            variantsInPreview.forEach((variantKey, index) => {
+                variantButtons.push(
+                    <div key={variantKey}
+                         data-key={variantKey}
+                         onClick={this.handleViewVariant}
+                         title="Select this variant to preview"
+                         className={"preview-overlay-variant-button" + (defaultVariantKey === variantKey ? " selected" : "")}>
+                        {index + 1}
                     </div>
-                    <span
-                        style={deleteButtonStyle}
-                        onClick={this.handleDelete}>[Delete]</span>
-                    <span
-                        style={closeButtonStyle}
-                        onClick={this.handleClose}>[Close]</span>
+                )
+            });
+        }
+        return (
+            <div className="preview-overlay-container">
+                <div className="preview-overlay-adjuster">
+                    <div className="preview-overlay-box">
+                        <div className="preview-overlay-canvas">
+                            {this.props.children}
+                        </div>
+                    </div>
+                </div>
+                <div className="preview-overlay-variant-toolbar">
+                    {variantButtons}
                 </div>
             </div>
         );

@@ -160,6 +160,7 @@
     position: fixed;
     top: 4em;
     left: 4em;
+    z-index: 5;
 }
 .preview-overlay-variant-button {
     display: flex;

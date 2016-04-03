@@ -231,6 +231,8 @@ class SelectedOverlay extends Component {
             let menuTitle;
             let menuSubTitle;
             let menuItems;
+            let componentsList = [];
+            let quickAction = undefined;
             if(!isMultiple){
                 buttonLine = {
                     display: 'flex',
@@ -294,18 +296,26 @@ class SelectedOverlay extends Component {
                         });
 
                     } else if(contextMenuType === QUICK_ADD_NEW_PANEL){
+                        const { initialState: {getComponentsList} } = this.props;
+                        componentsList = getComponentsList();
                         if(contextMenuItem === ADD_BEFORE){
-                            menuTitle = 'Enter component name to append before selected';
+                            quickAction = this.props.initialState.quickBefore;
+                            menuTitle = 'Before selected';
                         } else if(contextMenuItem === INSERT_FIRST){
-                            menuTitle = 'Enter component name to insert into selected as first child';
+                            quickAction = this.props.initialState.quickFirst;
+                            menuTitle = 'As first child';
                         } else if(contextMenuItem === INSERT_LAST){
-                            menuTitle = 'Enter component name to insert into selected as last child';
+                            quickAction = this.props.initialState.quickLast;
+                            menuTitle = 'As last child';
                         } else if(contextMenuItem === ADD_AFTER){
-                            menuTitle = 'Enter component name to append after selected';
+                            quickAction = this.props.initialState.quickAfter;
+                            menuTitle = 'After selected';
                         } else if(contextMenuItem === REPLACE){
-                            menuTitle = 'Enter component name to replace selected';
+                            quickAction = this.props.initialState.quickReplace;
+                            menuTitle = 'Replace selected';
                         } else if(contextMenuItem === WRAP){
-                            menuTitle = 'Enter component name to wrap selected';
+                            quickAction = this.props.initialState.quickWrap;
+                            menuTitle = 'Wrap selected';
                         }
                         menuSubTitle = 'Escape to close';
                     } else if(contextMenuType === SELECTION_MENU){
@@ -399,6 +409,9 @@ class SelectedOverlay extends Component {
                         <QuickAddNewOverlay style={menuBox}
                                             menuTitle={menuTitle}
                                             menuSubTitle={menuSubTitle}
+                                            componentsList={componentsList}
+                                            selectedKey={selectedKey}
+                                            quickAction={quickAction}
                                             onClose={() => {this.setState({contextMenuType: null, contextMenuItem: null});}}
                             /> : null
                     }

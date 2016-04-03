@@ -6,6 +6,8 @@ class PageForDesk extends Component{
     constructor(props, content) {
         super(props, content);
         this.handleViewVariant = this.handleViewVariant.bind(this);
+        this.handleSelectVariant = this.handleSelectVariant.bind(this);
+        this.handleHidePreview = this.handleHidePreview.bind(this);
     }
 
     handleViewVariant(e) {
@@ -14,6 +16,24 @@ class PageForDesk extends Component{
         const {initialState, componentInPreview} = this.props;
         if(initialState){
             initialState.setDefaultVariant(componentInPreview, e.currentTarget.dataset.key);
+        }
+    }
+
+    handleHidePreview(e){
+        e.stopPropagation();
+        e.preventDefault();
+        const {initialState} = this.props;
+        if(initialState){
+            initialState.hidePreview();
+        }
+    }
+
+    handleSelectVariant(e){
+        e.stopPropagation();
+        e.preventDefault();
+        const {initialState, defaultVariantKey} = this.props;
+        if(initialState){
+            initialState.selectVariant(defaultVariantKey);
         }
     }
 
@@ -38,13 +58,17 @@ class PageForDesk extends Component{
             <div className="preview-overlay-container">
                 <div className="preview-overlay-adjuster">
                     <div className="preview-overlay-box">
-                        <div className="preview-overlay-canvas">
-                            {this.props.children}
-                        </div>
+                        {this.props.children}
                     </div>
                 </div>
                 <div className="preview-overlay-variant-toolbar">
                     {variantButtons}
+                </div>
+                <div className="preview-overlay-select-toolbar">
+                    <div className="preview-overlay-select-button"
+                         onClick={this.handleSelectVariant}>Copy to clipboard</div>
+                    <div className="preview-overlay-select-button"
+                         onClick={this.handleHidePreview}>Close preview</div>
                 </div>
             </div>
         );

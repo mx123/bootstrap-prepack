@@ -5,7 +5,11 @@ class QuickAddNewOverlay extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            alert: ''
+        };
         this.handleOnKeyDown = this.handleOnKeyDown.bind(this);
+        this.handleOnSubmit = this.handleOnSubmit.bind(this);
     }
 
     componentDidMount(){
@@ -33,30 +37,58 @@ class QuickAddNewOverlay extends Component {
         }
     }
 
+    handleOnSubmit(e){
+        e.stopPropagation();
+        e.preventDefault();
+        const {quickAction, selectedKey, componentsList} = this.props;
+        const inputValue = this.refs.inputElement.value;
+        console.log('Typed value: ' + inputValue);
+        if(componentsList){
+            console.log('Index: ' + componentsList.indexOf(inputValue));
+            if(componentsList.indexOf(inputValue) >= 0){
+                console.log('Selected key: ' + selectedKey);
+                console.log('Is quick action: ' + !!quickAction);
+                if(quickAction && selectedKey){
+                    quickAction(inputValue, selectedKey);
+                }
+            } else {
+                this.setState({
+                    alert: 'Type a full name of component or select it from from the dropdown list'
+                });
+            }
+        }
+    }
+
     render() {
+        const { componentsList, menuTitle, menuSubTitle, onClose } = this.props;
+        const { alert } = this.state;
+        let componentNames = [];
+        if(componentsList && componentsList.length > 0){
+            componentsList.forEach((name, index) => {
+                componentNames.push(
+                    <option key={index}>{name}</option>
+                )
+            });
+        }
         let boxStyle = {
             display: 'inline-block'
         };
         let content = (
             <div style={boxStyle} className="selected-overlay-quick-add-panel">
                 <div className="selected-overlay-quick-add-close-button"
-                     onClick={() => {this.props.onClose();}}>&times;</div>
-                <form onSubmit={(e) => {e.stopPropagation(); e.preventDefault(); alert('Submit selection');}}>
-                    <span style={{color: '#9a9a9a'}}>{this.props.menuTitle}</span>
+                     onClick={() => {onClose();}}>&times;</div>
+                {alert ? <span style={{color: 'red'}}>{alert}</span> : null}
+                <form onSubmit={this.handleOnSubmit}>
+                    <span style={{color: '#9a9a9a'}}>{menuTitle}</span>
                     <input ref="inputElement"
                            type="text"
-                           autocomplete="on"
+                           autoComplete="on"
                            list="components"
                            onKeyDown={this.handleOnKeyDown}
                            className="selected-overlay-quick-add-input" />
-                    <span style={{color: '#9a9a9a'}}>{this.props.menuSubTitle}</span>
+                    <span style={{color: '#9a9a9a'}}>{menuSubTitle}</span>
                     <datalist id="components">
-                        <option>div</option>
-                        <option>table</option>
-                        <option>Table</option>
-                        <option>Panel</option>
-                        <option>PanelSignInOut</option>
-                        <option>AutoSignIn</option>
+                        {componentNames}
                     </datalist>
                 </form>
             </div>

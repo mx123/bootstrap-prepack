@@ -351,74 +351,25 @@
                       },
                       "children": [
                         {
-                          "type": "Input",
-                          "props": {
-                            "type": "text",
-                            "placeholder": "Enter value",
-                            "addonBefore": "$",
-                            "buttonAfter": {
-                              "type": "Button",
-                              "props": {
-                                "bsStyle": "default",
-                                "data-umyid": "78"
-                              },
-                              "children": [
-                                {
-                                  "type": "span",
-                                  "text": "Default",
-                                  "props": {
-                                    "data-umyid": "79"
-                                  },
-                                  "graphRef": {
-                                    "key": 232
-                                  }
-                                }
-                              ],
-                              "graphRef": {
-                                "key": 231
-                              }
+                          "variantName": "Unsaved variant",
+                          "type": "div",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty div"
                             },
-                            "data-umyid": "77"
-                          },
-                          "children": [],
-                          "graphRef": {
-                            "key": 230
-                          }
-                        },
-                        {
-                          "type": "Input",
-                          "props": {
-                            "type": "text",
-                            "placeholder": "Enter value",
-                            "addonBefore": "$",
-                            "buttonAfter": {
-                              "type": "Button",
+                            {
+                              "type": "Input",
                               "props": {
-                                "bsStyle": "default",
-                                "data-umyid": "78"
+                                "type": "text",
+                                "hasFeedback": true,
+                                "placeholder": "Enter value",
+                                "label": "Label for input",
+                                "help": "Help for input"
                               },
-                              "children": [
-                                {
-                                  "type": "span",
-                                  "text": "Default",
-                                  "props": {
-                                    "data-umyid": "79"
-                                  },
-                                  "graphRef": {
-                                    "key": 235
-                                  }
-                                }
-                              ],
-                              "graphRef": {
-                                "key": 234
-                              }
-                            },
-                            "data-umyid": "77"
-                          },
-                          "children": [],
-                          "graphRef": {
-                            "key": 233
-                          }
+                              "children": []
+                            }
+                          ]
                         }
                       ],
                       "graphRef": {
@@ -630,6 +581,31 @@
                           }
                         },
                         {
+                          "variantName": "Unsaved variant",
+                          "type": "p",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty p"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Button",
+                          "props": {
+                            "bsStyle": "default"
+                          },
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Default",
+                              "props": {},
+                              "componentName": null
+                            }
+                          ],
+                          "componentName": null
+                        },
+                        {
                           "type": "Input",
                           "props": {
                             "type": "text",
@@ -663,6 +639,273 @@
                           "graphRef": {
                             "key": 253
                           }
+                        },
+                        {
+                          "type": "Table",
+                          "props": {
+                            "striped": true,
+                            "bordered": false,
+                            "condensed": false,
+                            "hover": true
+                          },
+                          "children": [
+                            {
+                              "type": "thead",
+                              "props": {},
+                              "children": [
+                                {
+                                  "type": "tr",
+                                  "children": [
+                                    {
+                                      "type": "th",
+                                      "children": [
+                                        {
+                                          "type": "span",
+                                          "text": "Text in th",
+                                          "props": {}
+                                        }
+                                      ],
+                                      "props": {}
+                                    },
+                                    {
+                                      "type": "th",
+                                      "children": [
+                                        {
+                                          "type": "span",
+                                          "text": "Text in th",
+                                          "props": {}
+                                        }
+                                      ],
+                                      "props": {}
+                                    },
+                                    {
+                                      "type": "th",
+                                      "children": [
+                                        {
+                                          "type": "span",
+                                          "text": "Text in th",
+                                          "props": {}
+                                        }
+                                      ],
+                                      "props": {}
+                                    },
+                                    {
+                                      "type": "th",
+                                      "children": [
+                                        {
+                                          "type": "span",
+                                          "text": "Text in th",
+                                          "props": {}
+                                        }
+                                      ],
+                                      "props": {}
+                                    },
+                                    {
+                                      "type": "th",
+                                      "children": [
+                                        {
+                                          "type": "span",
+                                          "text": "Text in th",
+                                          "props": {}
+                                        }
+                                      ],
+                                      "props": {}
+                                    }
+                                  ],
+                                  "props": {}
+                                }
+                              ]
+                            },
+                            {
+                              "type": "tbody",
+                              "props": {},
+                              "children": [
+                                {
+                                  "type": "tr",
+                                  "children": [
+                                    {
+                                      "type": "td",
+                                      "children": [
+                                        {
+                                          "type": "span",
+                                          "text": "Text in td",
+                                          "props": {}
+                                        }
+                                      ],
+                                      "props": {}
+                                    },
+                                    {
+                                      "type": "td",
+                                      "children": [
+                                        {
+                                          "type": "span",
+                                          "text": "Text in td",
+                                          "props": {}
+                                        }
+                                      ],
+                                      "props": {}
+                                    },
+                                    {
+                                      "type": "td",
+                                      "children": [
+                                        {
+                                          "type": "span",
+                                          "text": "Text in td",
+                                          "props": {}
+                                        }
+                                      ],
+                                      "props": {}
+                                    },
+                                    {
+                                      "type": "td",
+                                      "children": [
+                                        {
+                                          "type": "span",
+                                          "text": "Text in td",
+                                          "props": {}
+                                        }
+                                      ],
+                                      "props": {}
+                                    },
+                                    {
+                                      "type": "td",
+                                      "children": [
+                                        {
+                                          "type": "span",
+                                          "text": "Text in td",
+                                          "props": {}
+                                        }
+                                      ],
+                                      "props": {}
+                                    }
+                                  ],
+                                  "props": {}
+                                },
+                                {
+                                  "type": "tr",
+                                  "children": [
+                                    {
+                                      "type": "td",
+                                      "children": [
+                                        {
+                                          "type": "span",
+                                          "text": "Text in td",
+                                          "props": {}
+                                        }
+                                      ],
+                                      "props": {}
+                                    },
+                                    {
+                                      "type": "td",
+                                      "children": [
+                                        {
+                                          "type": "span",
+                                          "text": "Text in td",
+                                          "props": {}
+                                        }
+                                      ],
+                                      "props": {}
+                                    },
+                                    {
+                                      "type": "td",
+                                      "children": [
+                                        {
+                                          "type": "span",
+                                          "text": "Text in td",
+                                          "props": {}
+                                        }
+                                      ],
+                                      "props": {}
+                                    },
+                                    {
+                                      "type": "td",
+                                      "children": [
+                                        {
+                                          "type": "span",
+                                          "text": "Text in td",
+                                          "props": {}
+                                        }
+                                      ],
+                                      "props": {}
+                                    },
+                                    {
+                                      "type": "td",
+                                      "children": [
+                                        {
+                                          "type": "span",
+                                          "text": "Text in td",
+                                          "props": {}
+                                        }
+                                      ],
+                                      "props": {}
+                                    }
+                                  ],
+                                  "props": {}
+                                },
+                                {
+                                  "type": "tr",
+                                  "children": [
+                                    {
+                                      "type": "td",
+                                      "children": [
+                                        {
+                                          "type": "span",
+                                          "text": "Text in td",
+                                          "props": {}
+                                        }
+                                      ],
+                                      "props": {}
+                                    },
+                                    {
+                                      "type": "td",
+                                      "children": [
+                                        {
+                                          "type": "span",
+                                          "text": "Text in td",
+                                          "props": {}
+                                        }
+                                      ],
+                                      "props": {}
+                                    },
+                                    {
+                                      "type": "td",
+                                      "children": [
+                                        {
+                                          "type": "span",
+                                          "text": "Text in td",
+                                          "props": {}
+                                        }
+                                      ],
+                                      "props": {}
+                                    },
+                                    {
+                                      "type": "td",
+                                      "children": [
+                                        {
+                                          "type": "span",
+                                          "text": "Text in td",
+                                          "props": {}
+                                        }
+                                      ],
+                                      "props": {}
+                                    },
+                                    {
+                                      "type": "td",
+                                      "children": [
+                                        {
+                                          "type": "span",
+                                          "text": "Text in td",
+                                          "props": {}
+                                        }
+                                      ],
+                                      "props": {}
+                                    }
+                                  ],
+                                  "props": {}
+                                }
+                              ]
+                            }
+                          ]
                         },
                         {
                           "type": "p",
@@ -725,6 +968,27 @@
                           },
                           "graphRef": {
                             "key": 43
+                          }
+                        },
+                        {
+                          "type": "p",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty Panel",
+                              "props": {
+                                "data-umyid": "38"
+                              },
+                              "graphRef": {
+                                "key": 38
+                              }
+                            }
+                          ],
+                          "props": {
+                            "data-umyid": "37"
+                          },
+                          "graphRef": {
+                            "key": 37
                           }
                         },
                         {
@@ -1065,6 +1329,15 @@
                         "data-umyid": "40"
                       },
                       "children": [
+                        {
+                          "variantName": "formatted",
+                          "type": "DateTimePickerWrapper",
+                          "props": {
+                            "format": "MM/DD/YYYY HH:mm:ss",
+                            "data-umyid": "16"
+                          },
+                          "children": []
+                        },
                         {
                           "type": "Input",
                           "props": {
@@ -1626,6 +1899,91 @@
                           "graphRef": {
                             "key": 50
                           }
+                        },
+                        {
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "78"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "79"
+                                  },
+                                  "graphRef": {
+                                    "key": 232
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 231
+                              }
+                            },
+                            "data-umyid": "77"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 230
+                          }
+                        },
+                        {
+                          "type": "Input",
+                          "props": {
+                            "type": "text",
+                            "placeholder": "Enter value",
+                            "addonBefore": "$",
+                            "buttonAfter": {
+                              "type": "Button",
+                              "props": {
+                                "bsStyle": "default",
+                                "data-umyid": "78"
+                              },
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Default",
+                                  "props": {
+                                    "data-umyid": "79"
+                                  },
+                                  "graphRef": {
+                                    "key": 235
+                                  }
+                                }
+                              ],
+                              "graphRef": {
+                                "key": 234
+                              }
+                            },
+                            "data-umyid": "77"
+                          },
+                          "children": [],
+                          "graphRef": {
+                            "key": 233
+                          }
+                        },
+                        {
+                          "type": "Button",
+                          "props": {
+                            "bsStyle": "danger"
+                          },
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Danger",
+                              "props": {},
+                              "componentName": null
+                            }
+                          ],
+                          "componentName": null
                         }
                       ],
                       "graphRef": {
@@ -2460,153 +2818,25 @@
                     {
                       "type": "Panel",
                       "props": {
-                        "data-umyid": "40"
+                        "data-umyid": "521"
                       },
                       "children": [
                         {
-                          "type": "Input",
-                          "props": {
-                            "type": "text",
-                            "placeholder": "Enter value",
-                            "addonBefore": "$",
-                            "buttonAfter": {
-                              "type": "Button",
+                          "type": "p",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty Panel",
                               "props": {
-                                "bsStyle": "default",
-                                "data-umyid": "72"
-                              },
-                              "children": [
-                                {
-                                  "type": "span",
-                                  "text": "Default",
-                                  "props": {
-                                    "data-umyid": "73"
-                                  },
-                                  "graphRef": {
-                                    "key": 220
-                                  }
-                                }
-                              ],
-                              "graphRef": {
-                                "key": 219
+                                "data-umyid": "523"
                               }
-                            },
-                            "data-umyid": "71"
-                          },
-                          "children": [],
-                          "graphRef": {
-                            "key": 218
-                          }
-                        },
-                        {
-                          "type": "Input",
+                            }
+                          ],
                           "props": {
-                            "type": "text",
-                            "placeholder": "Enter value",
-                            "addonBefore": "$",
-                            "buttonAfter": {
-                              "type": "Button",
-                              "props": {
-                                "bsStyle": "default",
-                                "data-umyid": "75"
-                              },
-                              "children": [
-                                {
-                                  "type": "span",
-                                  "text": "Default",
-                                  "props": {
-                                    "data-umyid": "76"
-                                  },
-                                  "graphRef": {
-                                    "key": 223
-                                  }
-                                }
-                              ],
-                              "graphRef": {
-                                "key": 222
-                              }
-                            },
-                            "data-umyid": "74"
-                          },
-                          "children": [],
-                          "graphRef": {
-                            "key": 221
-                          }
-                        },
-                        {
-                          "type": "Input",
-                          "props": {
-                            "type": "text",
-                            "placeholder": "Enter value",
-                            "addonBefore": "$",
-                            "buttonAfter": {
-                              "type": "Button",
-                              "props": {
-                                "bsStyle": "default",
-                                "data-umyid": "78"
-                              },
-                              "children": [
-                                {
-                                  "type": "span",
-                                  "text": "Default",
-                                  "props": {
-                                    "data-umyid": "79"
-                                  },
-                                  "graphRef": {
-                                    "key": 226
-                                  }
-                                }
-                              ],
-                              "graphRef": {
-                                "key": 225
-                              }
-                            },
-                            "data-umyid": "77"
-                          },
-                          "children": [],
-                          "graphRef": {
-                            "key": 224
-                          }
-                        },
-                        {
-                          "type": "Input",
-                          "props": {
-                            "type": "text",
-                            "placeholder": "Enter value",
-                            "addonBefore": "$",
-                            "buttonAfter": {
-                              "type": "Button",
-                              "props": {
-                                "bsStyle": "default",
-                                "data-umyid": "81"
-                              },
-                              "children": [
-                                {
-                                  "type": "span",
-                                  "text": "Default",
-                                  "props": {
-                                    "data-umyid": "82"
-                                  },
-                                  "graphRef": {
-                                    "key": 229
-                                  }
-                                }
-                              ],
-                              "graphRef": {
-                                "key": 228
-                              }
-                            },
-                            "data-umyid": "80"
-                          },
-                          "children": [],
-                          "graphRef": {
-                            "key": 227
+                            "data-umyid": "522"
                           }
                         }
-                      ],
-                      "graphRef": {
-                        "key": 217
-                      }
+                      ]
                     }
                   ],
                   "graphRef": {
@@ -2916,6 +3146,148 @@
           "graphRef": {
             "key": 29
           }
+        },
+        {
+          "variantName": "mini mesh",
+          "type": "Grid",
+          "props": {
+            "fluid": true,
+            "data-umyid": "514"
+          },
+          "children": [
+            {
+              "type": "Row",
+              "children": [
+                {
+                  "type": "Col",
+                  "props": {
+                    "xs": 3,
+                    "md": 3,
+                    "sm": 3,
+                    "lg": 3,
+                    "data-umyid": "516"
+                  },
+                  "children": [
+                    {
+                      "type": "Panel",
+                      "props": {
+                        "data-umyid": "517"
+                      },
+                      "children": [
+                        {
+                          "type": "p",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty Panel",
+                              "props": {
+                                "data-umyid": "519"
+                              }
+                            }
+                          ],
+                          "props": {
+                            "data-umyid": "518"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "Col",
+                  "props": {
+                    "xs": 6,
+                    "md": 6,
+                    "sm": 6,
+                    "lg": 6,
+                    "data-umyid": "520"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "Col",
+                  "props": {
+                    "xs": 3,
+                    "md": 3,
+                    "sm": 3,
+                    "lg": 3,
+                    "data-umyid": "524"
+                  },
+                  "children": [
+                    {
+                      "type": "Panel",
+                      "props": {
+                        "data-umyid": "525"
+                      },
+                      "children": [
+                        {
+                          "type": "p",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty Panel",
+                              "props": {
+                                "data-umyid": "527"
+                              }
+                            }
+                          ],
+                          "props": {
+                            "data-umyid": "526"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "props": {
+                "data-umyid": "515"
+              }
+            },
+            {
+              "type": "Row",
+              "children": [
+                {
+                  "type": "Col",
+                  "props": {
+                    "xs": 12,
+                    "md": 12,
+                    "sm": 12,
+                    "lg": 12,
+                    "data-umyid": "529"
+                  },
+                  "children": [
+                    {
+                      "type": "Panel",
+                      "props": {
+                        "data-umyid": "530"
+                      },
+                      "children": [
+                        {
+                          "type": "p",
+                          "children": [
+                            {
+                              "type": "span",
+                              "text": "Empty Panel",
+                              "props": {
+                                "data-umyid": "532"
+                              }
+                            }
+                          ],
+                          "props": {
+                            "data-umyid": "531"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "props": {
+                "data-umyid": "528"
+              }
+            }
+          ]
         }
       ],
       "props": {
@@ -3303,6 +3675,202 @@
                       "graphRef": {
                         "key": 112
                       }
+                    },
+                    {
+                      "type": "PanelGroup",
+                      "props": {
+                        "accordion": true,
+                        "defaultActiveKey": 1
+                      },
+                      "children": [
+                        {
+                          "type": "Panel",
+                          "props": {
+                            "header": "Panel 1",
+                            "eventKey": 1
+                          },
+                          "children": [
+                            {
+                              "variantName": "with filter",
+                              "type": "DropdownList",
+                              "props": {
+                                "valueField": "id",
+                                "textField": "name",
+                                "defaultValue": 1,
+                                "caseSensitive": false,
+                                "filter": "contains",
+                                "data": [
+                                  {
+                                    "id": 0,
+                                    "name": "orange"
+                                  },
+                                  {
+                                    "id": 1,
+                                    "name": "purple"
+                                  },
+                                  {
+                                    "id": 2,
+                                    "name": "red"
+                                  },
+                                  {
+                                    "id": 3,
+                                    "name": "blue"
+                                  }
+                                ],
+                                "data-umyid": "10"
+                              }
+                            },
+                            {
+                              "variantName": "with filter",
+                              "type": "DropdownList",
+                              "props": {
+                                "valueField": "id",
+                                "textField": "name",
+                                "defaultValue": 1,
+                                "caseSensitive": false,
+                                "filter": "contains",
+                                "data": [
+                                  {
+                                    "id": 0,
+                                    "name": "orange"
+                                  },
+                                  {
+                                    "id": 1,
+                                    "name": "purple"
+                                  },
+                                  {
+                                    "id": 2,
+                                    "name": "red"
+                                  },
+                                  {
+                                    "id": 3,
+                                    "name": "blue"
+                                  }
+                                ],
+                                "data-umyid": "10"
+                              }
+                            },
+                            {
+                              "type": "p",
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Basic panel",
+                                  "props": {},
+                                  "componentName": null
+                                }
+                              ],
+                              "props": {}
+                            },
+                            {
+                              "variantName": "with filter",
+                              "type": "DropdownList",
+                              "props": {
+                                "valueField": "id",
+                                "textField": "name",
+                                "defaultValue": 1,
+                                "caseSensitive": false,
+                                "filter": "contains",
+                                "data": [
+                                  {
+                                    "id": 0,
+                                    "name": "orange"
+                                  },
+                                  {
+                                    "id": 1,
+                                    "name": "purple"
+                                  },
+                                  {
+                                    "id": 2,
+                                    "name": "red"
+                                  },
+                                  {
+                                    "id": 3,
+                                    "name": "blue"
+                                  }
+                                ],
+                                "data-umyid": "10"
+                              }
+                            },
+                            {
+                              "variantName": "with filter",
+                              "type": "DropdownList",
+                              "props": {
+                                "valueField": "id",
+                                "textField": "name",
+                                "defaultValue": 1,
+                                "caseSensitive": false,
+                                "filter": "contains",
+                                "data": [
+                                  {
+                                    "id": 0,
+                                    "name": "orange"
+                                  },
+                                  {
+                                    "id": 1,
+                                    "name": "purple"
+                                  },
+                                  {
+                                    "id": 2,
+                                    "name": "red"
+                                  },
+                                  {
+                                    "id": 3,
+                                    "name": "blue"
+                                  }
+                                ],
+                                "data-umyid": "10"
+                              }
+                            }
+                          ],
+                          "componentName": null
+                        },
+                        {
+                          "type": "Panel",
+                          "props": {
+                            "header": "Panel 1",
+                            "eventKey": 1
+                          },
+                          "children": [
+                            {
+                              "type": "p",
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Basic panel",
+                                  "props": {},
+                                  "componentName": null
+                                }
+                              ],
+                              "props": {}
+                            }
+                          ],
+                          "componentName": null
+                        },
+                        {
+                          "type": "Panel",
+                          "props": {
+                            "header": "Panel 2",
+                            "eventKey": 2
+                          },
+                          "children": [
+                            {
+                              "type": "p",
+                              "children": [
+                                {
+                                  "type": "span",
+                                  "text": "Basic panel",
+                                  "props": {},
+                                  "componentName": null
+                                }
+                              ],
+                              "props": {}
+                            }
+                          ],
+                          "componentName": null
+                        }
+                      ],
+                      "componentName": null
                     }
                   ],
                   "graphRef": {
@@ -3347,6 +3915,21 @@
                           }
                         },
                         {
+                          "variantName": "Unsaved variant",
+                          "type": "div",
+                          "children": [
+                            {
+                              "variantName": "formatted",
+                              "type": "DateTimePickerWrapper",
+                              "props": {
+                                "format": "MM/DD/YYYY HH:mm:ss",
+                                "data-umyid": "16"
+                              },
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
                           "type": "p",
                           "children": [
                             {
@@ -3365,6 +3948,36 @@
                           },
                           "graphRef": {
                             "key": 119
+                          }
+                        },
+                        {
+                          "variantName": "with filter",
+                          "type": "DropdownList",
+                          "props": {
+                            "valueField": "id",
+                            "textField": "name",
+                            "defaultValue": 1,
+                            "caseSensitive": false,
+                            "filter": "contains",
+                            "data": [
+                              {
+                                "id": 0,
+                                "name": "orange"
+                              },
+                              {
+                                "id": 1,
+                                "name": "purple"
+                              },
+                              {
+                                "id": 2,
+                                "name": "red"
+                              },
+                              {
+                                "id": 3,
+                                "name": "blue"
+                              }
+                            ],
+                            "data-umyid": "10"
                           }
                         },
                         {
@@ -4496,6 +5109,43 @@
           ],
           "graphRef": {
             "key": 164
+          }
+        }
+      ],
+      "props": {
+        "data-umyid": "163"
+      },
+      "graphRef": {
+        "key": 161
+      }
+    },
+    {
+      "pageName": "UnnamedPage4",
+      "pagePath": "/UnnamedPage4",
+      "children": [
+        {
+          "type": "h3",
+          "props": {
+            "style": {
+              "padding": "1em",
+              "textAlign": "center"
+            },
+            "data-umyid": "164"
+          },
+          "children": [
+            {
+              "type": "span",
+              "text": "This is an empty page. To add new component select needed element on left-side panel and click on an element on the page where you want to put new component, than choose action for right component's place.",
+              "props": {
+                "data-umyid": "165"
+              },
+              "graphRef": {
+                "key": 163
+              }
+            }
+          ],
+          "graphRef": {
+            "key": 162
           }
         }
       ],

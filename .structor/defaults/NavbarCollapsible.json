@@ -4,7 +4,7 @@
     "type": "NavbarCollapsible",
     "props": {
       "inverse": true,
-      "fixedTop": false,
+      "fixedTop": true,
       "fluid": true,
       "staticTop": true,
       "branding": {

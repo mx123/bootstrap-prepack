@@ -144,7 +144,9 @@
 .preview-overlay-box {
     display: flex;
     justify-content: center;
-    width: 80%;
+    padding: 5em 5em;
+    width: 100%;
+    background-color: #ffffff;
 }
 .preview-overlay-canvas {
     background-color: #ffffff;
@@ -178,4 +180,29 @@
 .preview-overlay-variant-button:hover {
     background-color: #35b3ee;
     color: #ffffff;
+}
+.preview-overlay-select-toolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: fixed;
+    top: 4em;
+    left: 0;
+    width: 100%;
+}
+.preview-overlay-select-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #35b3ee;
+    color: #35b3ee;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 0.7em 1em;
+    margin: 0 1em;
+    cursor: pointer;
+}
+.preview-overlay-select-button:hover {
+    color: #ffffff;
+    background-color: #35b3ee;
 }

@@ -1,5 +1,6 @@
 [
   {
+    "type": "ButtonToolbar",
     "children":[
       {
         "type": "ButtonGroup",

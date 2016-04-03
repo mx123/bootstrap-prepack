@@ -297,43 +297,48 @@ class PageForDesk extends Component {
     createElements(model, initialState, options){
         initialState.elements = {};
         let elements = [];
-        model.children.forEach(child => {
-            elements.push(this.createElement(child, initialState, options));
-        });
+        if(model && model.children && model.children.length > 0){
+            model.children.forEach(child => {
+                elements.push(this.createElement(child, initialState, options));
+            });
+        }
         return elements;
     }
 
     createPreviewElement(node){
-
-        let type = 'div';
-        let modelNode = node.modelNode;
-        if(modelNode.type){
-            type = this.findComponent(components, modelNode.type, 0);
-            if(!type){
-                type = modelNode.type;
-            } else if(!isObject(type)){
-                console.error('Element type: ' + modelNode.type + ' is not object. Please check your index.js file');
-                type = 'div';
+        if(node && node.modelNode){
+            let type = 'div';
+            let modelNode = node.modelNode;
+            if(modelNode.type){
+                type = this.findComponent(components, modelNode.type, 0);
+                if(!type){
+                    type = modelNode.type;
+                } else if(!isObject(type)){
+                    console.error('Element type: ' + modelNode.type + ' is not object. Please check your index.js file');
+                    type = 'div';
+                }
             }
-        }
-        let props = Object.assign({}, {key: node.key}, modelNode.props);
-        if(node.props){
-            forOwn(node.props, (prop, propName) => {
-                props[propName] = this.createPreviewElement(prop);
-            });
-        }
-        let nestedElements = null;
-        if(node.children && node.children.length > 0){
-            let children = [];
-            node.children.forEach(node => {
-                children.push(this.createPreviewElement(node));
-            });
-            nestedElements = children;
-        } else if(modelNode.text) {
-            nestedElements = [modelNode.text];
-        }
+            let props = Object.assign({}, {key: node.key}, modelNode.props);
+            if(node.props){
+                forOwn(node.props, (prop, propName) => {
+                    props[propName] = this.createPreviewElement(prop);
+                });
+            }
+            let nestedElements = null;
+            if(node.children && node.children.length > 0){
+                let children = [];
+                node.children.forEach(node => {
+                    children.push(this.createPreviewElement(node));
+                });
+                nestedElements = children;
+            } else if(modelNode.text) {
+                nestedElements = [modelNode.text];
+            }
 
-        return React.createElement(type, props, nestedElements);
+            return React.createElement(type, props, nestedElements);
+        } else {
+            return null;
+        }
     }
 
     render(){

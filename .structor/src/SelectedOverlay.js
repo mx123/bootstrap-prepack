@@ -174,7 +174,7 @@ class SelectedOverlay extends Component {
 
     render(){
         const {newPos, border, contextMenuType, contextMenuItem } = this.state;
-        const { selectedKey, initialState: {onSelectParent, isMultipleSelection} } = this.props;
+        const { selectedKey, initialState: {onLoadOptions, isMultipleSelection} } = this.props;
         const isMultiple = isMultipleSelection();
         let content;
         if(newPos){
@@ -379,7 +379,10 @@ class SelectedOverlay extends Component {
                     }
                 }
             }
-            const firstButtonClassName = 'selected-overlay-button selected-overlay-button-select-parent';
+            const firstButtonClassName = 'selected-overlay-button selected-overlay-button-quick-add-new';
+            const secondButtonClassName = 'selected-overlay-button selected-overlay-button-edit';
+            const thirdButtonClassName = 'selected-overlay-button selected-overlay-button-copy-paste';
+            const fourthButtonClassName = 'selected-overlay-button selected-overlay-button-before-after';
             content = (
                 <div style={endPoint}>
                     <div style={topLine}></div>
@@ -389,12 +392,12 @@ class SelectedOverlay extends Component {
                     {!isMultiple ?
                         <div style={buttonLine}>
                             <div className={firstButtonClassName}
-                                 onClick={(e) => this.handleButtonClick(selectedKey, onSelectParent, e)}></div>
-                            <div className={firstButtonClassName}
                                  onClick={() => {this.setState({contextMenuType: QUICK_ADD_NEW_MENU});}}></div>
-                            <div className={firstButtonClassName}
+                            <div className={secondButtonClassName}
+                                 onClick={(e) => this.handleButtonClick(selectedKey, onLoadOptions, e)}></div>
+                            <div className={thirdButtonClassName}
                                  onClick={() => {this.setState({contextMenuType: SELECTION_MENU});}}></div>
-                            <div className={firstButtonClassName}
+                            <div className={fourthButtonClassName}
                                  onClick={() => {this.setState({contextMenuType: CLIPBOARD_MENU});}}></div>
                         </div> : null
                     }

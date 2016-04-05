@@ -7,7 +7,11 @@ class DateTimePickerWrapper extends Component {
         super(props, content);
     }
     render() {
-        return (<DateTimePicker {...this.props} defaultValue={new Date()} />
+        return (
+            <div>
+                <p>Text</p>
+                <DateTimePicker {...this.props} defaultValue={new Date()} />
+            </div>
             );
     }
 }

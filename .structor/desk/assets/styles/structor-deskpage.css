@@ -27,8 +27,26 @@
 .selected-overlay-button:hover {
     opacity: 1;
 }
-.selected-overlay-button-select-parent {
-    background: url(../imgs/levelup.svg) center no-repeat #35b3ee;
+.selected-overlay-button-quick-add-new {
+    background: url(../imgs/cross.svg) center no-repeat #35b3ee;
+    background-size: 1em 1em;
+    width: 2em;
+    height: 2em;
+}
+.selected-overlay-button-copy-paste {
+    background: url(../imgs/scissor-tool.svg) center no-repeat #35b3ee;
+    background-size: 1em 1em;
+    width: 2em;
+    height: 2em;
+}
+.selected-overlay-button-before-after {
+    background: url(../imgs/square.svg) center no-repeat #35b3ee;
+    background-size: 1em 1em;
+    width: 2em;
+    height: 2em;
+}
+.selected-overlay-button-edit {
+    background: url(../imgs/draw.svg) center no-repeat #35b3ee;
     background-size: 1em 1em;
     width: 2em;
     height: 2em;
@@ -57,11 +75,8 @@
     border-color: #043A71;
 }
 .selected-overlay-menu-title-close-button {
-    /*display: flex;*/
     align-items: center;
     justify-content: center;
-    /*top: 5px;*/
-    /*right: 5px;*/
     display: inline-flex;
     width: 1em;
     height: 1em;

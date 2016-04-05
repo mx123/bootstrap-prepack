@@ -290,10 +290,10 @@ class SelectedOverlay extends Component {
                             onClick: () => {this.setState({contextMenuType: QUICK_ADD_NEW_PANEL, contextMenuItem: REPLACE});},
                             label: 'Replace'
                         });
-                        menuItems.push({
-                            onClick: () => {this.setState({contextMenuType: QUICK_ADD_NEW_PANEL, contextMenuItem: WRAP});},
-                            label: 'Wrap'
-                        });
+                        //menuItems.push({
+                        //    onClick: () => {this.setState({contextMenuType: QUICK_ADD_NEW_PANEL, contextMenuItem: WRAP});},
+                        //    label: 'Wrap'
+                        //});
 
                     } else if(contextMenuType === QUICK_ADD_NEW_PANEL){
                         const { initialState: {getComponentsList} } = this.props;
@@ -313,10 +313,11 @@ class SelectedOverlay extends Component {
                         } else if(contextMenuItem === REPLACE){
                             quickAction = this.props.initialState.quickReplace;
                             menuTitle = 'Replace selected';
-                        } else if(contextMenuItem === WRAP){
-                            quickAction = this.props.initialState.quickWrap;
-                            menuTitle = 'Wrap selected';
                         }
+                        //else if(contextMenuItem === WRAP){
+                        //    quickAction = this.props.initialState.quickWrap;
+                        //    menuTitle = 'Wrap selected';
+                        //}
                         menuSubTitle = 'Escape to close';
                     } else if(contextMenuType === SELECTION_MENU){
                         const { initialState: {onCopy, onCut, onClone, onDelete} } = this.props;
@@ -339,12 +340,12 @@ class SelectedOverlay extends Component {
                             label: 'Delete'
                         });
                     } else if(contextMenuType === CLIPBOARD_MENU){
-                        const { initialState: {isAvailableToPaste, isClipboardEmpty, isAvailableToWrap} } = this.props;
+                        const { initialState: {isAvailableToPaste, isClipboardEmpty} } = this.props;
                         menuItems = [];
                         if(!isAvailableToPaste(selectedKey)){
                             menuTitle = 'Paste operation is not available';
                         } else if(!isClipboardEmpty()){
-                            const { initialState: {onBefore, onFirst, onLast, onAfter, onReplace, onWrap} } = this.props;
+                            const { initialState: {onBefore, onFirst, onLast, onAfter, onReplace} } = this.props;
                             menuTitle = 'Paste from clipboard';
                             menuItems.push({
                                 onClick: (e) => this.handleButtonClick(selectedKey, onBefore, e),
@@ -366,12 +367,12 @@ class SelectedOverlay extends Component {
                                 onClick: (e) => this.handleButtonClick(selectedKey, onReplace, e),
                                 label: 'Replace'
                             });
-                            if(isAvailableToWrap(selectedKey)){
-                                menuItems.push({
-                                    onClick: (e) => this.handleButtonClick(selectedKey, onWrap, e),
-                                    label: 'Wrap'
-                                });
-                            }
+                            //if(isAvailableToWrap(selectedKey)){
+                            //    menuItems.push({
+                            //        onClick: (e) => this.handleButtonClick(selectedKey, onWrap, e),
+                            //        label: 'Wrap'
+                            //    });
+                            //}
                         } else {
                             menuTitle = 'Clipboard is empty';
                         }

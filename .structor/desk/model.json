@@ -467,8 +467,7 @@
                               "variantName": "formatted",
                               "type": "DateTimePickerWrapper",
                               "props": {
-                                "format": "MM/DD/YYYY HH:mm:ss",
-                                "data-umyid": "16"
+                                "format": "MM/DD/YYYY HH:mm:ss"
                               },
                               "children": []
                             },
@@ -496,8 +495,7 @@
                               "variantName": "formatted",
                               "type": "DateTimePickerWrapper",
                               "props": {
-                                "format": "MM/DD/YYYY HH:mm:ss",
-                                "data-umyid": "16"
+                                "format": "MM/DD/YYYY HH:mm:ss"
                               },
                               "children": []
                             },
@@ -588,6 +586,36 @@
                           ]
                         }
                       ]
+                    },
+                    {
+                      "variantName": "3 empty tabs",
+                      "type": "Tabs",
+                      "props": {
+                        "activeKey": 1
+                      },
+                      "children": [
+                        {
+                          "type": "Tab",
+                          "props": {
+                            "title": "Tab1",
+                            "data-umyid": "140"
+                          }
+                        },
+                        {
+                          "type": "Tab",
+                          "props": {
+                            "title": "Tab1",
+                            "data-umyid": "141"
+                          }
+                        },
+                        {
+                          "type": "Tab",
+                          "props": {
+                            "title": "Tab1",
+                            "data-umyid": "142"
+                          }
+                        }
+                      ]
                     }
                   ]
                 },
@@ -651,7 +679,6 @@
                               "type": "Image",
                               "props": {
                                 "src": "http://lorempixel.com/600/337/nature/",
-                                "data-umyid": "81",
                                 "style": {
                                   "width": "100%"
                                 }

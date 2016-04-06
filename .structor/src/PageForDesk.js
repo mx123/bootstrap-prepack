@@ -19,28 +19,29 @@ function wrapComponent(WrappedComponent, props) {
             if(initialState){
                 initialState.elements[key] = {
                     getDOMNode: () => {
-                        if(!this.$DOMNode){
-                            return ReactDOM.findDOMNode(this);
-                        } else {
-                            return this.$DOMNode[0];
-                        }
+                        this.initDOMNode();
+                        return this.$DOMNode[0];
                     }
                 }
+            }
+        },
+        initDOMNode(){
+            if(!this.$DOMNode){
+                this.$DOMNode = $(ReactDOM.findDOMNode(this));
+                this.$DOMNode
+                    .on('mousedown', this.handleMouseDown)
+                    .on('mouseover', this.handleMouseOver)
+                    .on('mouseout', this.handleMouseOut)
+                    .on('click', this.handleNoop)
+                    .on('doubleclick', this.handleNoop)
+                    .on('mouseup', this.handleNoop);
             }
         },
         componentWillMount(){
             this.subscribeToInitialState();
         },
         componentDidMount(){
-            const DOMNode = ReactDOM.findDOMNode(this);
-            this.$DOMNode = $(DOMNode);
-            this.$DOMNode
-                .on('mousedown', this.handleMouseDown)
-                .on('mouseover', this.handleMouseOver)
-                .on('mouseout', this.handleMouseOut)
-                .on('click', this.handleNoop)
-                .on('doubleclick', this.handleNoop)
-                .on('mouseup', this.handleNoop);
+            this.initDOMNode();
         },
         componentWillUnmount(){
             if(this.$DOMNode){
@@ -68,11 +69,13 @@ function wrapComponent(WrappedComponent, props) {
         },
         handleMouseOver(e){
             if(initialState && initialState.onMouseOver){
+                this.initDOMNode();
                 initialState.onMouseOver({ targetDOMNode: this.$DOMNode[0], type});
             }
         },
         handleMouseOut(e){
             if(initialState && initialState.onMouseOut){
+                this.initDOMNode();
                 initialState.onMouseOut({ targetDOMNode: this.$DOMNode[0], remove: true});
             }
         },

@@ -334,9 +334,7 @@
   {
     "variantName": "empty row",
     "type": "Row",
-    "props": {
-      "data-umyid": "572"
-    },
+    "props": {},
     "children": []
   }
 ]

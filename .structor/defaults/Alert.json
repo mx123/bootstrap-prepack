@@ -81,23 +81,16 @@
     "variantName": "announce",
     "type": "Alert",
     "props": {
-      "data-umyid": "539",
       "bsStyle": "warning"
     },
     "children": [
       {
         "type": "strong",
-        "props": {
-          "data-umyid": "540"
-        },
         "children": [],
         "text": "Announce:"
       },
       {
         "type": "span",
-        "props": {
-          "data-umyid": "541"
-        },
         "children": [],
         "text": "  Best check yo self, you're not looking too good."
       }

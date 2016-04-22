@@ -2,23 +2,17 @@
   {
     "variantName": "default",
     "type": "PageHeader",
-    "props": {
-      "data-umyid": "77"
-    },
+    "props": {},
     "children": [
       {
         "type": "span",
-        "props": {
-          "data-umyid": "78"
-        },
+        "props": {},
         "children": [],
         "text": "Page Header Text"
       },
       {
         "type": "small",
-        "props": {
-          "data-umyid": "79"
-        },
+        "props": {},
         "children": [],
         "text": "  Small text"
       }

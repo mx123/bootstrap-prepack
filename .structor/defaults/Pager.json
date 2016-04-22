@@ -2,22 +2,17 @@
   {
     "variantName": "default",
     "type": "Pager",
-    "props": {
-      "data-umyid": "64"
-    },
+    "props": {},
     "children": [
       {
         "type": "PageItem",
         "props": {
-          "href": "#",
-          "data-umyid": "65"
+          "href": "#"
         },
         "children": [
           {
             "type": "span",
-            "props": {
-              "data-umyid": "66"
-            },
+            "props": {},
             "children": [],
             "text": "Previous"
           }
@@ -26,15 +21,12 @@
       {
         "type": "PageItem",
         "props": {
-          "href": "#",
-          "data-umyid": "67"
+          "href": "#"
         },
         "children": [
           {
             "type": "span",
-            "props": {
-              "data-umyid": "68"
-            },
+            "props": {},
             "children": [],
             "text": "Next"
           }
@@ -45,23 +37,18 @@
   {
     "variantName": "prev-next align",
     "type": "Pager",
-    "props": {
-      "data-umyid": "69"
-    },
+    "props": {},
     "children": [
       {
         "type": "PageItem",
         "props": {
           "href": "#",
-          "previous": true,
-          "data-umyid": "70"
+          "previous": true
         },
         "children": [
           {
             "type": "span",
-            "props": {
-              "data-umyid": "71"
-            },
+            "props": {},
             "children": [],
             "text": "Previous"
           }
@@ -71,15 +58,12 @@
         "type": "PageItem",
         "props": {
           "href": "#",
-          "next": true,
-          "data-umyid": "72"
+          "next": true
         },
         "children": [
           {
             "type": "span",
-            "props": {
-              "data-umyid": "73"
-            },
+            "props": {},
             "children": [],
             "text": "Next"
           }

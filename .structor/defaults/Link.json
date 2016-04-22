@@ -4,8 +4,11 @@
     "props": {
       "to": "/main"
     },
-    "children":[
-	{"type": "span", "text": "Link to /main"}
+    "children": [
+      {
+        "type": "span",
+        "text": "Link to /main"
+      }
     ]
   }
 ]

@@ -4,7 +4,10 @@
       "eventKey": "1"
     },
     "children": [
-      {"type": "span", "text": "Menu Item Link"}
+      {
+        "type": "span",
+        "text": "Menu Item Link"
+      }
     ]
   }
 ]

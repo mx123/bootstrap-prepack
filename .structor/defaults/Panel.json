@@ -326,23 +326,19 @@
       {
         "type": "ListGroup",
         "props": {
-          "fill": true,
-          "data-umyid": "52"
+          "fill": true
         },
         "children": [
           {
             "type": "ListGroupItem",
             "props": {
-              "href": "#",
-              "data-umyid": "53"
+              "href": "#"
             },
             "children": [
               {
                 "type": "span",
                 "text": "Link list item #1  ",
-                "props": {
-                  "data-umyid": "54"
-                },
+                "props": {},
                 "componentName": null
               }
             ],
@@ -351,16 +347,13 @@
           {
             "type": "ListGroupItem",
             "props": {
-              "href": "#",
-              "data-umyid": "55"
+              "href": "#"
             },
             "children": [
               {
                 "type": "span",
                 "text": "Link list item #2 ",
-                "props": {
-                  "data-umyid": "56"
-                },
+                "props": {},
                 "componentName": null
               }
             ],
@@ -369,16 +362,13 @@
           {
             "type": "ListGroupItem",
             "props": {
-              "href": "#",
-              "data-umyid": "57"
+              "href": "#"
             },
             "children": [
               {
                 "type": "span",
                 "text": "Link list item #3",
-                "props": {
-                  "data-umyid": "58"
-                },
+                "props": {},
                 "componentName": null
               }
             ],
@@ -400,16 +390,13 @@
         "type": "Button",
         "props": {
           "bsStyle": "default",
-          "block": true,
-          "data-umyid": "26"
+          "block": true
         },
         "children": [
           {
             "type": "span",
             "text": "Browse published projects",
-            "props": {
-              "data-umyid": "27"
-            },
+            "props": {},
             "componentName": null
           }
         ]
@@ -417,16 +404,13 @@
       {
         "type": "h3",
         "props": {
-          "className": "text-center",
-          "data-umyid": "28"
+          "className": "text-center"
         },
         "children": [
           {
             "type": "span",
             "text": "OR",
-            "props": {
-              "data-umyid": "29"
-            }
+            "props": {}
           }
         ]
       },
@@ -438,20 +422,16 @@
           "buttonAfter": {
             "type": "Button",
             "props": {
-              "bsStyle": "default",
-              "data-umyid": "38"
+              "bsStyle": "default"
             },
             "children": [
               {
                 "type": "span",
                 "text": "Open",
-                "props": {
-                  "data-umyid": "39"
-                }
+                "props": {}
               }
             ]
-          },
-          "data-umyid": "31"
+          }
         },
         "children": []
       },
@@ -460,20 +440,15 @@
         "props": {
           "header": {
             "type": "h4",
-            "props": {
-              "data-umyid": "71"
-            },
+            "props": {},
             "children": [
               {
                 "type": "span",
                 "text": "Recent local projects",
-                "props": {
-                  "data-umyid": "72"
-                }
+                "props": {}
               }
             ]
-          },
-          "data-umyid": "47"
+          }
         },
         "children": [
           {
@@ -483,23 +458,19 @@
               "style": {
                 "height": "100px",
                 "overflow": "auto"
-              },
-              "data-umyid": "52"
+              }
             },
             "children": [
               {
                 "type": "ListGroupItem",
                 "props": {
-                  "href": "#",
-                  "data-umyid": "53"
+                  "href": "#"
                 },
                 "children": [
                   {
                     "type": "span",
                     "text": "Link list item #1  ",
-                    "props": {
-                      "data-umyid": "54"
-                    },
+                    "props": {},
                     "componentName": null
                   }
                 ],
@@ -508,16 +479,13 @@
               {
                 "type": "ListGroupItem",
                 "props": {
-                  "href": "#",
-                  "data-umyid": "55"
+                  "href": "#"
                 },
                 "children": [
                   {
                     "type": "span",
                     "text": "Link list item #2 ",
-                    "props": {
-                      "data-umyid": "56"
-                    },
+                    "props": {},
                     "componentName": null
                   }
                 ],

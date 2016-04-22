@@ -1,77 +1,74 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
-class PageForDesk extends Component{
+class PreviewOverlay extends Component{
 
     constructor(props, content) {
         super(props, content);
-        this.handleClose = this.handleClose.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
+        this.handleViewVariant = this.handleViewVariant.bind(this);
+        this.handleSelectVariant = this.handleSelectVariant.bind(this);
+        this.handleHidePreview = this.handleHidePreview.bind(this);
     }
 
-    handleClose() {
-        if (this.props.onClose) {
-            this.props.onClose();
+    handleViewVariant(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        const {initialState, componentInPreview} = this.props;
+        if(initialState){
+            initialState.setDefaultVariant(componentInPreview, e.currentTarget.dataset.key);
         }
     }
 
-    handleDelete () {
-        if (this.props.onDelete) {
-            this.props.onDelete();
+    handleHidePreview(e){
+        e.stopPropagation();
+        e.preventDefault();
+        const {initialState} = this.props;
+        if(initialState){
+            initialState.hidePreview();
+        }
+    }
+
+    handleSelectVariant(e){
+        e.stopPropagation();
+        e.preventDefault();
+        const {initialState, defaultVariantKey} = this.props;
+        if(initialState){
+            initialState.selectVariant(defaultVariantKey);
         }
     }
 
     render () {
-        var style = {
-            position: 'relative',
-            padding: '2em',
-            minHeight: '300px'
-        };
-        var overlayStyle = {
-            position: 'fixed',
-            top: '0',
-            left: '0',
-            right: '0',
-            bottom: '0',
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-            padding: '2em',
-            'zIndex': 9999,
-            'overflow': 'auto'
-        };
-        const closeButtonStyle = {
-            position: 'absolute',
-            top: '1em',
-            right: '1em',
-            height: '1em',
-            color: '#224466',
-            verticalAlign: 'middle',
-            textAlign: 'center',
-            cursor: 'pointer',
-            fontSize: '16px'
-        };
-        const deleteButtonStyle = {
-            position: 'absolute',
-            bottom: '1em',
-            right: '1em',
-            height: '1em',
-            color: '#770A0B',
-            verticalAlign: 'middle',
-            textAlign: 'center',
-            cursor: 'pointer',
-            fontSize: '16px'
-        };
+
+        const {variantsInPreview, defaultVariantKey} = this.props;
+        let variantButtons = [];
+        if(variantsInPreview && variantsInPreview.length > 0){
+            variantsInPreview.forEach((variantKey, index) => {
+                variantButtons.push(
+                    <div key={variantKey}
+                         data-key={variantKey}
+                         onClick={this.handleViewVariant}
+                         title="Select this variant to preview"
+                         className={"preview-overlay-variant-button" + (defaultVariantKey === variantKey ? " selected" : "")}>
+                        {index + 1}
+                    </div>
+                )
+            });
+        }
         return (
-            <div style={overlayStyle}>
-                <div style={{position: 'relative', width: '100%', backgroundColor: '#fff', borderRadius: '5px'}}>
-                    <div style={style}>
+            <div className="preview-overlay-container">
+                <div className="preview-overlay-adjuster">
+                    <div className="preview-overlay-box">
                         {this.props.children}
                     </div>
-                    <span
-                        style={deleteButtonStyle}
-                        onClick={this.handleDelete}>[Delete]</span>
-                    <span
-                        style={closeButtonStyle}
-                        onClick={this.handleClose}>[Close]</span>
+                </div>
+                <div className="preview-overlay-variant-toolbar">
+                    {variantButtons}
+                </div>
+                <div className="preview-overlay-select-toolbar">
+                    <div className="preview-overlay-select-button"
+                         onClick={this.handleSelectVariant}>Copy to clipboard</div>
+                    <div className="preview-overlay-select-button"
+                         onClick={this.handleHidePreview}>Close preview</div>
                 </div>
             </div>
         );
@@ -79,4 +76,4 @@ class PageForDesk extends Component{
 
 }
 
-export default PageForDesk;
+export default PreviewOverlay;

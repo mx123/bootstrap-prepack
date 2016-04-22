@@ -1,19 +1,24 @@
 export default {
-    pageName: 'UnnamedPage',
-    pagePath: 'UnnamedPage',
+    key: "/",
     children: [
         {
-            type: 'h3',
-            props: {
-                style: {
-                    padding: '1em',
-                    textAlign: 'center'
+            key: "",
+            modelNode: {
+                type: 'h3',
+                props: {
+                    style: {
+                        padding: '1em',
+                        textAlign: 'center'
+                    }
                 }
             },
             children: [
                 {
-                    type: 'span',
-                    text: 'There are errors during rendering of the page. Please see console output.'
+                    key: "",
+                    modelNode: {
+                        type: 'span',
+                        text: 'Loading...'
+                    }
                 }
             ]
         }

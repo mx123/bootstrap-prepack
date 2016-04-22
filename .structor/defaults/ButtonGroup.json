@@ -432,15 +432,13 @@
     "variantName": "justified",
     "type": "ButtonGroup",
     "props": {
-      "data-umyid": "75",
       "justified": true
     },
     "children": [
       {
         "type": "ButtonGroup",
         "props": {
-          "justified": true,
-          "data-umyid": "68"
+          "justified": true
         },
         "children": [
           {
@@ -448,23 +446,16 @@
             "children": [
               {
                 "type": "span",
-                "text": "Left",
-                "props": {
-                  "data-umyid": "70"
-                }
+                "text": "Left"
               }
-            ],
-            "props": {
-              "data-umyid": "69"
-            }
+            ]
           }
         ]
       },
       {
         "type": "ButtonGroup",
         "props": {
-          "justified": true,
-          "data-umyid": "82"
+          "justified": true
         },
         "children": [
           {
@@ -472,15 +463,9 @@
             "children": [
               {
                 "type": "span",
-                "text": "Left",
-                "props": {
-                  "data-umyid": "84"
-                }
+                "text": "Left"
               }
-            ],
-            "props": {
-              "data-umyid": "83"
-            }
+            ]
           }
         ]
       }

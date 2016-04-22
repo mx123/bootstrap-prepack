@@ -1,13 +1,3 @@
-require('../../src/client/assets/css/react-widgets.css');
-require('../../src/client/assets/css/bootstrap.css');
-require('../../src/client/assets/css/font-awesome.css');
-require('../../src/client/assets/css/app.css');
-require('../../src/client/assets/js/bootstrap.js');
-var Moment = require('moment');
-var momentLocalizer = require('react-widgets/lib/localizers/moment');
-momentLocalizer(Moment);
-var numberLocalizer = require('react-widgets/lib/localizers/simple-number');
-numberLocalizer();
 module.exports = {
     Router: {
         Link: require('react-router').Link,
@@ -24,13 +14,9 @@ module.exports = {
         SplitButton: require('react-bootstrap').SplitButton,
         MenuItem: require('react-bootstrap').MenuItem,
         Panel: require('react-bootstrap').Panel,
-        PanelGroup: require('../../src/client/components/Bootstrap').PanelGroup,
         Input: require('react-bootstrap').Input,
         Table: require('react-bootstrap').Table,
-        Tabs: require('../../src/client/components/Bootstrap').Tabs,
         Tab: require('react-bootstrap').Tab,
-        Carousel: require('react-bootstrap').Carousel,
-        CarouselItem: require('react-bootstrap').CarouselItem,
         Image: require('react-bootstrap').Image,
         Thumbnail: require('react-bootstrap').Thumbnail,
         ProgressBar: require('react-bootstrap').ProgressBar,
@@ -46,23 +32,6 @@ module.exports = {
         Well: require('react-bootstrap').Well,
         Alert: require('react-bootstrap').Alert,
         Jumbotron: require('react-bootstrap').Jumbotron,
-        PageHeader: require('react-bootstrap').PageHeader,
-        AlertDismissable: require('../../src/client/components/Bootstrap').AlertDismissable
-    },
-    BootstrapNavigation: {
-        Navbar: require('react-bootstrap').Navbar,
-        NavbarCollapsible: require('../../src/client/components/BootstrapNavigation').NavbarCollapsible,
-        Nav: require('react-bootstrap').Nav,
-        NavItem: require('react-bootstrap').NavItem,
-        NavDropdown: require('react-bootstrap').NavDropdown
-    },
-    Widgets: {
-        DropdownList: require('react-widgets').DropdownList,
-        Combobox: require('react-widgets').Combobox,
-        Multiselect: require('react-widgets').Multiselect,
-        NumberPicker: require('react-widgets').NumberPicker,
-        SelectList: require('react-widgets').SelectList,
-        CalendarWrapper: require('../../src/client/components/Widgets/CalendarWrapper.jsx'),
-        DateTimePickerWrapper: require('../../src/client/components/Widgets/DateTimePickerWrapper.jsx')
+        PageHeader: require('react-bootstrap').PageHeader
     }
 };

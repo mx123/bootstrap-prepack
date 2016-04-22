@@ -4,7 +4,6 @@
     "type": "Image",
     "props": {
       "src": "http://lorempixel.com/600/337/nature/",
-      "data-umyid": "81",
       "style": {
         "width": "100%"
       }
@@ -20,8 +19,7 @@
       "thumbnail": false,
       "style": {
         "width": "100%"
-      },
-      "data-umyid": "81"
+      }
     }
   },
   {
@@ -35,8 +33,7 @@
       "style": {
         "width": "250px",
         "height": "250px"
-      },
-      "data-umyid": "81"
+      }
     }
   },
   {
@@ -49,8 +46,7 @@
       "thumbnail": true,
       "style": {
         "width": "100%"
-      },
-      "data-umyid": "81"
+      }
     }
   },
   {
@@ -64,8 +60,7 @@
       "responsive": true,
       "style": {
         "width": "100%"
-      },
-      "data-umyid": "82"
+      }
     }
   }
 ]

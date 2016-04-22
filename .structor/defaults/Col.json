@@ -35,17 +35,14 @@
       "xs": 1,
       "md": 1,
       "sm": 1,
-      "lg": 1,
-      "data-umyid": "585"
+      "lg": 1
     },
     "children": [
       {
         "variantName": "Default",
         "type": "span",
         "text": "Col1",
-        "props": {
-          "data-umyid": "589"
-        }
+        "props": {}
       }
     ]
   }

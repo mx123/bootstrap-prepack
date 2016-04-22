@@ -1,39 +1,29 @@
-require("babel-polyfill");
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createHistory } from 'history';
 import { Router, Route, Link, useRouterHistory } from 'react-router';
-
-import storeManager from '../../src/client/store/storeManager.js';
 import PageForDesk from './PageForDesk.js';
-import PageNoRoute from './PageNoRoute.js';
 
+require('../../src/client/assets/index.js');
+import initStore from '../../src/client/redux/store.js';
 
-window.pageReadyState = 'ready';
-
-window.__createPageDesk = function(model){
-
-    window.pageReadyState = 'initialized';
-    window.__model = model;
+window.__createPageDesk = function(){
 
     const history = useRouterHistory(createHistory)({
-        basename: '/deskpage'
+        basename: '/structor-deskpage'
     });
 
     window.__switchToPath = function(pagePath){
         history.push(pagePath);
     };
 
-    const store = storeManager();
-
     let childRoutes = [];
-    if(model && model.pages && model.pages.length > 0){
-        childRoutes = model.pages.map( (page, idex) => {
+    if(window.__pages && window.__pages.length > 0){
+        childRoutes = window.__pages.map( (page, idex) => {
             return { path: page.pagePath, component: PageForDesk }
         });
-        childRoutes.push({ path: '*', component: PageNoRoute });
+        childRoutes.push({ path: '*', component: PageForDesk });
     } else {
         console.warn('Please check project model, pages were not found.');
     }
@@ -47,11 +37,14 @@ window.__createPageDesk = function(model){
     ];
 
     ReactDOM.render(
-        <Provider store={store}>
+        <Provider store={initStore()}>
             <Router history={history} routes={routeConfig} />
         </Provider>,
         document.getElementById('content')
     );
 
+    window.pageReadyState = 'initialized';
+
 };
 
+window.pageReadyState = 'ready';

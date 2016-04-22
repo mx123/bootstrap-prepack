@@ -2,23 +2,16 @@
   {
     "variantName": "default",
     "type": "Breadcrumb",
-    "props": {
-      "data-umyid": "54"
-    },
     "children": [
       {
         "type": "BreadcrumbItem",
         "props": {
           "href": "#",
-          "data-umyid": "55"
         },
         "children": [
           {
             "variantName": "Unsaved variant",
             "type": "span",
-            "props": {
-              "data-umyid": "56"
-            },
             "text": "Home"
           }
         ]
@@ -26,16 +19,12 @@
       {
         "type": "BreadcrumbItem",
         "props": {
-          "href": "#",
-          "data-umyid": "57"
+          "href": "#"
         },
         "children": [
           {
             "variantName": "Unsaved variant",
             "type": "span",
-            "props": {
-              "data-umyid": "58"
-            },
             "text": "Home"
           }
         ]
@@ -43,16 +32,12 @@
       {
         "type": "BreadcrumbItem",
         "props": {
-          "href": "#",
-          "data-umyid": "59"
+          "href": "#"
         },
         "children": [
           {
             "variantName": "Unsaved variant",
             "type": "span",
-            "props": {
-              "data-umyid": "60"
-            },
             "text": "Home"
           }
         ]

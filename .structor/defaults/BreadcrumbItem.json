@@ -3,16 +3,12 @@
     "variantName": "default",
     "type": "BreadcrumbItem",
     "props": {
-      "href": "#",
-      "data-umyid": "55"
+      "href": "#"
     },
     "children": [
       {
         "variantName": "Unsaved variant",
         "type": "span",
-        "props": {
-          "data-umyid": "56"
-        },
         "text": "Home"
       }
     ]
@@ -23,16 +19,12 @@
     "props": {
       "href": "#",
       "active": true,
-      "target": "_blank",
-      "data-umyid": "57"
+      "target": "_blank"
     },
     "children": [
       {
         "variantName": "Unsaved variant",
-        "type": "span",
-        "props": {
-          "data-umyid": "58"
-        },
+        "type": "span"
         "text": "Home"
       }
     ]
@@ -42,16 +34,12 @@
     "type": "BreadcrumbItem",
     "props": {
       "href": "#",
-      "target": "_blank",
-      "data-umyid": "55"
+      "target": "_blank"
     },
     "children": [
       {
         "variantName": "Unsaved variant",
         "type": "span",
-        "props": {
-          "data-umyid": "56"
-        },
         "text": "Home"
       }
     ]

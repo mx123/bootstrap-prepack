@@ -1,48 +1,67 @@
 [
   {
-    "children":[
+    "type": "ButtonToolbar",
+    "children": [
       {
         "type": "ButtonGroup",
-        "children":[
+        "children": [
           {
             "type": "Button",
-            "children":[
-              {"type": "span", "text": "Left"}
+            "children": [
+              {
+                "type": "span",
+                "text": "Left"
+              }
             ]
           },
           {
             "type": "Button",
-            "children":[
-              {"type": "span", "text": "Middle"}
+            "children": [
+              {
+                "type": "span",
+                "text": "Middle"
+              }
             ]
           },
           {
             "type": "Button",
-            "children":[
-              {"type": "span", "text": "Right"}
+            "children": [
+              {
+                "type": "span",
+                "text": "Right"
+              }
             ]
           }
         ]
       },
       {
         "type": "ButtonGroup",
-        "children":[
+        "children": [
           {
             "type": "Button",
-            "children":[
-              {"type": "span", "text": "Left"}
+            "children": [
+              {
+                "type": "span",
+                "text": "Left"
+              }
             ]
           },
           {
             "type": "Button",
-            "children":[
-              {"type": "span", "text": "Middle"}
+            "children": [
+              {
+                "type": "span",
+                "text": "Middle"
+              }
             ]
           },
           {
             "type": "Button",
-            "children":[
-              {"type": "span", "text": "Right"}
+            "children": [
+              {
+                "type": "span",
+                "text": "Right"
+              }
             ]
           }
         ]

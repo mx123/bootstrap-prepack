@@ -1,14 +1,13 @@
-[![structor compatible](https://img.shields.io/badge/structor%20compatible-v0.2.9-0077dd.svg?style=flat)](http://helmetrex.com)
+[![structor compatible](https://img.shields.io/badge/structor%20compatible-v1.0.0-0077dd.svg?style=flat)](https://helmetrex.com)
 
 ### Description
-Starter project with a set of more than 40 React Bootstrap & React Widgets components. Also, has a scaffold for the server backend.
+Structor starter project with React Bootstrap components.
  
 ### Documentation
 
 Structor's documentation:
 
 * [Structor's component model representation](https://github.com/ipselon/structor/wiki/Structor's-component-model-representation)
-* [Generators metadata overview](https://github.com/ipselon/structor/wiki/Generators-metadata-overview)
 * [Structor shortcuts](https://github.com/ipselon/structor/wiki/Structor-shortcuts)
 
 Prepack documentation
@@ -24,6 +23,7 @@ The following libs and technologies were used:
 * ```react```
 * ```react-router```
 * ```redux```, ```redux-thunk```, ```react-redux```
+* ```redux-saga```
 * ```react-bootstrap```
 * ```express```
  
@@ -38,7 +38,6 @@ Every component has its own quick note which is accessible through "Options" -> 
 If you want to see the app in action please do the following:
 * Go to folder where you unpack downloaded package.
 * Run command: ```npm install```
-* Run command: ```npm run build-server```
 * Run command: ```npm run build-client```
 * Run command: ```node ./server.js```
 * Go to http://localhost:3000

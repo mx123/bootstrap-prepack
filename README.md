@@ -9,14 +9,6 @@ Structor's documentation:
 
 * [Structor's component model representation](https://github.com/ipselon/structor/wiki/Structor's-component-model-representation)
 * [Structor shortcuts](https://github.com/ipselon/structor/wiki/Structor-shortcuts)
-
-Prepack documentation
-
-* [The files structure description](https://github.com/ipselon/bootstrap-prepack/wiki/The-source-code-structure)
-* [Generator for React component](https://github.com/ipselon/bootstrap-prepack/wiki/Generator-for-React-component)
-* [Generator for smart Redux component (container)](https://github.com/ipselon/bootstrap-prepack/wiki/Generator-for-smart-Redux-component-(container))
-* [Migration guide](https://github.com/ipselon/bootstrap-prepack/wiki/Migration-guide)
- 
 <br/>
 ### Technologies and libraries
 The following libs and technologies were used:

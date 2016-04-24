@@ -93,6 +93,38 @@ function wrapComponent(WrappedComponent, props) {
     return klass;
 }
 
+function wrapPreviewComponent(WrappedComponent) {
+    const myName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
+    var klass = React.createClass({
+        initDOMNode(){
+            if(!this.$DOMNode){
+                this.$DOMNode = $(ReactDOM.findDOMNode(this));
+                this.$DOMNode
+                    .on('keydown', this.handleNoop);
+            }
+        },
+        componentDidMount(){
+            this.initDOMNode();
+        },
+        componentWillUnmount(){
+            if(this.$DOMNode){
+                this.$DOMNode
+                    .off('keydown');
+            }
+            this.$DOMNode = undefined;
+        },
+        handleNoop(e){
+            e.stopPropagation();
+            e.preventDefault();
+        },
+        render: function(){
+            return <WrappedComponent {...this.props} />;
+        }
+    });
+    klass.displayName = myName;
+    return klass;
+}
+
 class PageForDesk extends Component {
 
     constructor(props, content) {
@@ -370,8 +402,7 @@ class PageForDesk extends Component {
             } else if(modelNode.text) {
                 nestedElements = [modelNode.text];
             }
-
-            return React.createElement(type, props, nestedElements);
+            return React.createElement(wrapPreviewComponent(type), props, nestedElements);
         } else {
             return null;
         }

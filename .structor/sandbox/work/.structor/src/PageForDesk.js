@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import Test from '../../src/controllers/TestGroup/TestComponent/TestComponent.jsx';
+import Test from '../../src/views/TestGroup/TestComponent.jsx';
 
 class PageForDesk extends Component{
 

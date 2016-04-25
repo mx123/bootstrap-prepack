@@ -10,8 +10,9 @@ Structor's documentation:
 * [Structor's component model representation](https://github.com/ipselon/structor/wiki/Structor's-component-model-representation)
 * [Structor shortcuts](https://github.com/ipselon/structor/wiki/Structor-shortcuts)
 <br/>
-### Technologies and libraries
-The following libs and technologies were used:
+
+### What is inside?
+
 * ```react```
 * ```react-router```
 * ```redux```, ```redux-thunk```, ```react-redux```

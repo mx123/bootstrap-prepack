@@ -10,8 +10,9 @@ Structor's documentation:
 * [Structor's component model representation](https://github.com/ipselon/structor/wiki/Structor's-component-model-representation)
 * [Structor shortcuts](https://github.com/ipselon/structor/wiki/Structor-shortcuts)
 <br/>
-### Technologies and libraries
-The following libs and technologies were used:
+
+### What is inside?
+
 * ```react```
 * ```react-router```
 * ```redux```, ```redux-thunk```, ```react-redux```
@@ -25,15 +26,6 @@ In the builder you will have an ability easily compose components right on the p
 But also you can add your own reusable components manually.
 Every component has its own quick note which is accessible through "Options" -> "ReadMe"
 <br/>
-<br/>
-### Start backend server
-If you want to see the app in action please do the following:
-* Go to folder where you unpack downloaded package.
-* Run command: ```npm install```
-* Run command: ```npm run build-client```
-* Run command: ```node ./server.js```
-* Go to http://localhost:3000
-
 <br/>
 ### Starting Structor 
 If you still didn't start the backend server please do the following: 
@@ -72,11 +64,14 @@ Also you may edit templates for output React components in ```.structor/template
 <br/>
 <br/>
 ### Building and trying a real Web app
-Having exported pages and routes you can run webpack's build script:
-* ```npm run build-client```
+
+If you want to see the app in action please do the following:
+* Run command: ```npm run build```
+* Run command: ```node ./server.js```
 
 Then, if everything were built and you didn't stop backend server, just go to http://localhost:3000
 <br/>
 <br/>
+
 ### License
 MIT

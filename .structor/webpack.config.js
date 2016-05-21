@@ -1,8 +1,20 @@
-module.exports = {
-    module: {
-        loaders: [
-            { test: /\.css$/, exclude: /node_modules/, loader: "style-loader!css-loader" },
-            { test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)([\?]?.*)$/, exclude: /node_modules/, loader: 'url-loader' }
-        ]
-    }
+var projectWebpackConfig = require('../build-conf/webpack-structor.config');
+
+module.exports = function (options) {
+    return Object.assign({}, projectWebpackConfig, {
+        entry: [
+            options.deskEntryPoint,
+            options.deskEntryPointFilePath
+        ],
+        output: {
+            path: options.deskEntryPointOutputPath,
+            filename: options.deskEntryPointOutputFileName,
+            publicPath: options.deskEntryPointOutputPublicPath
+        },
+        resolve: {
+            root: [options.nodeModulesDirPath, options.serverNodeModulesDirPath]
+        }
+            
+        
+    });
 };

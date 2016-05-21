@@ -7,7 +7,7 @@ import mainSaga from './saga.js';
 import myMiddleware from './middleware.js';
 import initialState from './initialState.js';
 
-const sagaMiddleware = createSagaMiddleware(mainSaga);
+const sagaMiddleware = createSagaMiddleware();
 
 const createStoreWithMiddleware = applyMiddleware(
     myMiddleware,
@@ -17,6 +17,7 @@ const createStoreWithMiddleware = applyMiddleware(
 
 export default function(){
     const store = createStoreWithMiddleware(reducer, initialState);
+    sagaMiddleware.run(mainSaga);
     if (module.hot) {
         // Enable Webpack hot module replacement for reducers
         module.hot.accept('./reducer.js', () => {

@@ -6,8 +6,10 @@ import reducer from './reducer.js';
 import mainSaga from './saga.js';
 import myMiddleware from './middleware.js';
 
-const sagaMiddleware = createSagaMiddleware(mainSaga);
+const sagaMiddleware = createSagaMiddleware();
 
 export default function(){
-  return createStore(reducer, applyMiddleware(myMiddleware, sagaMiddleware, thunk));
+    const store = createStore(reducer, applyMiddleware(myMiddleware, sagaMiddleware, thunk));
+    sagaMiddleware.run(mainSaga);
+    return store;
 }

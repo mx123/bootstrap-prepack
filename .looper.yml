@@ -1,0 +1,12 @@
+tools:
+  nodejs: 7.4.0
+  npm: 4.1.1
+flows:
+  default: |
+    env
+    echo NODEJS_LOCATION `which node`
+    echo NPM_LOCATION `which npm`
+    echo NPM_PREFIX `npm prefix -g`
+    echo NODEJS_VERSION `node --version`
+    echo NPM_VERSION `npm --version`
+    npm install 
